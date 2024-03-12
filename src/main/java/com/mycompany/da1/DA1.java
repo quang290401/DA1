@@ -5,6 +5,7 @@
 package com.mycompany.da1;
 
 import com.mycompany.da1.service.SanPhamChiTietService;
+import com.mycompany.da1.view.DangNhap;
 import com.mycompany.da1.view.FormBanHang;
 
 
@@ -23,7 +24,7 @@ public class  DA1 {
 //        UIManager.put("Panel.background", lightGreen);
 //        UIManager.put("OptionPane.background", lightGreen);
 //        UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        FormBanHang a = new FormBanHang();
+        DangNhap a = new DangNhap( );
       a.setVisible(true);
     }
 }

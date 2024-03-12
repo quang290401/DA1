@@ -47,10 +47,10 @@ public class DangNhap extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Email:");
+        jLabel2.setText("Tài Khoản ");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("PassWord :");
+        jLabel3.setText("Mật Khẩu");
 
         btnDangNhap.setBackground(new java.awt.Color(255, 204, 51));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -112,7 +112,8 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-
+            FormBanHang formBanHang = new FormBanHang();
+            formBanHang.setVisible(true);
       
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
