@@ -31,4 +31,10 @@ public class VoucherEntity {
     @Column(name = "ngayTao")
     private Date ngayTao;
 
+
+    @Override
+    public String toString(){
+        return  ""+id;
+    }
 }
+

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 public class SanPhamChiTietIMPL implements SanPhamChiTietService {
+
    SanPhamChiTietDAO sanPhamChiTietDAO = new SanPhamChiTietDAO();
 
 
