@@ -163,7 +163,6 @@ public class FormBanHang extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 102, 102));
         jLabel8.setText("SHOP Giày");
 
-        btnBanhang.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\cart.png")); // NOI18N
         btnBanhang.setText("Bán Hàng");
         btnBanhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,19 +170,14 @@ public class FormBanHang extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\product.png")); // NOI18N
         jButton6.setText("Quản Lý Sản Phẩm");
 
-        jButton7.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\icons8-add-new-32.png")); // NOI18N
         jButton7.setText("Quản Lý Voucher");
 
-        jButton8.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\bill.png")); // NOI18N
         jButton8.setText("Quản Lý Hóa Đơn");
 
-        jButton9.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\employee.png")); // NOI18N
         jButton9.setText("Quản Lý Nhân Viên");
 
-        jButton10.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\check-out.png")); // NOI18N
         jButton10.setText("Quản Lý Khách Hàng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -330,8 +324,6 @@ public class FormBanHang extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(51, 0, 51));
         jLabel10.setText("Nhóm 1 Bán Giày");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\house.png")); // NOI18N
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -347,7 +339,7 @@ public class FormBanHang extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel1)
