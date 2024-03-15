@@ -20,8 +20,6 @@ public class SanPhamEntity {
     private String tenSanPham;
     @Column(name = "trangThai")
     private int trangThai;
-    @Column(name = "soLuong")
-    private int soLuong;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngayTao")

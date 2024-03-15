@@ -19,7 +19,8 @@ import java.util.regex.Pattern;
  */
 public class DangNhap extends javax.swing.JFrame {
     TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
-    int vaiTro=1;
+    int user=1;
+    int adMin =2;
 
 
     public DangNhap() {
@@ -115,22 +116,27 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {
-        this.dispose();
-        JFrameMain mainMenu = new JFrameMain();
-        mainMenu.setVisible(true);
-//        ArrayList<TaiKhoanEntity>taiKhoanEntitys = taiKhoanIMPL.GetAll();
-//        for (TaiKhoanEntity p:taiKhoanEntitys){
-//            if(p.getTaiKhoan().equals(txtUserName.getText())&&p.getMatKhau().equals(txtPassDN.getText())){
-//              if(p.getVaiTroEntity().getId()==vaiTro){
-//                  FormBanHang formBanHang = new FormBanHang();
-//                  formBanHang.setVisible(true);
-//                  break;
-//                }
-//            }else {
-//                JOptionPane.showMessageDialog(null, "Sai tài Khoản mật khẩu");
-//                return;
-//            }
-//        } 
+        ArrayList<TaiKhoanEntity>taiKhoanEntitys = taiKhoanIMPL.GetAll();
+        for (TaiKhoanEntity p:taiKhoanEntitys){
+            if(p.getTaiKhoan().equals(txtUserName.getText())&&p.getMatKhau().equals(txtPassDN.getText())){
+              if(p.getVaiTroEntity().getId()==user){
+                  FormBanHang formBanHang = new FormBanHang();
+                  formBanHang.setVisible(true);
+                  break;
+                } else if(p.getVaiTroEntity().getId()==adMin){
+                    
+                      break;
+                    
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Sai tài Khoản mật khẩu");
+                return;
+            }
+        }
+        
+
+
+      
     }                                           
 
     /**

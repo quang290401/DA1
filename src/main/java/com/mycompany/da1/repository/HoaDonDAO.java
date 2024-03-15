@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class HoaDonDAO {
@@ -42,12 +43,13 @@ public class HoaDonDAO {
         return hoaDonEntities;
     }
 
-    public void UpdateHoaDon(int idHoaDon) {
+    public void UpdateHoaDon(int idHoaDon, BigDecimal tongTien) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             session.beginTransaction();
-            String sql = "UPDATE HoaDonEntity SET trangThai = 1 WHERE id = :idHoaDon";
+            String sql = "UPDATE HoaDonEntity SET trangThai = 1,tongTien=:tongTien WHERE id = :idHoaDon";
             Query query = session.createQuery(sql);
-            query.setParameter("idHoaDon", idHoaDon); // Thiết lập tham số idHoaDon
+            query.setParameter("idHoaDon", idHoaDon);
+            query.setParameter("tongTien", tongTien);// Thiết lập tham số idHoaDon
             int updatedCount = query.executeUpdate();
 
             // Kết thúc giao dịch

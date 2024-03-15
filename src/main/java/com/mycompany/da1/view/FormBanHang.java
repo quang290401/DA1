@@ -14,7 +14,7 @@ import com.mycompany.da1.service.IMPL.SanPhamChiTietIMPL;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 
@@ -32,7 +32,7 @@ public class FormBanHang extends javax.swing.JFrame {
         LoadTableCTSanPham();
         LoadTableHoaDonCho();
     }
-       String giaSP;
+    
 
         public void LoadTableCTSanPham() {
         DefaultTableModel dtm = (DefaultTableModel) TableSanPhamCT.getModel();
@@ -40,7 +40,7 @@ public class FormBanHang extends javax.swing.JFrame {
         dtm.setRowCount(0);
         for (SanPhamChiTietEntity p : sanPhams) {
             Object[] row = {p.getId(), p.getSanPhamEntity().getTenSanPham(), p.getGiaSanPham(), 
-                p.getSanPhamEntity().getSoLuong(),p.getKichCoEntity().
+                p.getSoLuong(),p.getKichCoEntity().
                   getTenKichCo(),p.getMauSacEntity().getTenMauSac()};
             dtm.addRow(row);
         }
@@ -171,6 +171,11 @@ public class FormBanHang extends javax.swing.JFrame {
         });
 
         jButton6.setText("Quản Lý Sản Phẩm");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Quản Lý Voucher");
 
@@ -670,7 +675,8 @@ public class FormBanHang extends javax.swing.JFrame {
             BigDecimal discountPercentage = new BigDecimal(p.getVoucherEntity().getPhanTramGiam());
             lableTongTienSaugiam.setText(String.valueOf(bigDecimal.subtract(discountPercentage)));
         }
-        hoaDonIMPL.UpdateHoaDon(Integer.parseInt(txtHoaDon.getText()));
+        BigDecimal tongTienHoaDon = new BigDecimal(lableTongTienSaugiam.getText());
+        hoaDonIMPL.UpdateHoaDon(Integer.parseInt(txtHoaDon.getText()),tongTienHoaDon);
         LoadTableHoaDonThanhToan();
         LoadTableHoaDonCho();
         
@@ -739,6 +745,10 @@ public class FormBanHang extends javax.swing.JFrame {
       hoaDonChiTietIMPL.DeleteHDCT(Integer.parseInt(txtHoaDon.getText()));
       LoadTableHoaDonCT();
     }//GEN-LAST:event_btnXoaSPActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
