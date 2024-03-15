@@ -5,6 +5,8 @@
 package com.mycompany.da1.view;
 
 
+import com.mycompany.da1.entity.TaiKhoanEntity;
+import com.mycompany.da1.service.IMPL.TaiKhoanIMPL;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ import java.util.regex.Pattern;
  * @author acer
  */
 public class DangNhap extends javax.swing.JFrame {
-
+    TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
+    int vaiTro=1;
 
 
     public DangNhap() {
@@ -111,11 +114,25 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-            FormBanHang formBanHang = new FormBanHang();
-            formBanHang.setVisible(true);
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {
+        ArrayList<TaiKhoanEntity>taiKhoanEntitys = taiKhoanIMPL.GetAll();
+        for (TaiKhoanEntity p:taiKhoanEntitys){
+            if(p.getTaiKhoan().equals(txtUserName.getText())&&p.getMatKhau().equals(txtPassDN.getText())){
+              if(p.getVaiTroEntity().getId()==vaiTro){
+                  FormBanHang formBanHang = new FormBanHang();
+                  formBanHang.setVisible(true);
+                  break;
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Sai tài Khoản mật khẩu");
+                return;
+            }
+        }
+        
+
+
       
-    }//GEN-LAST:event_btnDangNhapActionPerformed
+    }                                           
 
     /**
      * @param args the command line arguments

@@ -4,9 +4,6 @@ import com.mycompany.da1.entity.HoaDonEntity;
 import com.mycompany.da1.entity.KhachHangEntity;
 import com.mycompany.da1.repository.HoaDonDAO;
 import com.mycompany.da1.service.HoaDonService;
-import com.mycompany.da1.util.HibernateUltil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 
@@ -21,6 +18,18 @@ public class HoaDonIMPL implements HoaDonService {
     public ArrayList<HoaDonEntity> GetAll() {
         ArrayList<HoaDonEntity>hoaDonEntities = hoaDonDAO.GetList();
         return hoaDonEntities;
+    }
+
+    @Override
+    public ArrayList<HoaDonEntity> ThanhToan(int idHoaDon) {
+        ArrayList<HoaDonEntity>hoaDonEntities = hoaDonDAO.ThanhToan(idHoaDon);
+        return hoaDonEntities;
+    }
+
+    @Override
+    public void UpdateHoaDon(int idHoaDon) {
+         hoaDonDAO.UpdateHoaDon(idHoaDon);
+
     }
 
 }

@@ -10,12 +10,14 @@ com\mycompany\da1\repository\SanPhamChiTietDAO.class
 com\mycompany\da1\view\template\FormBanHang.class
 com\mycompany\da1\view\FormBanHang$8.class
 com\mycompany\da1\service\IMPL\SanPhamChiTietIMPL.class
+com\mycompany\da1\service\IMPL\HoaDonChiTietIMPL.class
 com\mycompany\da1\view\DangNhap$1.class
 com\mycompany\da1\service\IMPL\VoucherServiceIMPL.class
 com\mycompany\da1\combobox\KhachHangCBB.class
 com\mycompany\da1\service\SanPhamChiTietService.class
 com\mycompany\da1\view\FormBanHang$4.class
 com\mycompany\da1\view\FormBanHang$7.class
+com\mycompany\da1\repository\HoaDonChiTietDAO.class
 com\mycompany\da1\view\DangNhap$2.class
 com\mycompany\da1\service\VoucherService.class
 com\mycompany\da1\repository\KhachHangDAO.class
@@ -27,5 +29,6 @@ com\mycompany\da1\view\FormBanHang$9.class
 com\mycompany\da1\view\FormBanHang.class
 com\mycompany\da1\view\FormBanHang$2.class
 com\mycompany\da1\view\InsertHoaDon$5.class
+com\mycompany\da1\service\HoaDonChiTietService.class
 com\mycompany\da1\view\InsertHoaDon$2.class
 com\mycompany\da1\view\InsertHoaDon.class

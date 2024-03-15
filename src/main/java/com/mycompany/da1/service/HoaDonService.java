@@ -8,4 +8,6 @@ import java.util.ArrayList;
 public interface HoaDonService {
    void Save(HoaDonEntity hoaDonEntity);
    ArrayList<HoaDonEntity> GetAll();
+   ArrayList<HoaDonEntity>ThanhToan(int idHoaDon);
+   void UpdateHoaDon(int idHoaDon);
 }
