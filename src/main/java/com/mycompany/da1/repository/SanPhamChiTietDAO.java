@@ -11,7 +11,7 @@ public class SanPhamChiTietDAO {
     public ArrayList<SanPhamChiTietEntity> GetList() {
         ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity ").list();
+            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai = 1").list();
 
         } catch (Exception e) {
             e.printStackTrace();

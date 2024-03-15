@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -23,6 +24,8 @@ public class HoaDonEntity {
     private Date ngaySua;
     @Column(name = "trangThai")
     private int trangThai;
+    @Column(name = "tongTien")
+    private BigDecimal tongTien;
     @ManyToOne
     @JoinColumn(name = "TaiKhoan_id")
     private TaiKhoanEntity taiKhoanEntity;

@@ -14,6 +14,9 @@ public class SanPhamChiTietEntity {
     private int id;
     @Column(name = "giaSanPham")
     private BigDecimal giaSanPham;
+
+    @Column(name = "soLuong")
+    private int soLuong;
     @ManyToOne
     @JoinColumn(name = "SanPham_id")
     private SanPhamEntity sanPhamEntity;

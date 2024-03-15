@@ -5,6 +5,7 @@ import com.mycompany.da1.entity.KhachHangEntity;
 import com.mycompany.da1.repository.HoaDonDAO;
 import com.mycompany.da1.service.HoaDonService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class HoaDonIMPL implements HoaDonService {
@@ -27,8 +28,8 @@ public class HoaDonIMPL implements HoaDonService {
     }
 
     @Override
-    public void UpdateHoaDon(int idHoaDon) {
-         hoaDonDAO.UpdateHoaDon(idHoaDon);
+    public void UpdateHoaDon(int idHoaDon, BigDecimal tongTien) {
+         hoaDonDAO.UpdateHoaDon(idHoaDon,tongTien);
 
     }
 
