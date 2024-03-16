@@ -24,7 +24,7 @@ public class HibernateUltil {
         properties.put(Environment.USER, "sa");
         properties.put(Environment.PASS, "2212starx");
         properties.put(Environment.SHOW_SQL, "true");
-        properties.put(Environment.HBM2DDL_AUTO, "update"); // Hoặc "update" tùy vào nhu cầu của bạn
+        properties.put(Environment.HBM2DDL_AUTO, "create"); // Hoặc "update" tùy vào nhu cầu của bạn
 
         conf.setProperties(properties);
         conf.addAnnotatedClass(SanPhamEntity.class);
