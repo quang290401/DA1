@@ -28,4 +28,8 @@ public class DanhMucEntity {
     @Column(name = "trangThai")
     private int trangThai;
 
+    @Override
+    public String toString() {
+        return tenDanhMuc;
+    }
 }

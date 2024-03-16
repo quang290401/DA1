@@ -45,10 +45,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="sb" min="-2" pref="453" max="-2" attributes="0"/>
-              <EmptySpace min="112" max="32767" attributes="0"/>
+              <Component id="sb" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="menu" alignment="0" max="32767" attributes="0"/>
+          <Component id="menu" alignment="0" pref="566" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -63,6 +63,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="                                                                                      WELLCOME TO SHOP"/>
       </Properties>
+    </Component>
+    <Component class="com.mycompany.da1.view.components.JPanelMenu" name="menu">
     </Component>
     <Container class="javax.swing.JScrollPane" name="sb">
       <Properties>
@@ -83,7 +85,5 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="com.mycompany.da1.view.components.JPanelMenu" name="menu">
-    </Component>
   </SubComponents>
 </Form>

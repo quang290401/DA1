@@ -1,6 +1,7 @@
 package com.mycompany.da1.view;
 
 import com.mycompany.da1.view.events.EventMenuSelected;
+import com.mycompany.da1.view.form.product.FormSanPham;
 import com.mycompany.da1.view.form.temp.ViewDemo;
 import com.mycompany.da1.view.swing.ScrollBar;
 import java.awt.Color;
@@ -23,17 +24,19 @@ public class JFrameMain extends javax.swing.JFrame {
         menu.initMoving(JFrameMain.this);
         sb.setVerticalScrollBar(new ScrollBar());
         // Đặt chế độ đóng cửa sổ
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForm(new ViewDemo());
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
+                System.out.println("Select index = " + index);
                 if (index == 0) {
                     setForm(new ViewDemo());
                 } else if (index == 2) {
                     setForm(new ViewDemo());
                 } else if (index == 4) {
-                    setForm(new ViewDemo());
+                    setForm(new FormSanPham());
                 } else if (index == 6) {
                     setForm(new ViewDemo());
                 } else if (index == 8) {
@@ -45,7 +48,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 } else if (index == 14) {
                     setForm(new ViewDemo());
                 } else if (index == 16) {
-                    new ViewDemo().setVisible(true);
+                    new DangNhap().setVisible(true);
                     setVisible(false);
                 }
             }
@@ -62,9 +65,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        menu = new com.mycompany.da1.view.components.JPanelMenu();
         sb = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
-        menu = new com.mycompany.da1.view.components.JPanelMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -100,9 +103,9 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sb, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sb)
+                .addContainerGap())
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
         );
 
         pack();

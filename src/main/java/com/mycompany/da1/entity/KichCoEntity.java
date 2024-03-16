@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "KichCo")
 public class KichCoEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,4 +26,9 @@ public class KichCoEntity {
     private Date ngaySua;
     @Column(name = "trangThai")
     private int trangThai;
+
+    @Override
+    public String toString() {
+        return tenKichCo;
+    }
 }

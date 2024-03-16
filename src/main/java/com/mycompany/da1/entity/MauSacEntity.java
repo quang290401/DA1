@@ -27,5 +27,10 @@ public class MauSacEntity  {
     private Date ngaySua;
     @Column(name = "trangThai")
     private int trangThai;
+    
+    @Override
+    public String toString() {
+        return tenMauSac;
+    }
 }
 

@@ -17,6 +17,10 @@ public class SanPhamChiTietEntity {
 
     @Column(name = "soLuong")
     private int soLuong;
+    
+    @Column(name = "moTa")
+    private String moTa;
+    
     @ManyToOne
     @JoinColumn(name = "SanPham_id")
     private SanPhamEntity sanPhamEntity;

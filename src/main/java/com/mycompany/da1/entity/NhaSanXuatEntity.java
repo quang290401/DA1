@@ -13,6 +13,7 @@ import java.util.List;
 @Table(name = "NhaSanXuat")
 
 public class NhaSanXuatEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,4 +29,9 @@ public class NhaSanXuatEntity {
     private Date ngaySua;
     @Column(name = "trangThai")
     private int trangThai;
+
+    @Override
+    public String toString() {
+        return tenNhaSanXuat;
+    }
 }
