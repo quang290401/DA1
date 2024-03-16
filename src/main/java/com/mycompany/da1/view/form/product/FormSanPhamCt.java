@@ -212,6 +212,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -292,8 +293,10 @@ public class FormSanPhamCt extends javax.swing.JFrame {
 
         jLabel12.setText("Trạng Thái");
 
+        buttonGroup1.add(rdoDangBan);
         rdoDangBan.setText("Dang Ban");
 
+        buttonGroup1.add(rdoTamNgung);
         rdoTamNgung.setText("Tam Ngung Ban");
 
         lbClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -937,6 +940,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     private javax.swing.JLabel btnNhaSx;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboDanhMuc;
     private javax.swing.JComboBox<String> cboKichCo;
