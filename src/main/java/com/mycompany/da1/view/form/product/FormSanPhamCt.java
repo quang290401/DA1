@@ -183,7 +183,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     public boolean checkPhaiLaSoF(JTextField txt) {
         try {
             Float.parseFloat(txt.getText().trim());
@@ -798,7 +798,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
 //        } else if (checkPhaiDuong(txtGia) == false || checkPhaiDuong(txtSoLuong) == false) {
 //            MsgBox.alert(this, "Số lượng và giá không thể âm");
 //        }
-        
+
         if (checkRongTxtArea(txtMoTa) == false || checkRongTxt(txtGia) == false || checkRongTxt(txtSoLuong) == false) {
             MsgBox.alert(this, "Vui long nhap day du thong tin.");
             return;
@@ -826,9 +826,15 @@ public class FormSanPhamCt extends javax.swing.JFrame {
         MauSacEntity mauSacTmp = ((MauSacEntity) cboMauSac.getSelectedItem());
         ChatLieuEntity chatLieuTmp = ((ChatLieuEntity) cboChatLieu.getSelectedItem());
         KichCoEntity kichCoTmp = ((KichCoEntity) cboKichCo.getSelectedItem());
+        
+        System.out.println("==========================================");
+        System.out.println(mauSacTmp.getId());
 
         SanPhamChiTietEntity sanPhamChiTiet = new SanPhamChiTietEntity();
+        sanPhamChiTiet.setId(Integer.valueOf(lblid.getText()));
         sanPhamChiTiet.setGiaSanPham(gia);
+        sanPhamChiTiet.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
+        sanPhamChiTiet.setMoTa(txtMoTa.getText());
         sanPhamChiTiet.setTrangThai(1);
         sanPhamChiTiet.setSanPhamEntity(sanPhamTmp);
         sanPhamChiTiet.setDanhMucEntity(danhMucTmp);
