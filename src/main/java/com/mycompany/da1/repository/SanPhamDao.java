@@ -45,14 +45,12 @@ public class SanPhamDao {
             session.beginTransaction();
             String sql = "UPDATE SanPhamEntity"
                     + " SET trangThai = :trangThai,"
-                    + " soLuong= :soLuong,"
                     + " tenSanPham = :tenSanPham,"
                     + " maSanPham = :maSanPham,"
                     + " anhSanPham = :anhSanPham"
                     + " WHERE id = :id";
             Query query = session.createQuery(sql);
             query.setParameter("trangThai", obiInput.getTrangThai());
-            query.setParameter("soLuong", obiInput.getSoLuong());
             query.setParameter("tenSanPham", obiInput.getTenSanPham());
             query.setParameter("maSanPham", obiInput.getMaSanPham());
             query.setParameter("anhSanPham", obiInput.getAnhSanPham());

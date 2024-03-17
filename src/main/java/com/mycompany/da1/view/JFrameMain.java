@@ -4,9 +4,10 @@ import com.mycompany.da1.view.events.EventMenuSelected;
 import com.mycompany.da1.view.form.product.FormSanPham;
 import com.mycompany.da1.view.form.temp.ViewDemo;
 import com.mycompany.da1.view.swing.ScrollBar;
+
 import java.awt.Color;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+
 
 /**
  *
@@ -24,9 +25,10 @@ public class JFrameMain extends javax.swing.JFrame {
         menu.initMoving(JFrameMain.this);
         sb.setVerticalScrollBar(new ScrollBar());
         // Đặt chế độ đóng cửa sổ
-//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setForm(new ViewDemo());
+        setForm(new FormSanPham());
+   
+
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -34,7 +36,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 if (index == 0) {
                     setForm(new ViewDemo());
                 } else if (index == 2) {
-                    setForm(new ViewDemo());
+                    setForm(new FormBanHang());
                 } else if (index == 4) {
                     setForm(new FormSanPham());
                 } else if (index == 6) {
@@ -53,6 +55,10 @@ public class JFrameMain extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void setForm(FormBanHang formBanHang) {
+        formBanHang.setVisible(true);
     }
 
     /**

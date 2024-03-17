@@ -20,7 +20,8 @@ public class SanPhamChiTietDAO {
     public ArrayList<SanPhamChiTietEntity> GetList() {
         ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai = 1").list();
+            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity").list();
+//            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai = 1").list();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,12 +85,14 @@ public class SanPhamChiTietDAO {
             return null;
         }
     }
-    
 
     public int update(SanPhamChiTietEntity objInput) {
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println(objInput.toString());
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             session.beginTransaction();
             String sql = "UPDATE SanPhamChiTietEntity"
+                    //                    + " SET soLuong = 13"
                     + " SET giaSanPham = :giaSanPham,"
                     + " soLuong = :soLuong,"
                     + " trangThai = :trangThai,"
@@ -97,9 +100,9 @@ public class SanPhamChiTietDAO {
                     + " danhmuc_id = :danhmucid,"
                     + " kichco_id = :kichcoid,"
                     + " mausac_id = :mausacid,"
-                    + " nhanSanXuat_id = :nhanSanXuatid,"
+                    + " nhaSanXuat_id = :nhaSanXuatid,"
                     + " moTa = :moTa"
-                    + " WHERE SanPhamChiTietEntity.id = :id";
+                    + " WHERE id = :id";
             Query query = session.createQuery(sql);
             query.setParameter("giaSanPham", objInput.getGiaSanPham());
             query.setParameter("soLuong", objInput.getSoLuong());
@@ -108,13 +111,12 @@ public class SanPhamChiTietDAO {
             query.setParameter("danhmucid", objInput.getDanhMucEntity().getId());
             query.setParameter("kichcoid", objInput.getKichCoEntity().getId());
             query.setParameter("mausacid", objInput.getMauSacEntity().getId());
-            query.setParameter("nhanSanXuatid", objInput.getNhaSanXuatEntity().getId());
+            query.setParameter("nhaSanXuatid", objInput.getNhaSanXuatEntity().getId());
             query.setParameter("moTa", objInput.getMoTa());
             query.setParameter("id", objInput.getId());
-            
             int updatedCount = query.executeUpdate();
             session.getTransaction().commit();
-            
+
             return updatedCount;
         } catch (Exception e) {
             e.printStackTrace();

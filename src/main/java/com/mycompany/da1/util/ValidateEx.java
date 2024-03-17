@@ -75,5 +75,54 @@ public class ValidateEx {
         }
         return sdf.parse(jTextField.getText());
     }
+
+    public static Boolean checkIsNull(JTextComponent... jTextField) {
+        boolean check = false;
+        for (JTextComponent item : jTextField) {
+            if (item.getText().equals("")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    ;
     
+    public static Boolean checkIsFloat(JTextComponent... jTextField) {
+        boolean check = false;
+        try {
+            for (JTextComponent item : jTextField) {
+                Float.parseFloat(item.getText().trim());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            check = true;
+            return true;
+        }
+        return check;
+    }
+
+    public static Boolean checkIsNumber(JTextComponent... jTextField) {
+        boolean check = false;
+        try {
+            for (JTextComponent item : jTextField) {
+                Integer.valueOf(item.getText().trim());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            check = true;
+            return true;
+        }
+        return check;
+    }
+
+    public static Boolean checkMoreThan(JTextField jTextField, int valueCheck) {
+        boolean check = false;
+        float a = Float.valueOf(jTextField.getText());
+        if (a <= valueCheck) {
+            return true;
+        }
+        return check;
+    }
+
 }

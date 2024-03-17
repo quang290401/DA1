@@ -57,4 +57,8 @@ public class Contants {
         }
         return "Đang bán";
     }
+    
+    static public String getStatusAttribute(int tinhTrang) {
+        return tinhTrang == 0 ? "Hết" : "Còn";
+    }
 }
