@@ -89,7 +89,6 @@ public class SanPhamChiTietDAO {
     public int update(SanPhamChiTietEntity objInput) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             session.beginTransaction();
-
             String sql = "UPDATE SanPhamChiTietEntity"
                     + " SET giaSanPham = :giaSanPham,"
                     + " soLuong = :soLuong,"
