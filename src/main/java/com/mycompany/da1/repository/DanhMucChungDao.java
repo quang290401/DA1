@@ -1,9 +1,8 @@
 package com.mycompany.da1.repository;
 
-import com.mycompany.da1.entity.HoaDonEntity;
+import com.mycompany.da1.entity.MauSacEntity;
 import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.util.HibernateUltil;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,20 +12,19 @@ import org.hibernate.query.Query;
  *
  * @author sonst
  */
-public class SanPhamDao {
+public class DanhMucChungDao<T> {
 
-    public ArrayList<SanPhamEntity> GetList() {
-        ArrayList<SanPhamEntity> listData = new ArrayList<>();
+    public ArrayList<T> getAll(Class<T> entityType) {
+        ArrayList<T> listData = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            listData = (ArrayList<SanPhamEntity>) session.createQuery("from SanPhamEntity where trangThai = 1").list();
-
+            listData = (ArrayList<T>) session.createQuery("from " + entityType.getSimpleName()).list();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listData;
     }
 
-    public SanPhamEntity Save(SanPhamEntity objInput) {
+    public T Save(T objInput) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(objInput);
@@ -40,21 +38,19 @@ public class SanPhamDao {
         }
     }
 
-    public int updateSanPham(SanPhamEntity obiInput) {
+    public int updateSanPham(Class<T> entityType, String tenDanhMuc, int id, int trangThai, String value) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            String entityName = entityType.getSimpleName();
             session.beginTransaction();
-            String sql = "UPDATE SanPhamEntity"
+            String sql = "UPDATE "
+                    + entityName
                     + " SET trangThai = :trangThai,"
-                    + " tenSanPham = :tenSanPham,"
-                    + " maSanPham = :maSanPham,"
-                    + " anhSanPham = :anhSanPham"
+                    + tenDanhMuc + " = :" + tenDanhMuc
                     + " WHERE id = :id";
             Query query = session.createQuery(sql);
-            query.setParameter("trangThai", obiInput.getTrangThai());
-            query.setParameter("tenSanPham", obiInput.getTenSanPham());
-            query.setParameter("maSanPham", obiInput.getMaSanPham());
-            query.setParameter("anhSanPham", obiInput.getAnhSanPham());
-            query.setParameter("id", obiInput.getId());
+            query.setParameter("trangThai", trangThai);
+            query.setParameter(tenDanhMuc, value);
+            query.setParameter("id", id);
             int check = query.executeUpdate();
             session.getTransaction().commit();
             return check;

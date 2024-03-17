@@ -115,10 +115,6 @@ public class SanPhamChiTietDAO {
             query.setParameter("nhaSanXuatid", objInput.getNhaSanXuatEntity().getId());
             query.setParameter("moTa", objInput.getMoTa());
             query.setParameter("id", objInput.getId());
-
-            System.out.println("==========================================================");
-            System.out.println(query);
-
             int updatedCount = query.executeUpdate();
             session.getTransaction().commit();
 

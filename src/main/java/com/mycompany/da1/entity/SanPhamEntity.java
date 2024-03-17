@@ -29,8 +29,6 @@ public class SanPhamEntity {
     private Date ngaySua;
     @Column(name = "anhSanPham")
     private String anhSanPham;
-    @Column(name = "soLuong")
-    private Integer soLuong;
 
     @Override
     public String toString() {

@@ -24,9 +24,8 @@ public class JFrameMain extends javax.swing.JFrame {
         menu.initMoving(JFrameMain.this);
         sb.setVerticalScrollBar(new ScrollBar());
         // Đặt chế độ đóng cửa sổ
-//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setForm(new ViewDemo());
+        setForm(new FormSanPham());
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {

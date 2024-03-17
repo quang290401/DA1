@@ -11,20 +11,21 @@ import com.mycompany.da1.service.IMPL.SanPhamChiTietIMPL;
 import com.mycompany.da1.service.IMPL.SanPhamIMPL;
 import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.ValidateEx;
+import com.mycompany.da1.view.events.EventDialogListener;
+import java.awt.Dialog;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sonst
  */
-public class FormSanPhamCt extends javax.swing.JFrame {
+public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogListener {
 
     private SanPhamChiTietIMPL sanPhamChiTietIMPL = new SanPhamChiTietIMPL();
     private SanPhamIMPL sanPhamIMPL = new SanPhamIMPL();
@@ -37,6 +38,8 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     private List<KichCoEntity> lstKichCo;
     private List<ChatLieuEntity> lstChatLieu;
 
+    private JDialog jDialog;
+
     public FormSanPhamCt() {
         initComponents();
         setLocationRelativeTo(null);
@@ -45,6 +48,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     }
 
     private void setUp() {
+        rdoDangBan.setSelected(true);
         lstSanPhamCt = sanPhamChiTietIMPL.GetAll();
         fillTableSanPham();
         fillCboChiTiet();
@@ -83,7 +87,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
         lstMauSac = sanPhamChiTietIMPL.getListMauSac();
         lstChatLieu = sanPhamChiTietIMPL.getListChatLieu();
         lstSanPham = sanPhamIMPL.GetAll();
-//        System.out.println("lstSanPham" + lstSanPham.toString());
         if (lstDanhMuc.isEmpty()
                 || lstNhaSx.isEmpty()
                 || lstKichCo.isEmpty()
@@ -92,11 +95,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
             System.out.println("=================== ERROR ==============");
             System.out.println("Thuộc tính tồn tại 1 bảng trống");
         } else {
-
-//            cboSanPham.removeAllItems();
-//            for (SanPhamEntity item : lstSanPham) {
-//                cboSanPham.addItem(item.getTenSanPham());
-//            }
             DefaultComboBoxModel comboBoxModel;
 
             comboBoxModel = (DefaultComboBoxModel) cboSanPham.getModel();
@@ -117,7 +115,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
             comboBoxModel.removeAllElements();
             cboNsx.removeAllItems();
             for (NhaSanXuatEntity item : lstNhaSx) {
-//                cboNsx.addItem(item.getTenNhaSanXuat());
                 comboBoxModel.addElement(item);
             }
 
@@ -125,7 +122,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
             comboBoxModel.removeAllElements();
             cboKichCo.removeAllItems();
             for (KichCoEntity item : lstKichCo) {
-//                cboKichCo.addItem(item.getTenKichCo());
                 comboBoxModel.addElement(item);
             }
 
@@ -133,7 +129,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
             comboBoxModel.removeAllElements();
             cboChatLieu.removeAllItems();
             for (ChatLieuEntity item : lstChatLieu) {
-//                cboChatLieu.addItem(item.getTenChatLieu());
                 comboBoxModel.addElement(item);
             }
 
@@ -141,56 +136,8 @@ public class FormSanPhamCt extends javax.swing.JFrame {
             comboBoxModel.removeAllElements();
             cboMauSac.removeAllItems();
             for (MauSacEntity item : lstMauSac) {
-//                cboMauSac.addItem(item.getTenMauSac());
                 comboBoxModel.addElement(item);
             }
-
-//            listDanhMuc.add("All");
-//            cboDanhMuc.removeAllItems();
-//            for (String string : listDanhMuc) {
-//                cboDanhMuc.addItem(string);
-//            }
-        }
-    }
-
-    private boolean checkRongTxt(JTextField txt) {
-        if (txt.getText().trim().equalsIgnoreCase("")) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkRongTxtArea(JTextArea txtA) {
-        if (txtA.getText().trim().equalsIgnoreCase("")) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkPhaiLaSo(JTextField txt) {
-        try {
-            int a = Integer.parseInt(txt.getText());
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    private boolean checkPhaiDuong(JTextField txt) {
-        if (Integer.parseInt(txt.getText()) < 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkPhaiLaSoF(JTextField txt) {
-        try {
-            Float.parseFloat(txt.getText().trim());
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 
@@ -206,6 +153,11 @@ public class FormSanPhamCt extends javax.swing.JFrame {
         cboNsx.setSelectedIndex(0);
         cboKichCo.setSelectedIndex(0);
         cboMauSac.setSelectedIndex(0);
+    }
+
+    @Override
+    public void closeDialog() {
+        fillCboChiTiet();
     }
 
     @SuppressWarnings("unchecked")
@@ -293,11 +245,13 @@ public class FormSanPhamCt extends javax.swing.JFrame {
 
         jLabel12.setText("Trạng Thái");
 
+        rdoDangBan.setBackground(new java.awt.Color(255, 255, 204));
         buttonGroup1.add(rdoDangBan);
-        rdoDangBan.setText("Dang Ban");
+        rdoDangBan.setText("Đang bán");
 
+        rdoTamNgung.setBackground(new java.awt.Color(255, 255, 204));
         buttonGroup1.add(rdoTamNgung);
-        rdoTamNgung.setText("Tam Ngung Ban");
+        rdoTamNgung.setText("Ngừng bán");
 
         lbClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -559,7 +513,7 @@ public class FormSanPhamCt extends javax.swing.JFrame {
                                                     .addComponent(jLabel9)
                                                     .addComponent(jLabel10)
                                                     .addComponent(jLabel11))
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(rdoDangBan)
@@ -580,6 +534,11 @@ public class FormSanPhamCt extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12, jLabel9});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboSanPham, lblid});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -668,6 +627,10 @@ public class FormSanPhamCt extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12, jLabel9});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboSanPham, lblid, txtGia, txtSoLuong});
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -744,17 +707,26 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     }//GEN-LAST:event_btLonMaxActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (checkRongTxtArea(txtMoTa) == false || checkRongTxt(txtGia) == false || checkRongTxt(txtSoLuong) == false) {
-            MsgBox.alert(this, "Vui lòng nhập đầy đủ");
-        } else if (checkPhaiLaSo(txtSoLuong) == false) {
-            MsgBox.alert(this, "Số lượng và giá là kiểu số");
-        } else if (checkPhaiDuong(txtGia) == false || checkPhaiDuong(txtSoLuong) == false) {
-            MsgBox.alert(this, "Số lượng và giá không thể âm");
+        if (ValidateEx.checkIsNull(txtMoTa, txtGia, txtSoLuong)) {
+            MsgBox.alert(this, "Vui lòng nhập đầy đủ thông tin");
+            return;
         }
 
+        if (ValidateEx.checkIsNumber(txtSoLuong)) {
+            MsgBox.alert(this, "Số lượng phải là kiểu số");
+            return;
+        } else if (ValidateEx.checkMoreThan(txtSoLuong, 0)) {
+            MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+            return;
+        }
+
+        if (ValidateEx.checkIsFloat(txtGia)) {
+            MsgBox.alert(this, "Giá bán phải là kiểu số");
+            return;
+        }
         BigDecimal gia = new BigDecimal(txtGia.getText());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
-            MsgBox.alert(this, "Giá không thể âm");
+            MsgBox.alert(this, "Giá bán không thể là số âm");
             return;
         }
 
@@ -794,32 +766,26 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-//        if (checkRongTxtArea(txtMoTa) == false || checkRongTxt(txtGia) == false || checkRongTxt(txtSoLuong) == false) {
-//            MsgBox.alert(this, "Vui lòng nhập đầy đủ");
-//        } else if (checkPhaiLaSo(txtSoLuong) == false) {
-//            MsgBox.alert(this, "Số lượng và giá là kiểu số");
-//        } else if (checkPhaiDuong(txtGia) == false || checkPhaiDuong(txtSoLuong) == false) {
-//            MsgBox.alert(this, "Số lượng và giá không thể âm");
-//        }
-
-        if (checkRongTxtArea(txtMoTa) == false || checkRongTxt(txtGia) == false || checkRongTxt(txtSoLuong) == false) {
-            MsgBox.alert(this, "Vui long nhap day du thong tin.");
+        if (ValidateEx.checkIsNull(txtMoTa, txtGia, txtSoLuong)) {
+            MsgBox.alert(this, "Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
-        if (!checkPhaiLaSoF(txtGia)) {
-            MsgBox.alert(this, "Gia phai la so.");
+        if (ValidateEx.checkIsNumber(txtSoLuong)) {
+            MsgBox.alert(this, "Số lượng phải là kiểu số");
+            return;
+        } else if (ValidateEx.checkMoreThan(txtSoLuong, 0)) {
+            MsgBox.alert(this, "Số lượng phải lớn hơn 0");
             return;
         }
 
-        if (!checkPhaiLaSo(txtSoLuong)) {
-            MsgBox.alert(this, "Gia phai la so.");
+        if (ValidateEx.checkIsFloat(txtGia)) {
+            MsgBox.alert(this, "Giá bán phải là kiểu số");
             return;
         }
-
-        BigDecimal gia = new BigDecimal(Float.valueOf(txtGia.getText()));
+        BigDecimal gia = new BigDecimal(txtGia.getText());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
-            MsgBox.alert(this, "Giá không thể âm");
+            MsgBox.alert(this, "Giá bán không thể là số âm");
             return;
         }
 
@@ -829,9 +795,6 @@ public class FormSanPhamCt extends javax.swing.JFrame {
         MauSacEntity mauSacTmp = ((MauSacEntity) cboMauSac.getSelectedItem());
         ChatLieuEntity chatLieuTmp = ((ChatLieuEntity) cboChatLieu.getSelectedItem());
         KichCoEntity kichCoTmp = ((KichCoEntity) cboKichCo.getSelectedItem());
-        
-        System.out.println("==========================================");
-        System.out.println(mauSacTmp.getId());
 
         SanPhamChiTietEntity sanPhamChiTiet = new SanPhamChiTietEntity();
         sanPhamChiTiet.setId(Integer.valueOf(lblid.getText()));
@@ -869,28 +832,63 @@ public class FormSanPhamCt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDanhMucMouseClicked
-//        try {
-//            Form_DanhMuc danhMuc = new Form_DanhMuc();
-//            danhMuc.setVisible(true);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        FormDanhMuc viewDanhMuc = new FormDanhMuc(this);
+        jDialog = new JDialog();
+        jDialog.setTitle("Bảng danh mục");
+        jDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog.setSize(500, 450);
+        jDialog.setResizable(false);
+        jDialog.add(viewDanhMuc);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setVisible(true);
     }//GEN-LAST:event_btnDanhMucMouseClicked
 
     private void btnKichCoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKichCoMouseClicked
-        // TODO add your handling code here:
+        FormKichCo view = new FormKichCo(this);
+        jDialog = new JDialog();
+        jDialog.setTitle("Bảng kích cỡ");
+        jDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog.setSize(500, 450);
+        jDialog.setResizable(false);
+        jDialog.add(view);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setVisible(true);
     }//GEN-LAST:event_btnKichCoMouseClicked
 
     private void btnMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMauSacMouseClicked
-        // TODO add your handling code here:
+        FormMauSac view = new FormMauSac(this);
+        jDialog = new JDialog();
+        jDialog.setTitle("Bảng màu sắc");
+        jDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog.setSize(500, 450);
+        jDialog.setResizable(false);
+        jDialog.add(view);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setVisible(true);
     }//GEN-LAST:event_btnMauSacMouseClicked
 
     private void btnChatLieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChatLieuMouseClicked
-        // TODO add your handling code here:
+        FormChatLieu view = new FormChatLieu(this);
+        jDialog = new JDialog();
+        jDialog.setTitle("Bảng chất liệu");
+        jDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog.setSize(500, 450);
+        jDialog.setResizable(false);
+        jDialog.add(view);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setVisible(true);
     }//GEN-LAST:event_btnChatLieuMouseClicked
 
     private void btnNhaSxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhaSxMouseClicked
-        // TODO add your handling code here:
+        FormNhaSanXuat view = new FormNhaSanXuat(this);
+        jDialog = new JDialog();
+        jDialog.setTitle("Bảng nhà sản xuất");
+        jDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog.setSize(500, 450);
+        jDialog.setResizable(false);
+        jDialog.add(view);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setVisible(true);
     }//GEN-LAST:event_btnNhaSxMouseClicked
 
     /**
