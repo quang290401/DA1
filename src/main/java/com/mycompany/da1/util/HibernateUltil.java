@@ -22,7 +22,7 @@ public class HibernateUltil {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DUAN1");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "22122002starx");
+        properties.put(Environment.PASS, "2212starx");
         properties.put(Environment.SHOW_SQL, "true");
         properties.put(Environment.HBM2DDL_AUTO, "update"); // Hoặc "update" tùy vào nhu cầu của bạn
 
