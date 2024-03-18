@@ -13,7 +13,7 @@ public class KhachHangEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "hoTen")
+    @Column(name = "hoTen", columnDefinition = "NVARCHAR(255)")
     private String hoTen;
     @Column(name = "soDienThoai")
     private String soDienThoai;

@@ -4,6 +4,7 @@ import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.repository.SanPhamDao;
 import com.mycompany.da1.service.SanPhamService;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SanPhamIMPL implements SanPhamService {
@@ -13,6 +14,11 @@ public class SanPhamIMPL implements SanPhamService {
     @Override
     public ArrayList<SanPhamEntity> GetAll() {
         ArrayList<SanPhamEntity> listData = service.GetList();
+        return listData;
+    }
+    
+    public List<SanPhamEntity> getSerch(String text, int status) {
+        List<SanPhamEntity> listData = service.getSearch(text, status);
         return listData;
     }
     

@@ -1,18 +1,18 @@
 package com.mycompany.da1.repository;
 
 import com.mycompany.da1.entity.ChatLieuEntity;
-import com.mycompany.da1.entity.HoaDonChiTietEntity;
+import com.mycompany.da1.entity.DanhMucEntity;
 import com.mycompany.da1.entity.KichCoEntity;
 import com.mycompany.da1.entity.MauSacEntity;
 import com.mycompany.da1.entity.NhaSanXuatEntity;
 import com.mycompany.da1.entity.SanPhamChiTietEntity;
+import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.util.HibernateUltil;
-import jakarta.persistence.Query;
-import java.math.BigDecimal;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Transaction;
 
 public class SanPhamChiTietDAO {
@@ -20,13 +20,53 @@ public class SanPhamChiTietDAO {
     public ArrayList<SanPhamChiTietEntity> GetList() {
         ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity").list();
-//            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai = 1").list();
-
+            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity order by id asc").list();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return sanPhamChiTietEntities;
+    }
+
+    public List<SanPhamChiTietEntity> getListByMaSp(String maSpCt) {
+        List<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            Query<SanPhamChiTietEntity> query = session.createQuery("from SanPhamChiTietEntity where maSanPhamCt = :maSpCt order by id asc", SanPhamChiTietEntity.class);
+            query.setParameter("maSpCt", maSpCt);
+            sanPhamChiTietEntities = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sanPhamChiTietEntities;
+    }
+
+    public List<SanPhamChiTietEntity> getSearch(String textSearch, DanhMucEntity dme, NhaSanXuatEntity nsxe, int status, SanPhamEntity sanPhamEntity) {
+        List<SanPhamChiTietEntity> lstData = new ArrayList<>();
+        System.out.println(sanPhamEntity.getId() + " ơ " + sanPhamEntity.getMaSanPham());
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            Query<SanPhamChiTietEntity> query = session.createQuery(
+                    "SELECT spct FROM SanPhamChiTietEntity spct "
+                    + "LEFT JOIN spct.sanPhamEntity sp "
+                    + "LEFT JOIN spct.danhMucEntity dm "
+                    + "LEFT JOIN spct.nhaSanXuatEntity nsx "
+                    + "WHERE "
+                    + "(spct.maSanPhamCt LIKE :textSearch) "
+                    + "AND (sp.id = :spId)"
+                    + "AND (:trangThai = 3 OR spct.trangThai = :trangThai) "
+                    + "AND (:dmeId = 0 OR dm.id = :dmeId) "
+                    + "AND (:nsxeId = 0 OR nsx.id = :nsxeId) "
+                    + "ORDER BY spct.id ASC",
+                    SanPhamChiTietEntity.class
+            );
+            query.setParameter("textSearch", "%" + textSearch + "%");
+            query.setParameter("spId", sanPhamEntity.getId());
+            query.setParameter("trangThai", status);
+            query.setParameter("dmeId", dme != null ? dme.getId() : 0);
+            query.setParameter("nsxeId", nsxe != null ? nsxe.getId() : 0);
+            lstData = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lstData;
     }
 
     public ArrayList<KichCoEntity> getListKichCo() {
@@ -43,7 +83,6 @@ public class SanPhamChiTietDAO {
         ArrayList<MauSacEntity> listData = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             listData = (ArrayList<MauSacEntity>) session.createQuery("from MauSacEntity where trangThai = 1").list();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,6 +114,7 @@ public class SanPhamChiTietDAO {
     public SanPhamChiTietEntity save(SanPhamChiTietEntity objInput) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             Transaction transaction = session.beginTransaction();
+            System.out.println(objInput.getMoTa());
             session.save(objInput);
             session.flush();
             session.refresh(objInput);
@@ -101,7 +141,9 @@ public class SanPhamChiTietDAO {
                     + " kichco_id = :kichcoid,"
                     + " mausac_id = :mausacid,"
                     + " nhaSanXuat_id = :nhaSanXuatid,"
-                    + " moTa = :moTa"
+                    + " moTa = :moTa,"
+                    + " maSanPhamCt = :maSanPhamCt,"
+                    + " anhSanPham = :anhSanPham"
                     + " WHERE id = :id";
             Query query = session.createQuery(sql);
             query.setParameter("giaSanPham", objInput.getGiaSanPham());
@@ -113,6 +155,8 @@ public class SanPhamChiTietDAO {
             query.setParameter("mausacid", objInput.getMauSacEntity().getId());
             query.setParameter("nhaSanXuatid", objInput.getNhaSanXuatEntity().getId());
             query.setParameter("moTa", objInput.getMoTa());
+            query.setParameter("maSanPhamCt", objInput.getMaSanPhamCt());
+            query.setParameter("anhSanPham", objInput.getAnhSanPham());
             query.setParameter("id", objInput.getId());
             int updatedCount = query.executeUpdate();
             session.getTransaction().commit();

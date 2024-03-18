@@ -1,10 +1,9 @@
 package com.mycompany.da1.repository;
 
-import com.mycompany.da1.entity.HoaDonEntity;
 import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.util.HibernateUltil;
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -18,12 +17,30 @@ public class SanPhamDao {
     public ArrayList<SanPhamEntity> GetList() {
         ArrayList<SanPhamEntity> listData = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            listData = (ArrayList<SanPhamEntity>) session.createQuery("from SanPhamEntity where trangThai = 1").list();
-
+            listData = (ArrayList<SanPhamEntity>) session.createQuery("from SanPhamEntity order by id asc").list();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listData;
+    }
+
+    public List<SanPhamEntity> getSearch(String textSearch, int status) {
+        List<SanPhamEntity> lstData = new ArrayList<>();
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            Query<SanPhamEntity> query = session
+                    .createQuery(
+                            "from SanPhamEntity where"
+                            + " (tenSanPham LIKE :textSearch OR maSanPham LIKE :textSearch)  And"
+                            + " (:trangThai = 3 OR trangThai = :trangThai) "
+                            + " order by id asc",
+                            SanPhamEntity.class);
+            query.setParameter("textSearch", "%" + textSearch + "%");
+            query.setParameter("trangThai", status);
+            lstData = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lstData;
     }
 
     public SanPhamEntity Save(SanPhamEntity objInput) {
@@ -45,15 +62,11 @@ public class SanPhamDao {
             session.beginTransaction();
             String sql = "UPDATE SanPhamEntity"
                     + " SET trangThai = :trangThai,"
-                    + " tenSanPham = :tenSanPham,"
-                    + " maSanPham = :maSanPham,"
-                    + " anhSanPham = :anhSanPham"
+                    + " tenSanPham = :tenSanPham"
                     + " WHERE id = :id";
             Query query = session.createQuery(sql);
             query.setParameter("trangThai", obiInput.getTrangThai());
             query.setParameter("tenSanPham", obiInput.getTenSanPham());
-            query.setParameter("maSanPham", obiInput.getMaSanPham());
-            query.setParameter("anhSanPham", obiInput.getAnhSanPham());
             query.setParameter("id", obiInput.getId());
             int check = query.executeUpdate();
             session.getTransaction().commit();

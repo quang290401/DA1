@@ -15,7 +15,7 @@ public class ChatLieuEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tenChatLieu")
+    @Column(name = "tenChatLieu", columnDefinition = "NVARCHAR(255)")
     private String tenChatLieu;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

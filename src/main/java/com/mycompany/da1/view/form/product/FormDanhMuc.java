@@ -277,6 +277,8 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
         danhMucEntity.setTenDanhMuc(txtTen.getText());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
+        System.out.println(danhMucEntity.getTrangThai() + " =========================================");
+        
         DanhMucEntity objTmp = danhMucChungImpl.save(danhMucEntity);
         if (objTmp == null) {
             MsgBox.alert(this, "Thêm mới không thành công");

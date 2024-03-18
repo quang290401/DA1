@@ -51,11 +51,11 @@ public class Contants {
         }
     }
     
-    static public String getTinhTrangText(int tinhTrang) {
-        if (tinhTrang == 0) {
-            return "Ngừng bán";
+    static public String getStatusBusiness (int status) {
+        if (status == 0) {
+            return "Ngừng kinh doanh";
         }
-        return "Đang bán";
+        return "Đang kinh doanh";
     }
     
     static public String getStatusAttribute(int tinhTrang) {

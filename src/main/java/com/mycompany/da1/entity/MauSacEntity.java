@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -15,7 +13,7 @@ public class MauSacEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tenMauSac")
+    @Column(name = "tenMauSac", columnDefinition = "NVARCHAR(255)")
     private String tenMauSac;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

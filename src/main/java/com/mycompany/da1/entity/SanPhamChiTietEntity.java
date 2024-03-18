@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "SanPhamChiTiet")
 public class SanPhamChiTietEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,10 +18,16 @@ public class SanPhamChiTietEntity {
 
     @Column(name = "soLuong")
     private int soLuong;
-    
-    @Column(name = "moTa")
+
+    @Column(name = "moTa", columnDefinition = "NVARCHAR(255)")
     private String moTa;
+
+    @Column(name = "anhSanPham")
+    private String anhSanPham;
     
+    @Column(name = "maSanPhamCt")
+    private String maSanPhamCt;
+
     @ManyToOne
     @JoinColumn(name = "SanPham_id")
     private SanPhamEntity sanPhamEntity;

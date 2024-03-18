@@ -13,7 +13,7 @@ public class DanhMucEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tenDanhMuc")
+    @Column(name = "tenDanhMuc", columnDefinition = "NVARCHAR(255)")
     private String tenDanhMuc;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

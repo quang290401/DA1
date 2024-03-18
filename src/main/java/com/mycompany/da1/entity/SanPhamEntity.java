@@ -13,7 +13,7 @@ public class SanPhamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tenSanPham")
+    @Column(name = "tenSanPham", columnDefinition = "NVARCHAR(255)")
     private String tenSanPham;
     @Column(name = "maSanPham")
     private String maSanPham;
@@ -27,8 +27,6 @@ public class SanPhamEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngaySua")
     private Date ngaySua;
-    @Column(name = "anhSanPham")
-    private String anhSanPham;
 
     @Override
     public String toString() {
