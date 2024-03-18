@@ -178,7 +178,7 @@ public class FormChatLieu extends javax.swing.JPanel implements EventDialogListe
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Bảng danh mục");
+        jLabel1.setText("Bảng Chất Liệu");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);

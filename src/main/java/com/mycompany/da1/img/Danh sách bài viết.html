@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)http://localhost:8080/MVC/admin-product?page=1&maxPageItem=2&type=list -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Danh sách bài viết</title>
+<link rel="stylesheet" href="./Danh sách bài viết_files/bootstrap.min.css">
+<link rel="stylesheet" href="./Danh sách bài viết_files/font-awesome.min.css">
+<link rel="stylesheet" href="./Danh sách bài viết_files/ace.min.css" class="ace-main-stylesheet" id="main-ace-style">
+<script src="./Danh sách bài viết_files/ace-extra.min.js.download"></script>
+<link rel="stylesheet" href="./Danh sách bài viết_files/jquery-ui.css">
+
+<script src="./Danh sách bài viết_files/jquery.min.js.download"></script>
+<script src="./Danh sách bài viết_files/jquery.twbsPagination.js.download"></script>
+
+
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+<body class="no-skin">
+	<!-- header -->
+	
+
+
+
+
+<div id="navbar" class="navbar navbar-default          ace-save-state">
+	<div class="navbar-container ace-save-state" id="navbar-container">
+		<div class="navbar-header pull-left">
+			<a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="navbar-brand"> <small> <i class="fa fa-leaf"></i> Trang quản trị
+			</small>
+			</a>
+		</div>
+		<div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
+			<ul class="nav ace-nav" style="">
+				<li class="light-blue dropdown-modal"><a data-toggle="dropdown" href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="dropdown-toggle"> Xin chào,
+						Anh lê </a>
+				</li><li class="light-blue dropdown-modal"><a href="http://localhost:8080/MVC/thoat?action=logout"> <i class="ace-icon fa fa-power-off"></i> Thoát
+				</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+
+	<!-- header -->
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<!-- header -->
+		
+
+
+
+
+<div id="sidebar" class="sidebar responsive ace-save-state" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
+    <script type="text/javascript">
+        try{ace.settings.loadState('sidebar')}catch(e){}
+    </script>
+    <div class="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="ace-icon fa fa-signal"></i>
+            </button>
+
+            <button class="btn btn-info">
+                <i class="ace-icon fa fa-pencil"></i>
+            </button>
+
+            <button class="btn btn-warning">
+                <i class="ace-icon fa fa-users"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="ace-icon fa fa-cogs"></i>
+            </button>
+        </div>
+        <div class="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div>
+    <ul class="nav nav-list" style="top: 0px;">
+        <li>
+            <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text"></span>
+                Quản lý bài viết
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                <li>
+                <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        DS bài viết
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="sidebar-toggle sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+</div>
+		<!-- header -->
+		<div class="main-content">
+			<div class="main-content-inner">
+
+				<div class="page-content">
+					
+
+	<div class="main-content">
+		<form action="http://localhost:8080/MVC/admin-product" id="formSubmit" method="get">
+			<div class="main-content-inner">
+				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#">Trang
+								chủ</a></li>
+					</ul>
+					<!-- /.breadcrumb -->
+				</div>
+				
+				
+				<div class="page-content">
+				 <div class="widget-box table-filter">
+									<div class="table-btn-controls">
+										<div class="pull-right tableTools-container">
+											<div class="dt-buttons btn-overlap btn-group">
+												<a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Thêm bài viết" href="http://localhost:8080/MVC/admin-product?type=edit">
+
+															<span>
+																<i class="fa fa-plus-circle bigger-110 purple"></i>
+															</span>
+												</a>
+									<button id="btnDelete" type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Xóa bài viết">
+										<span> <i class="fa fa-trash-o bigger-110 pink"></i>
+										</span>
+									</button>
+								</div>
+										</div>
+									</div>
+								</div>
+					<div class="row">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>numOrDer</th>
+										<th>id</th>
+										<th>tên Sản Phẩm</th>
+										<th>Giá Sản Phẩm</th>
+										<th>Thao Tác</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+										<tr>
+											<td>1</td>
+											<td>SP001</td>
+											<td>Giày LV </td>
+											<td>13.23400</td>
+											<td>	<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip" title="Cập nhật bài viết" href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																</a>
+																</td>
+										</tr>
+									
+										<tr>
+											<td>2</td>
+											<td>SP002</td>
+											<td>Giày Gucci </td>
+											<td>154.36000</td>
+											<td>	<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip" title="Cập nhật bài viết" href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																</a>
+																</td>
+										</tr>
+									
+
+								</tbody>
+							</table>
+							<ul class="pagination" id="pagination"><li class="page-item first disabled"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">First</a></li><li class="page-item prev disabled"><a href="http://localhost:8080/admin-product?page=1&amp;maxPageItem=2&amp;type=list" class="page-link">Previous</a></li><li class="page-item active"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">1</a></li><li class="page-item"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list" class="page-link">2</a></li><li class="page-item"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">3</a></li><li class="page-item"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">4</a></li><li class="page-item next"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">Next</a></li><li class="page-item last"><a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" class="page-link">Last</a></li></ul>
+							<input type="hidden" value="" id="page" name="page">
+							<input type="hidden" value="" id="maxPageItem" name="maxPageItem">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- main conten/ -->
+	<script>
+	    $(function () {
+	    	var curentpage = 1;
+			var totalpages = 4;
+			var limit=2;
+	        window.pagObj = $('#pagination').twbsPagination({
+	        	totalPages : 4,
+				visiblePages : 10,
+				startPage:curentpage,
+	            onPageClick: function (event, page) {
+	            	if(curentpage != page){
+						$('#maxPageItem').val(limit);
+						$('#page').val(page);
+						$('#formSubmit').submit();
+	            }
+	           }
+	        });
+	    });
+
+	</script>
+
+
+				</div>
+			</div>
+		</div>
+
+
+		<!-- footer -->
+		
+
+<div class="footer">
+	<div class="footer-inner">
+		<div class="footer-content">
+			<span class="bigger-120"> <span class="blue bolder">Ace</span>
+				Application © 2013-2014
+			</span> &nbsp; &nbsp; <span class="action-buttons"> <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#">
+					<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+			</a> <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#"> <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+			</a> <a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#"> <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+			</a>
+			</span>
+		</div>
+	</div>
+</div>
+		<!-- footer -->
+
+		<a href="http://localhost:8080/MVC/admin-product?page=1&amp;maxPageItem=2&amp;type=list#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse display"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
+	</div>
+
+
+	<script src="./Danh sách bài viết_files/bootstrap.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery-ui.custom.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.ui.touch-punch.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.easypiechart.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.sparkline.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.flot.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.flot.pie.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/jquery.flot.resize.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/ace-elements.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/ace.min.js.download"></script>
+	<script src="./Danh sách bài viết_files/bootstrap.min.js.download"></script>
+
+	<!-- page specific plugin scripts -->
+	<script src="./Danh sách bài viết_files/jquery-ui.min.js.download"></script>
+
+</body></html>
