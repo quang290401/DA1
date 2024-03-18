@@ -20,8 +20,7 @@ public class SanPhamChiTietDAO {
     public ArrayList<SanPhamChiTietEntity> GetList() {
         ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity").list();
-//            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai = 1").list();
+            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) session.createQuery("from SanPhamChiTietEntity where trangThai=1").list();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,4 +122,26 @@ public class SanPhamChiTietDAO {
             return 0;
         }
     }
+    public void updateSoLuongChiTietSanPham(Integer newSoLuong, Integer idChiTietSanPham) {
+        Session session = HibernateUltil.getFACTORY().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            String hql = "UPDATE SanPhamChiTietEntity SET soLuong=soLuong-:newSoLuong WHERE id=:idChiTietSanPham";
+            int updatedEntities = session.createQuery(hql)
+                    .setParameter("newSoLuong", newSoLuong)
+                    .setParameter("idChiTietSanPham", idChiTietSanPham)
+                    .executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 }

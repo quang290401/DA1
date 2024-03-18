@@ -8,4 +8,5 @@ public interface SanPhamChiTietService {
     ArrayList<SanPhamChiTietEntity>GetAll();
     
     ArrayList<DanhMucEntity> getListDanhMuc();
+    void UpdateSoLuongSP(Integer soLuong,Integer idChiTietSP);
 }

@@ -215,7 +215,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chi tiết sản phẩm");
-        setPreferredSize(new java.awt.Dimension(980, 630));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -495,9 +494,9 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
                                                 .addComponent(lbChatLieu))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(cboDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGap(12, 12, 12)
                                                 .addComponent(btnDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(lbDanhMuc))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(cboKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -739,6 +738,8 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
 
         SanPhamChiTietEntity sanPhamChiTiet = new SanPhamChiTietEntity();
         sanPhamChiTiet.setGiaSanPham(gia);
+        sanPhamChiTiet.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        sanPhamChiTiet.setMoTa((txtMoTa.getText()));
         sanPhamChiTiet.setTrangThai(1);
         sanPhamChiTiet.setSanPhamEntity(sanPhamTmp);
         sanPhamChiTiet.setDanhMucEntity(danhMucTmp);

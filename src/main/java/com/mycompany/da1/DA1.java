@@ -6,6 +6,6 @@ public class DA1 {
 
     public static void main(String[] args) {
         DangNhap a = new DangNhap();
-        a.setVisible(true);
+        a.setVisible(true); 
     }
 }

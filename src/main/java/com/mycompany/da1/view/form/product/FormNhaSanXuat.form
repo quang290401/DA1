@@ -288,7 +288,7 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="B&#x1ea3;ng danh m&#x1ee5;c"/>
+            <Property name="text" type="java.lang.String" value="B&#x1ea3;ng Nh&#xe0; S&#x1ea3;n Xu&#x1ea5;t"/>
           </Properties>
         </Component>
       </SubComponents>

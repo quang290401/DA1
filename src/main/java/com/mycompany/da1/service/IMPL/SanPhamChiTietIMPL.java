@@ -10,6 +10,7 @@ import com.mycompany.da1.entity.SanPhamChiTietEntity;
 import com.mycompany.da1.repository.DanhMucDao;
 import com.mycompany.da1.repository.SanPhamChiTietDAO;
 import com.mycompany.da1.service.SanPhamChiTietService;
+
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
     public SanPhamChiTietEntity save(SanPhamChiTietEntity objInput) {
         return sanPhamChiTietDAO.save(objInput);
     }
-    
+
     public int update(SanPhamChiTietEntity objInput) {
         return sanPhamChiTietDAO.update(objInput);
     }
@@ -37,6 +38,12 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
     public ArrayList<DanhMucEntity> getListDanhMuc() {
         ArrayList<DanhMucEntity> listData = danhMucDao.GetList();
         return listData;
+    }
+
+    @Override
+    public void UpdateSoLuongSP(Integer soLuong, Integer idChiTietSP) {
+        sanPhamChiTietDAO.updateSoLuongChiTietSanPham(soLuong, idChiTietSP);
+
     }
 
     public ArrayList<NhaSanXuatEntity> getListNhaSx() {
