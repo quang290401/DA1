@@ -32,7 +32,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel2" alignment="1" pref="600" max="32767" attributes="0"/>
+          <Component id="jPanel2" alignment="1" pref="580" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -504,6 +504,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btNhoMaxMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNhoMaxActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btLonMax">
@@ -512,6 +513,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btLonMaxMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLonMaxActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbTrang">

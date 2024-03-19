@@ -389,11 +389,21 @@ public class FormSanPham extends javax.swing.JPanel {
                 btNhoMaxMouseClicked(evt);
             }
         });
+        btNhoMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNhoMaxActionPerformed(evt);
+            }
+        });
 
         btLonMax.setText(">>");
         btLonMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btLonMaxMouseClicked(evt);
+            }
+        });
+        btLonMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLonMaxActionPerformed(evt);
             }
         });
 
@@ -462,7 +472,7 @@ public class FormSanPham extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -596,6 +606,14 @@ public class FormSanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillTableWhenSearch();
     }//GEN-LAST:event_txtLocSanPhamKeyReleased
+
+    private void btNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhoMaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btNhoMaxActionPerformed
+
+    private void btLonMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLonMaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLonMaxActionPerformed
 
     public void clearFrom() {
         idSanPham = -1;
