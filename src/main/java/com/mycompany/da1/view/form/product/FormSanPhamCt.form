@@ -98,9 +98,9 @@
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="cboDanhMuc" min="-2" pref="235" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                                   <Component id="btnDanhMuc" min="-2" pref="31" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="lbDanhMuc" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
