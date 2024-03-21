@@ -48,7 +48,7 @@
               <Component id="sb" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="menu" alignment="0" pref="658" max="32767" attributes="0"/>
+          <Component id="menu" alignment="0" pref="681" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
