@@ -29,10 +29,13 @@
               <Component id="menu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="652" max="-2" attributes="0"/>
-                  <Component id="sb" min="-2" pref="1219" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="652" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="590" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="sb" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,7 +48,7 @@
               <Component id="sb" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="menu" alignment="0" pref="643" max="32767" attributes="0"/>
+          <Component id="menu" alignment="0" pref="658" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

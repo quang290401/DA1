@@ -1,5 +1,6 @@
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\VoucherDAO.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\TaiKhoanIMPL.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\InsertHoaDon.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\TaiKhoanDAO.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\KhachhangService.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\MauSacEntity.java
@@ -30,8 +31,6 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\SanPhamService.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\util\XFile.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\combobox\VoucherCBB.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\TaiKhoanService.java
-D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\InsertHoaDon.java
-D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\FormBanHang.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\util\ValidateEx.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\events\EventMenuSelected.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\combobox\KhachHangCBB.java
@@ -62,7 +61,9 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\product\FormMauSac.jav
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\HoaDonEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\DanhMucChungImpl.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\VaiTroEntity.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\FormBanHang.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\SanPhamChiTietDAO.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\FormBanHang2.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\TaiKhoanEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\KichCoEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\KhachHangIMPL.java

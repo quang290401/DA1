@@ -25,4 +25,8 @@ public class KhachHangEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngaySua")
     private Date ngaySua;
+    @Override
+    public String toString(){
+        return this.hoTen=hoTen;
+    }
 }
