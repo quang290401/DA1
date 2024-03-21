@@ -64,4 +64,9 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
     public ArrayList<ChatLieuEntity> getListChatLieu() {
         return sanPhamChiTietDAO.getListChatLieu();
     }
+    
+    public void UpdateSoLuongSP(Integer soLuong, Integer idChiTietSP) {
+        sanPhamChiTietDAO.updateSoLuongChiTietSanPham(soLuong, idChiTietSP);
+
+    }
 }
