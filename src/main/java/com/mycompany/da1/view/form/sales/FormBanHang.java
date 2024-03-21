@@ -7,18 +7,16 @@ import com.mycompany.da1.service.IMPL.HoaDonChiTietIMPL;
 import com.mycompany.da1.service.IMPL.HoaDonIMPL;
 import com.mycompany.da1.service.IMPL.SanPhamChiTietIMPL;
 import com.mycompany.da1.util.XFile;
-import java.awt.Dialog;
+import com.mycompany.da1.view.events.EventDialogListener;
 import java.awt.Image;
 import java.io.File;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 import javax.swing.table.DefaultTableModel;
-
 public class FormBanHang extends javax.swing.JPanel {
     SanPhamChiTietIMPL sanPhamChiTietIMPL = new SanPhamChiTietIMPL();
     HoaDonIMPL hoaDonIMPL = new HoaDonIMPL();

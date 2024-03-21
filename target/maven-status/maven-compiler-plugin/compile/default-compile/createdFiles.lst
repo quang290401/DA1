@@ -13,12 +13,14 @@ com\mycompany\da1\view\form\sales\FormBanHang2$21.class
 com\mycompany\da1\service\IMPL\VoucherServiceIMPL.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$9.class
 com\mycompany\da1\service\MauSacService.class
+com\mycompany\da1\view\form\sales\InsertHoaDon$2.class
 com\mycompany\da1\util\PhanTrang.class
 com\mycompany\da1\view\form\sales\FormBanHang2.class
 com\mycompany\da1\view\swing\ListMenu$1.class
 com\mycompany\da1\view\form\product\FormDanhMuc$3.class
 com\mycompany\da1\service\TaiKhoanService.class
 com\mycompany\da1\view\DangNhap$2.class
+com\mycompany\da1\view\form\sales\InsertHoaDon$3.class
 com\mycompany\da1\view\swing\ListMenu$2.class
 com\mycompany\da1\view\form\product\FormMauSac.class
 com\mycompany\da1\view\form\sales\FormBanHang2$15.class
