@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public interface SanPhamChiTietService {
     ArrayList<SanPhamChiTietEntity>GetAll();
+    ArrayList<SanPhamChiTietEntity>GetAllSPFormBanHang();
     
     ArrayList<DanhMucEntity> getListDanhMuc();
+    void UpdateTrangThaiToZero(Integer id);
+
 }

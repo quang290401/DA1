@@ -24,7 +24,12 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
         ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = sanPhamChiTietDAO.GetList();
         return sanPhamChiTietEntities;
     }
-    
+
+    @Override
+    public ArrayList<SanPhamChiTietEntity> GetAllSPFormBanHang() {
+        return sanPhamChiTietDAO.GetListSPFormBanHang();
+    }
+
     public List<SanPhamChiTietEntity> getAllByMaSpCt(String maSpCt) {
         List<SanPhamChiTietEntity> sanPhamChiTietEntities = sanPhamChiTietDAO.getListByMaSp(maSpCt);
         return sanPhamChiTietEntities;
@@ -48,6 +53,13 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
         ArrayList<DanhMucEntity> listData = danhMucDao.GetList();
         return listData;
     }
+
+    @Override
+    public void UpdateTrangThaiToZero(Integer id) {
+        sanPhamChiTietDAO.updateTrangThaiToZero(id);
+
+    }
+
 
     public ArrayList<NhaSanXuatEntity> getListNhaSx() {
         return sanPhamChiTietDAO.getListNhaSx();

@@ -21,10 +21,10 @@ public class HibernateUltil {
         properties.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=duan2");
-        properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "quang@201");
-        properties.put(Environment.SHOW_SQL, "true");
-        properties.put(Environment.HBM2DDL_AUTO, "update"); // Hoặc "update" tùy vào nhu cầu của bạn
+        properties.put(Environment.USER,"sa");
+        properties.put(Environment.PASS,"quang@201");
+        properties.put(Environment.SHOW_SQL,"true");
+        properties.put(Environment.HBM2DDL_AUTO,"update"); // Hoặc "update" tùy vào nhu cầu của bạn
 
         conf.setProperties(properties);
         conf.addAnnotatedClass(SanPhamEntity.class);

@@ -26,6 +26,18 @@ public class SanPhamChiTietDAO {
         }
         return sanPhamChiTietEntities;
     }
+    public ArrayList<SanPhamChiTietEntity> GetListSPFormBanHang() {
+        ArrayList<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            session.beginTransaction();
+            Query query = session.createQuery("from SanPhamChiTietEntity where trangThai = 1 order by id asc");
+            sanPhamChiTietEntities = (ArrayList<SanPhamChiTietEntity>) query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sanPhamChiTietEntities;
+    }
 
     public List<SanPhamChiTietEntity> getListByMaSp(String maSpCt) {
         List<SanPhamChiTietEntity> sanPhamChiTietEntities = new ArrayList<>();
@@ -189,4 +201,21 @@ public class SanPhamChiTietDAO {
             session.close();
         }
     }
+    public void updateTrangThaiToZero(Integer id) {
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            session.beginTransaction();
+            SanPhamChiTietEntity sanPhamChiTietEntity = session.get(SanPhamChiTietEntity.class, id);
+            if (sanPhamChiTietEntity != null) {
+                sanPhamChiTietEntity.setTrangThai(0); // Cập nhật trạng thái thành 0
+                session.update(sanPhamChiTietEntity);
+                session.getTransaction().commit();
+                System.out.println("Đã cập nhật trạng thái thành 0 cho ID: " + id);
+            } else {
+                System.out.println("Không tìm thấy bản ghi với ID: " + id);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
