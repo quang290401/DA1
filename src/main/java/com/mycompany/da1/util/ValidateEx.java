@@ -79,7 +79,7 @@ public class ValidateEx {
     public static Boolean checkIsNull(JTextComponent... jTextField) {
         boolean check = false;
         for (JTextComponent item : jTextField) {
-            if (item.getText().equals("")) {
+            if (item.getText().trim().isBlank()) {
                 check = true;
             }
         }

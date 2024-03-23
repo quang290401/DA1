@@ -4,7 +4,6 @@
  */
 package com.mycompany.da1.view.form.sales;
 
-
 import com.mycompany.da1.combobox.KhachHangCBB;
 import com.mycompany.da1.combobox.TaiKhoanCBB;
 import com.mycompany.da1.combobox.VoucherCBB;
@@ -26,9 +25,10 @@ import javax.swing.JOptionPane;
  * @author Quang
  */
 public class InsertHoaDon extends javax.swing.JFrame {
-       VoucherServiceIMPL voucher = new VoucherServiceIMPL();
+
+    VoucherServiceIMPL voucher = new VoucherServiceIMPL();
     KhachHangIMPL khachHangIMPL = new KhachHangIMPL();
-     TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
+    TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
     HoaDonIMPL hoaDonIMPL = new HoaDonIMPL();
 
     /**
@@ -36,6 +36,8 @@ public class InsertHoaDon extends javax.swing.JFrame {
      */
     public InsertHoaDon() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         loadDanhMucVouCher();
         loadKhachHang();
         loadtaiKhoan();
@@ -48,60 +50,63 @@ public class InsertHoaDon extends javax.swing.JFrame {
         model.removeAllElements();
         // đỗ dưc liệu mới vào
         List<VoucherEntity> voucherEntitys = voucher.GetAll();
-        try{
-            for (VoucherEntity p:voucherEntitys){
+        try {
+            for (VoucherEntity p : voucherEntitys) {
                 int id = p.getId();
                 int phanTramGiam = p.getPhanTramGiam();
-                VoucherCBB voucherCBB = new VoucherCBB(id,phanTramGiam);
+                VoucherCBB voucherCBB = new VoucherCBB(id, phanTramGiam);
                 model.addElement(voucherCBB);
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     private void loadKhachHang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) CBBKhachHang.getModel();
         // xoa du lieu cu
         model.removeAllElements();
         // đỗ dưc liệu mới vào
         List<KhachHangEntity> khachHangEntitys = khachHangIMPL.GetAll();
-        try{
-            for (KhachHangEntity p:khachHangEntitys){
+        try {
+            for (KhachHangEntity p : khachHangEntitys) {
                 int id = p.getId();
                 String hoTen = p.getHoTen();
-                KhachHangCBB khachHangCBB = new KhachHangCBB(id,hoTen);
+                KhachHangCBB khachHangCBB = new KhachHangCBB(id, hoTen);
                 model.addElement(khachHangCBB);
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     private void loadtaiKhoan() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) CBBNhanVien.getModel();
         // xoa du lieu cu
         model.removeAllElements();
         // đỗ dưc liệu mới vào
         List<TaiKhoanEntity> taiKhoanEntitys = taiKhoanIMPL.GetAll();
-        try{
-            for (TaiKhoanEntity p:taiKhoanEntitys){
+        try {
+            for (TaiKhoanEntity p : taiKhoanEntitys) {
                 int id = p.getId();
                 String hoTen = p.getHoTen();
-                TaiKhoanCBB taiKhoanCBB = new TaiKhoanCBB(id,hoTen);
+                TaiKhoanCBB taiKhoanCBB = new TaiKhoanCBB(id, hoTen);
                 model.addElement(taiKhoanCBB);
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,18 +156,17 @@ public class InsertHoaDon extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnThem)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClose))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CBBNhanVien, 0, 140, Short.MAX_VALUE)
@@ -177,26 +181,26 @@ public class InsertHoaDon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(CBBNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(CBBKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(CBBVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBBVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnClose))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-       HoaDonEntity hoaDonEntity = new HoaDonEntity();
+        HoaDonEntity hoaDonEntity = new HoaDonEntity();
         KhachHangEntity khachHangEntity = new KhachHangEntity();
         VoucherEntity voucherEntity = new VoucherEntity();
         TaiKhoanEntity taiKhoanEntity = new TaiKhoanEntity();
@@ -206,9 +210,9 @@ public class InsertHoaDon extends javax.swing.JFrame {
         VoucherCBB voucherCBB = (VoucherCBB) CBBVoucher.getSelectedItem();
         maVouCher = voucherCBB.IdInt();
         KhachHangCBB khachHangCBB = (KhachHangCBB) CBBKhachHang.getSelectedItem();
-        maKhachHang=khachHangCBB.IdInt();
+        maKhachHang = khachHangCBB.IdInt();
         TaiKhoanCBB taiKhoanCBB = (TaiKhoanCBB) CBBNhanVien.getSelectedItem();
-        maTaiKhoan=taiKhoanCBB.IdInt();
+        maTaiKhoan = taiKhoanCBB.IdInt();
         khachHangEntity.setId(maKhachHang);
         voucherEntity.setId(maVouCher);
         taiKhoanEntity.setId(maTaiKhoan);
@@ -221,7 +225,7 @@ public class InsertHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-           this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
