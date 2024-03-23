@@ -50,18 +50,20 @@ public class HoaDonChiTietDAO {
         }
     }
 
-    public void deleteByHoaDonId(int idHoaDon) {
+    public void deleteByHoaDonIdAndProductId(int idHoaDon, int idSP) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             session.beginTransaction();
-            String sql = "DELETE FROM HoaDonChiTietEntity WHERE hoaDonEntity.id = :idHoaDon";
+            String sql = "DELETE FROM HoaDonChiTietEntity WHERE hoaDonEntity.id = :idHoaDon AND sanPhamChiTietEntity.id = :idSP";
             Query query = session.createQuery(sql);
             query.setParameter("idHoaDon", idHoaDon);
+            query.setParameter("idSP", idSP);
             int deletedCount = query.executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public BigDecimal getTotalTongTienByHoaDonId(int idHoaDon) {
         BigDecimal totalTongTien = BigDecimal.ZERO;
         try (Session session = HibernateUltil.getFACTORY().openSession()) {

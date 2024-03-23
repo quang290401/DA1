@@ -26,8 +26,9 @@ public class HoaDonChiTietIMPL implements HoaDonChiTietService {
     }
 
     @Override
-    public void DeleteHDCT(int idHoaDon) {
-        hoaDonChiTietDAO.deleteByHoaDonId(idHoaDon);
+    public void DeleteHDCT(int idHoaDon,int idSP) {
+
+        hoaDonChiTietDAO.deleteByHoaDonIdAndProductId(idHoaDon,idSP);
     }
 
     @Override

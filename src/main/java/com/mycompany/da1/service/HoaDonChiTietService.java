@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface HoaDonChiTietService {
     ArrayList<HoaDonChiTietEntity> GetAll(int idHoaDon);
     void Save (HoaDonChiTietEntity hoaDonChiTietEntity, int soLuong, BigDecimal newTongTien);
-    void  DeleteHDCT(int idHoaDon);
+    void  DeleteHDCT(int idHoaDon,int idSP);
     BigDecimal SumtongTien(int idHoaDon);
 
 

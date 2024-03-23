@@ -33,4 +33,9 @@ public class HoaDonIMPL implements HoaDonService {
 
     }
 
+    @Override
+    public void UpDateHuyHD(int idHoaDon) {
+      hoaDonDAO.UpdateHuyHD(idHoaDon);
+    }
+
 }
