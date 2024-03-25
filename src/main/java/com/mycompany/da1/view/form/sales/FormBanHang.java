@@ -59,7 +59,7 @@ public class FormBanHang extends javax.swing.JPanel {
         ArrayList<SanPhamChiTietEntity> sanPhams = sanPhamChiTietIMPL.GetAllSPFormBanHang();
         dtm.setRowCount(0);
         for (SanPhamChiTietEntity p : sanPhams) {
-            if (p.getSoLuong() == 0) {
+            if (p.getSoLuong() <= 0) {
                 sanPhamChiTietIMPL.UpdateTrangThaiToZero(p.getId());
             }
             Object[] row = {p.getId(), p.getSanPhamEntity().getTenSanPham(), p.getGiaSanPham(),
