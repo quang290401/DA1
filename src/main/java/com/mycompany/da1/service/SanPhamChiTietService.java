@@ -10,5 +10,6 @@ public interface SanPhamChiTietService {
     
     ArrayList<DanhMucEntity> getListDanhMuc();
     void UpdateTrangThaiToZero(Integer id);
+    int getSoLuongById(int id);
 
 }

@@ -217,5 +217,23 @@ public class SanPhamChiTietDAO {
             e.printStackTrace();
         }
     }
+    public int getSoLuongById(int id) {
+        int soLuong = 0;
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            // Viết câu truy vấn để lấy số lượng sản phẩm từ bảng dựa trên ID
+            Query query = session.createQuery("select soLuong from SanPhamChiTietEntity where id = :id");
+            query.setParameter("id", id);
+
+            // Thực hiện truy vấn và lấy kết quả
+            Object result = query.uniqueResult();
+            if (result != null) {
+                soLuong = (int) result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return soLuong;
+    }
+
 
 }

@@ -15,6 +15,7 @@ import com.mycompany.da1.service.IMPL.HoaDonIMPL;
 import com.mycompany.da1.service.IMPL.KhachHangIMPL;
 import com.mycompany.da1.service.IMPL.TaiKhoanIMPL;
 import com.mycompany.da1.service.IMPL.VoucherServiceIMPL;
+import com.mycompany.da1.view.JFrameMain;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -30,6 +31,7 @@ public class InsertHoaDon extends javax.swing.JFrame {
     KhachHangIMPL khachHangIMPL = new KhachHangIMPL();
     TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
     HoaDonIMPL hoaDonIMPL = new HoaDonIMPL();
+    static FormBanHang formBanHang = new FormBanHang();
 
     /**
      * Creates new form InsertHoaDon
@@ -42,6 +44,8 @@ public class InsertHoaDon extends javax.swing.JFrame {
         loadKhachHang();
         loadtaiKhoan();
     }
+    JFrameMain jFrame = new JFrameMain();
+  
 
     @SuppressWarnings("unchecked")
     private void loadDanhMucVouCher() {
@@ -222,6 +226,7 @@ public class InsertHoaDon extends javax.swing.JFrame {
         hoaDonEntity.setTrangThai(0);
         hoaDonIMPL.Save(hoaDonEntity);
         JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công.");
+         jFrame.setForm(new FormBanHang());
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed

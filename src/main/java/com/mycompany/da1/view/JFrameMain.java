@@ -148,7 +148,7 @@ public class JFrameMain extends javax.swing.JFrame {
         });
     }
 
-    private void setForm(JComponent component) {
+    public void setForm(JComponent component) {
         mainPanel.removeAll();
         mainPanel.add(component);
         mainPanel.repaint();

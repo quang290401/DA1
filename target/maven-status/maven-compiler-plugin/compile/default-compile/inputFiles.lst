@@ -42,6 +42,7 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\product\FormNhaSanXuat
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\product\FormDanhMuc.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\util\PhanTrang.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\DanhMucDao.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\QuanLyBanHangImpl.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\DanhMucEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\product\FormKichCo.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\HoaDonService.java
@@ -60,6 +61,7 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\NhaSanXuatEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\product\FormMauSac.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\HoaDonEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\DanhMucChungImpl.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\QuanLyBanHangDao.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\VaiTroEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\FormBanHang.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\SanPhamChiTietDAO.java
