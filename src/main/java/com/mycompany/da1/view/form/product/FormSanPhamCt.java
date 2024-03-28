@@ -696,7 +696,15 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             new String [] {
                 "STT", "Mã sản phẩm", "Tên sản phẩm", "Giá", "Số lượng", "Danh mục", "Nhà sản xuất", "Màu sắc", "Kích cỡ", "Chất liệu", "Trạng Thái", "Ảnh sản phẩm"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
