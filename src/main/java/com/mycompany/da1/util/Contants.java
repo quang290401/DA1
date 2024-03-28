@@ -75,4 +75,19 @@ public class Contants {
         }
 
     }
+    
+    public static enum VaiTro {
+        USER(1),
+        ADMIN(2);
+        private int value;
+
+        VaiTro(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+    }
 }

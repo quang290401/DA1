@@ -33,4 +33,14 @@ public class TaiKhoanEntity {
 
     @Column(name = "trangThai")
     private int trangThai;
+
+    @Override
+    public String toString() {
+        return "TaiKhoanEntity{" +
+                "id=" + id +
+                ", taiKhoan='" + taiKhoan + '\'' +
+                ", matKhau='" + matKhau + '\'' +
+                ", vaiTroEntity=" + vaiTroEntity.getTenVaiTro() +
+                '}';
+    }
 }

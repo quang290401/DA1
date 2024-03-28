@@ -71,9 +71,9 @@
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="txtUserName" min="-2" pref="247" max="-2" attributes="0"/>
+                              <Component id="txtUsername" min="-2" pref="247" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="txtPassDN" alignment="0" min="-2" pref="247" max="-2" attributes="0"/>
+                              <Component id="txtPassword" alignment="0" min="-2" pref="247" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -95,11 +95,11 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtUserName" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtUsername" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPassDN" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtPassword" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -126,9 +126,9 @@
             <Property name="text" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUserName">
+        <Component class="javax.swing.JTextField" name="txtUsername">
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtPassDN">
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
         </Component>
         <Component class="javax.swing.JButton" name="btnDangNhap">
           <Properties>

@@ -6,6 +6,7 @@ import com.mycompany.da1.service.IMPL.SanPhamIMPL;
 import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
 import com.mycompany.da1.util.PhanTrang;
+import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
 import java.util.List;
@@ -560,6 +561,7 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void btnNhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapExcelActionPerformed
         MsgBox.alert(this, "Chức năng sắp ra  mắt");
+        System.out.println(UserSession.getInstance().getAccountSession().toString());
     }//GEN-LAST:event_btnNhapExcelActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
