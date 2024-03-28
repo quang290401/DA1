@@ -978,6 +978,13 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             return;
         }
 
+        try {
+            Integer.valueOf(txtSoLuong.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Số lượng không đúng định dạng, xem lại");
+            return;
+        }
+
         if (ValidateEx.checkIsNull(txtGia)) {
             MsgBox.alert(this, "Giá bán bắt buộc nhập");
             return;
@@ -985,7 +992,15 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             MsgBox.alert(this, "Giá bán phải là kiểu số");
             return;
         }
-        BigDecimal gia = new BigDecimal(txtGia.getText());
+
+        try {
+            new BigDecimal(txtGia.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Giá bán không đúng định dạng, xem lại");
+            return;
+        }
+
+        BigDecimal gia = new BigDecimal(txtGia.getText().trim());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
             MsgBox.alert(this, "Giá bán không thể là số âm");
             return;
@@ -1026,7 +1041,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         sanPhamChiTiet.setMaSanPhamCt("SPCT" + idTmp);
         sanPhamChiTiet.setGiaSanPham(gia);
         sanPhamChiTiet.setAnhSanPham(imageName);
-        sanPhamChiTiet.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
+        sanPhamChiTiet.setSoLuong(Integer.valueOf(txtSoLuong.getText().trim()));
         sanPhamChiTiet.setMoTa(txtMoTa.getText());
         sanPhamChiTiet.setSanPhamEntity(sanPhamEntity);
         sanPhamChiTiet.setDanhMucEntity(danhMucTmp);
@@ -1070,6 +1085,13 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             return;
         }
 
+        try {
+            Integer.valueOf(txtSoLuong.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Số lượng không đúng định dạng, xem lại");
+            return;
+        }
+
         if (ValidateEx.checkIsNull(txtGia)) {
             MsgBox.alert(this, "Giá bán bắt buộc nhập");
             return;
@@ -1077,6 +1099,14 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             MsgBox.alert(this, "Giá bán phải là kiểu số");
             return;
         }
+
+        try {
+            new BigDecimal(txtGia.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Giá bán không đúng định dạng, xem lại");
+            return;
+        }
+
         BigDecimal gia = new BigDecimal(txtGia.getText());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
             MsgBox.alert(this, "Giá bán không thể là số âm");

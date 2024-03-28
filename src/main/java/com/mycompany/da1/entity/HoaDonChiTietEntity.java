@@ -32,4 +32,9 @@ public class HoaDonChiTietEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngayTao")
     private Date ngayTao;
+    
+    @Override
+    public String toString() {
+        return this.hoaDonEntity.getId() + "";
+    }
 }

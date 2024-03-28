@@ -17,7 +17,7 @@ public class NhaSanXuatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tenNhaSanXuat")
+    @Column(name = "tenNhaSanXuat", columnDefinition = "NVARCHAR(255)")
     private String tenNhaSanXuat;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
