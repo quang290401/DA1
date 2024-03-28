@@ -1,5 +1,7 @@
 package com.mycompany.da1.view;
 
+import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.view.events.EventMenuSelected;
 import com.mycompany.da1.view.form.bill_manager.QuanLyHoaDon;
 import com.mycompany.da1.view.form.product.FormSanPham;
@@ -9,7 +11,6 @@ import com.mycompany.da1.view.swing.ScrollBar;
 
 import java.awt.Color;
 import javax.swing.JComponent;
-
 
 /**
  *
@@ -26,7 +27,6 @@ public class JFrameMain extends javax.swing.JFrame {
         // Đặt chế độ đóng cửa sổ
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForm(new FormSanPham());
-   
 
         menu.addEventMenuSelected(new EventMenuSelected() {
             // Muốn setForm thì form degsin = JPanel mới add được
@@ -53,8 +53,11 @@ public class JFrameMain extends javax.swing.JFrame {
                 } else if (index == 14) {   // Khuyến mãi
                     setForm(new ViewDemo());
                 } else if (index == 16) { // Đăng xuất
-                    new DangNhap().setVisible(true);
-                    setVisible(false);
+                    if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
+                        UserSession.getInstance().setAccountSession(null);
+                        new DangNhap().setVisible(true);
+                        setVisible(false);
+                    }
                 }
             }
         });
