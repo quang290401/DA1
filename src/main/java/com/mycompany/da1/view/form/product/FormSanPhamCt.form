@@ -321,6 +321,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMaSpCt">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtGia">
             </Component>

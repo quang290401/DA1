@@ -118,7 +118,7 @@ public class ValidateEx {
 
     public static Boolean checkMoreThan(JTextField jTextField, int valueCheck) {
         boolean check = false;
-        float a = Float.valueOf(jTextField.getText());
+        float a = Float.valueOf(jTextField.getText().trim());
         if (a <= valueCheck) {
             return true;
         }

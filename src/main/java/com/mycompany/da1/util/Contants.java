@@ -61,4 +61,18 @@ public class Contants {
     static public String getStatusAttribute(int tinhTrang) {
         return tinhTrang == 0 ? "Hết" : "Còn";
     }
+    
+    public static enum PhanTrang {
+        DEFAULT_PAGE(1);
+        private int value;
+
+        PhanTrang(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+    }
 }

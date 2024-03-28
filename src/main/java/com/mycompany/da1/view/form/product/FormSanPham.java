@@ -5,12 +5,11 @@ import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.service.IMPL.SanPhamIMPL;
 import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.PhanTrang;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,16 +18,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormSanPham extends javax.swing.JPanel {
 
-    private SanPhamIMPL sanPhamService = new SanPhamIMPL();
+    private PhanTrang<SanPhamEntity> phanTranglocal;
+
+    private final SanPhamIMPL sanPhamService = new SanPhamIMPL();
 
     private List<SanPhamEntity> lstSanPham;
-    private List<DanhMucEntity> lstTrangThai;
-
-    private int idSanPham = -1;
-    private Integer pageSize = 10;
-    private Integer currentPage = 0;
-
-    private JDialog jDialog;
 
     public FormSanPham() {
         initComponents();
@@ -38,61 +32,38 @@ public class FormSanPham extends javax.swing.JPanel {
     private void setUp() {
         rdoConHang.setSelected(true);
         lstSanPham = sanPhamService.GetAll();
-        lstTrangThai = new ArrayList<>();
-        fillTableSanPham();
+        // phân trang
+        phanTranglocal = new PhanTrang<>(lstSanPham);
         fillCboTimKiem();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }
 
-    public void fillTableSanPham() {
-        lstSanPham = sanPhamService.GetAll();
-        DefaultTableModel def = (DefaultTableModel) tbDanhSach.getModel();
-        def.setRowCount(0);
-
-        int start = currentPage * pageSize;
-        int end = Math.min(start + pageSize, lstSanPham.size());
-
-        int index = 1;
-        for (int i = start; i < end; i++) {
-            SanPhamEntity sp = lstSanPham.get(i);
-            Object[] rowData = {
-                index,
-                sp.getMaSanPham(),
-                sp.getTenSanPham(),
-                XDate.toString(sp.getNgayTao()),
-                Contants.getStatusBusiness(sp.getTrangThai())
-            };
-            def.addRow(rowData);
-            index++;
-        }
-        ButtonState();
-    }
-    
-    public void fillTableWhenSearch() {
+    public void fillTableWhenSearch(int page) {
         String txtSearch = txtLocSanPham.getText();
         DanhMucEntity danhMucTmp = ((DanhMucEntity) cboLocTrangThai.getSelectedItem());
         int trangThai = danhMucTmp.getTrangThai();
-        
-        lstSanPham = sanPhamService.getSerch(txtSearch, trangThai);
+
+        this.lstSanPham = sanPhamService.getSerch(txtSearch, trangThai);
+        phanTranglocal.refreshList(this.lstSanPham);
         DefaultTableModel def = (DefaultTableModel) tbDanhSach.getModel();
         def.setRowCount(0);
 
-        int start = currentPage * pageSize;
-        int end = Math.min(start + pageSize, lstSanPham.size());
-
         int index = 1;
-        for (int i = start; i < end; i++) {
-            SanPhamEntity sp = lstSanPham.get(i);
+        for (SanPhamEntity item : phanTranglocal.getListData(page)) {
             Object[] rowData = {
                 index,
-                sp.getMaSanPham(),
-                sp.getTenSanPham(),
-                XDate.toString(sp.getNgayTao()),
-                Contants.getStatusBusiness(sp.getTrangThai())
+                item.getMaSanPham(),
+                item.getTenSanPham(),
+                XDate.toString(item.getNgayTao()),
+                Contants.getStatusBusiness(item.getTrangThai())
             };
             def.addRow(rowData);
             index++;
         }
+        phanTranglocal.setButtonStatus();
         ButtonState();
+        System.out.println("====================Table=====================");
+        System.out.println(phanTranglocal.toString());
     }
 
     public void fillCboTimKiem() {
@@ -116,7 +87,7 @@ public class FormSanPham extends javax.swing.JPanel {
         danhMuc2.setTrangThai(1);
         comboBoxModel.addElement(danhMuc2);
     }
-    
+
     private SanPhamEntity getIdByMaSp(String maSp) {
         List<SanPhamEntity> lst = sanPhamService.GetAll();
         for (SanPhamEntity item : lst) {
@@ -125,6 +96,27 @@ public class FormSanPham extends javax.swing.JPanel {
             }
         }
         return null;
+    }
+
+    private Boolean checkEquasName(String name) {
+        for (SanPhamEntity item : lstSanPham) {
+            if (item.getTenSanPham().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, String maSp) {
+        for (SanPhamEntity item : lstSanPham) {
+            if (item.getTenSanPham().equalsIgnoreCase(name) && item.getMaSanPham().equalsIgnoreCase(maSp)) {
+                continue;
+            }
+            if (item.getTenSanPham().equalsIgnoreCase(name) && !item.getMaSanPham().equalsIgnoreCase(maSp)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @SuppressWarnings("unchecked")
@@ -258,6 +250,8 @@ public class FormSanPham extends javax.swing.JPanel {
                     .addComponent(btnChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txtMaSanPham.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -482,6 +476,11 @@ public class FormSanPham extends javax.swing.JPanel {
             return;
         }
 
+        if (checkEquasName(txtTenSanPham.getText().trim())) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
+
         List<SanPhamEntity> lstTmp = sanPhamService.GetAll();
         int idTmp = 0;
         if (lstTmp.size() > 0) {
@@ -489,10 +488,10 @@ public class FormSanPham extends javax.swing.JPanel {
         } else {
             idTmp = 1;
         }
-        
+
         SanPhamEntity sanPham = new SanPhamEntity();
         sanPham.setMaSanPham("SP" + idTmp);
-        sanPham.setTenSanPham(txtTenSanPham.getText());
+        sanPham.setTenSanPham(txtTenSanPham.getText().trim());
         if (rdoConHang.isSelected()) {
             sanPham.setTrangThai(1);
         } else {
@@ -504,14 +503,13 @@ public class FormSanPham extends javax.swing.JPanel {
             MsgBox.alert(this, "Thêm mới sản phẩm thất bại!");
             return;
         }
-        
+
         MsgBox.alert(this, "Thêm mới sản phẩm thành công!");
-        fillTableSanPham();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
         clearFrom();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-
         if (ValidateEx.checkIsNull(txtTenSanPham)) {
             MsgBox.alert(this, "Tên sản phẩm bắt buộc nhập");
             return;
@@ -520,15 +518,21 @@ public class FormSanPham extends javax.swing.JPanel {
             MsgBox.alert(this, "Mã sản phẩm bắt buộc nhập");
             return;
         }
-        
+
+        if (checkEquasName(txtTenSanPham.getText().trim(), txtMaSanPham.getText())) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
+
         if (getIdByMaSp(txtMaSanPham.getText()) == null) {
             MsgBox.alert(this, "Mã sản phẩm không tồn tại");
             return;
         }
+
         SanPhamEntity sanPham = new SanPhamEntity();
         sanPham.setId(getIdByMaSp(txtMaSanPham.getText()).getId());
         sanPham.setMaSanPham(txtMaSanPham.getText());
-        sanPham.setTenSanPham(txtTenSanPham.getText());
+        sanPham.setTenSanPham(txtTenSanPham.getText().trim());
         if (rdoConHang.isSelected()) {
             sanPham.setTrangThai(1);
         } else {
@@ -542,7 +546,7 @@ public class FormSanPham extends javax.swing.JPanel {
         }
 
         MsgBox.alert(this, "Cập nhật sản phẩm thành công!");
-        fillTableSanPham();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
         clearFrom();
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -551,16 +555,16 @@ public class FormSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNhapExcelActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
-         if (ValidateEx.checkIsNull(txtMaSanPham)) {
+        if (ValidateEx.checkIsNull(txtMaSanPham)) {
             MsgBox.alert(this, "Hãy chọn hoặc nhập mã sản phẩm");
             return;
         }
-        
+
         if (getIdByMaSp(txtMaSanPham.getText()) == null) {
             MsgBox.alert(this, "Mã sản phẩm không tồn tại!");
             return;
         }
-        
+
         FormSanPhamCt viewSanPhamCt = new FormSanPhamCt(getIdByMaSp(txtMaSanPham.getText()));
         viewSanPhamCt.setVisible(true);
     }//GEN-LAST:event_btnChiTietActionPerformed
@@ -580,22 +584,20 @@ public class FormSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_tbDanhSachMouseClicked
 
     private void btLonMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLonMaxMouseClicked
-        if (currentPage < (int) Math.ceil((double) lstSanPham.size() / pageSize) - 1) {
-            currentPage++;
-            fillTableSanPham();
+        if (phanTranglocal.getIsNext()) {
+            fillTableWhenSearch(phanTranglocal.getPage() + 1);
         }
     }//GEN-LAST:event_btLonMaxMouseClicked
 
     private void btNhoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btNhoMaxMouseClicked
-        if (currentPage > 0) {
-            currentPage--;
-            fillTableSanPham();
+        if (phanTranglocal.getIsPrev()) {
+            fillTableWhenSearch(phanTranglocal.getPage() - 1);
         }
     }//GEN-LAST:event_btNhoMaxMouseClicked
 
     private void cboLocTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocTrangThaiActionPerformed
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocTrangThaiActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -604,7 +606,7 @@ public class FormSanPham extends javax.swing.JPanel {
 
     private void txtLocSanPhamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLocSanPhamKeyReleased
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_txtLocSanPhamKeyReleased
 
     private void btNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhoMaxActionPerformed
@@ -616,18 +618,15 @@ public class FormSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btLonMaxActionPerformed
 
     public void clearFrom() {
-        idSanPham = -1;
         txtMaSanPham.setText("");
         txtTenSanPham.setText("");
         rdoConHang.setSelected(true);
     }
 
     private void ButtonState() {
-        int pageCount = (int) Math.ceil((double) lstSanPham.size() / pageSize);
-
-        btNhoMax.setEnabled(currentPage > 0);
-        btLonMax.setEnabled(currentPage < pageCount - 1);
-        lbTrang.setText("Page: " + (currentPage + 1));
+        btNhoMax.setEnabled(phanTranglocal.getIsPrev());
+        btLonMax.setEnabled(phanTranglocal.getIsNext());
+        lbTrang.setText("Page: " + phanTranglocal.getPage());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -660,5 +659,4 @@ public class FormSanPham extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtTenSanPham;
     // End of variables declaration//GEN-END:variables
-
 }
