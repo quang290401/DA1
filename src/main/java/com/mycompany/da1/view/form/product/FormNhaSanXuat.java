@@ -61,6 +61,27 @@ public class FormNhaSanXuat extends javax.swing.JPanel implements EventDialogLis
         rdoCon.setSelected(true);
     }
 
+    private Boolean checkEquasName(String name) {
+        for (NhaSanXuatEntity item : lstData) {
+            if (item.getTenNhaSanXuat().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, int id) {
+        for (NhaSanXuatEntity item : lstData) {
+            if (item.getTenNhaSanXuat().equalsIgnoreCase(name.trim()) && item.getId() == id) {
+                continue;
+            }
+            if (item.getTenNhaSanXuat().equalsIgnoreCase(name.trim()) && item.getId() != id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -268,8 +289,13 @@ public class FormNhaSanXuat extends javax.swing.JPanel implements EventDialogLis
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim())) {
+            MsgBox.alert(this, "Tên đã tồn tại");
+            return;
+        }
+
         NhaSanXuatEntity danhMucEntity = new NhaSanXuatEntity();
-        danhMucEntity.setTenNhaSanXuat(txtTen.getText());
+        danhMucEntity.setTenNhaSanXuat(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         NhaSanXuatEntity objTmp = danhMucChungImpl.save(danhMucEntity);
@@ -295,10 +321,15 @@ public class FormNhaSanXuat extends javax.swing.JPanel implements EventDialogLis
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim(), Integer.valueOf(lblId.getText()))) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
+
         int id = Integer.valueOf(lblId.getText());
         NhaSanXuatEntity danhMucEntity = new NhaSanXuatEntity();
         danhMucEntity.setId(id);
-        danhMucEntity.setTenNhaSanXuat(txtTen.getText());
+        danhMucEntity.setTenNhaSanXuat(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         int check = danhMucChungImpl.update(NhaSanXuatEntity.class,

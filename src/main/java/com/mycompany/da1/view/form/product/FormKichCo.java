@@ -60,6 +60,28 @@ public class FormKichCo extends javax.swing.JPanel implements EventDialogListene
         txtTen.setText("");
         rdoCon.setSelected(true);
     }
+    
+    private Boolean checkEquasName(String name) {
+        for (KichCoEntity item : lstData) {
+            if (item.getTenKichCo().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, int id) {
+        for (KichCoEntity item : lstData) {
+            if (item.getTenKichCo().equalsIgnoreCase(name.trim()) && item.getId() == id) {
+                continue;
+            }
+            if (item.getTenKichCo().equalsIgnoreCase(name.trim()) && item.getId() != id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -96,7 +118,15 @@ public class FormKichCo extends javax.swing.JPanel implements EventDialogListene
             new String [] {
                 "ID", "Tên kích cỡ", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
@@ -268,8 +298,13 @@ public class FormKichCo extends javax.swing.JPanel implements EventDialogListene
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim())) {
+            MsgBox.alert(this, "Tên đã tồn tại");
+            return;
+        }
+        
         KichCoEntity danhMucEntity = new KichCoEntity();
-        danhMucEntity.setTenKichCo(txtTen.getText());
+        danhMucEntity.setTenKichCo(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         KichCoEntity objTmp = danhMucChungImpl.save(danhMucEntity);
@@ -294,11 +329,16 @@ public class FormKichCo extends javax.swing.JPanel implements EventDialogListene
             MsgBox.alert(this, "Không lấy được id danh mục");
             return;
         }
+        
+        if (checkEquasName(txtTen.getText().trim(), Integer.valueOf(lblId.getText()))) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
 
         int id = Integer.valueOf(lblId.getText());
         KichCoEntity danhMucEntity = new KichCoEntity();
         danhMucEntity.setId(id);
-        danhMucEntity.setTenKichCo(txtTen.getText());
+        danhMucEntity.setTenKichCo(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         int check = danhMucChungImpl.update(KichCoEntity.class,

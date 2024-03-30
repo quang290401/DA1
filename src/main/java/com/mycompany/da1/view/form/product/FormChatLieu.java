@@ -60,6 +60,27 @@ public class FormChatLieu extends javax.swing.JPanel implements EventDialogListe
         txtTen.setText("");
         rdoCon.setSelected(true);
     }
+    
+    private Boolean checkEquasName(String name) {
+        for (ChatLieuEntity item : lstData) {
+            if (item.getTenChatLieu().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, int id) {
+        for (ChatLieuEntity item : lstData) {
+            if (item.getTenChatLieu().equalsIgnoreCase(name.trim()) && item.getId() == id) {
+                continue;
+            }
+            if (item.getTenChatLieu().equalsIgnoreCase(name.trim()) && item.getId() != id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void closeDialog() {
@@ -100,7 +121,15 @@ public class FormChatLieu extends javax.swing.JPanel implements EventDialogListe
             new String [] {
                 "ID", "Tên Chất liệu", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
@@ -271,9 +300,14 @@ public class FormChatLieu extends javax.swing.JPanel implements EventDialogListe
             MsgBox.alert(this, "Tên Chất liệu bắt buộc nhập");
             return;
         }
+        
+        if (checkEquasName(txtTen.getText().trim())) {
+            MsgBox.alert(this, "Tên đã tồn tại");
+            return;
+        }
 
         ChatLieuEntity objData = new ChatLieuEntity();
-        objData.setTenChatLieu(txtTen.getText());
+        objData.setTenChatLieu(txtTen.getText().trim());
         objData.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         ChatLieuEntity objTmp = danhMucChungImpl.save(objData);
@@ -296,6 +330,12 @@ public class FormChatLieu extends javax.swing.JPanel implements EventDialogListe
 
         if (lblId.getText().equals("")) {
             MsgBox.alert(this, "Không lấy được id danh mục");
+            return;
+        }
+        
+        
+        if (checkEquasName(txtTen.getText().trim(), Integer.valueOf(lblId.getText()))) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
             return;
         }
 

@@ -61,6 +61,27 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
         rdoCon.setSelected(true);
     }
 
+    private Boolean checkEquasName(String name) {
+        for (DanhMucEntity item : lstData) {
+            if (item.getTenDanhMuc().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, int id) {
+        for (DanhMucEntity item : lstData) {
+            if (item.getTenDanhMuc().equalsIgnoreCase(name.trim()) && item.getId() == id) {
+                continue;
+            }
+            if (item.getTenDanhMuc().equalsIgnoreCase(name.trim()) && item.getId() != id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void closeDialog() {
     }
@@ -100,7 +121,15 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
             new String [] {
                 "ID", "Tên Danh mục", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
@@ -188,7 +217,7 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addComponent(lbClose)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,8 +237,7 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(rdoCon)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rdoHet)))
-                                .addGap(0, 0, 0))
+                                        .addComponent(rdoHet))))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -273,12 +301,17 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim())) {
+            MsgBox.alert(this, "Tên đã tồn tại");
+            return;
+        }
+
         DanhMucEntity danhMucEntity = new DanhMucEntity();
-        danhMucEntity.setTenDanhMuc(txtTen.getText());
+        danhMucEntity.setTenDanhMuc(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         System.out.println(danhMucEntity.getTrangThai() + " =========================================");
-        
+
         DanhMucEntity objTmp = danhMucChungImpl.save(danhMucEntity);
         if (objTmp == null) {
             MsgBox.alert(this, "Thêm mới không thành công");
@@ -302,10 +335,15 @@ public class FormDanhMuc extends javax.swing.JPanel implements EventDialogListen
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim(), Integer.valueOf(lblId.getText()))) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
+
         int id = Integer.valueOf(lblId.getText());
         DanhMucEntity danhMucEntity = new DanhMucEntity();
         danhMucEntity.setId(id);
-        danhMucEntity.setTenDanhMuc(txtTen.getText());
+        danhMucEntity.setTenDanhMuc(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         int check = danhMucChungImpl.update(DanhMucEntity.class,
