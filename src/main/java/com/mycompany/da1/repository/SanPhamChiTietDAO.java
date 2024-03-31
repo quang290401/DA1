@@ -186,7 +186,28 @@ public class SanPhamChiTietDAO {
 
         try {
             transaction = session.beginTransaction();
-            String hql = "UPDATE SanPhamChiTietEntity SET soLuong=soLuong-:newSoLuong WHERE id=:idChiTietSanPham";
+            String hql = "UPDATE SanPhamChiTietEntity SET soLuong = soLuong - :newSoLuong WHERE id = :idChiTietSanPham";
+            int updatedEntities = session.createQuery(hql)
+                    .setParameter("newSoLuong", newSoLuong)
+                    .setParameter("idChiTietSanPham", idChiTietSanPham)
+                    .executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    public void CongSoLuongChiTietSanPham(int newSoLuong, int idChiTietSanPham) {
+        Session session = HibernateUltil.getFACTORY().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            String hql = "UPDATE SanPhamChiTietEntity SET soLuong = soLuong + :newSoLuong WHERE id = :idChiTietSanPham";
             int updatedEntities = session.createQuery(hql)
                     .setParameter("newSoLuong", newSoLuong)
                     .setParameter("idChiTietSanPham", idChiTietSanPham)

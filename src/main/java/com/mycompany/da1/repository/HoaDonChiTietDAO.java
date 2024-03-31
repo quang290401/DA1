@@ -37,7 +37,11 @@ public class HoaDonChiTietDAO {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             // Bắt đầu giao dịch
             session.beginTransaction();
-            String sql = "UPDATE HoaDonChiTietEntity SET soLuong = :newSoLuong, tongTien = :newTongTien WHERE hoaDonEntity.id = :idHoaDon AND sanPhamChiTietEntity.id = :idChiTietSP";
+            String sql = "UPDATE HoaDonChiTietEntity " +
+                    "SET soLuong = soLuong + :newSoLuong, " +
+                    "    tongTien = :newTongTien " +
+                    "WHERE hoaDonEntity.id = :idHoaDon AND sanPhamChiTietEntity.id = :idChiTietSP";
+
             Query query = session.createQuery(sql);
             query.setParameter("newSoLuong", newSoLuong);
             query.setParameter("newTongTien", newTongTien); // Thiết lập tham số newTongTien
@@ -80,8 +84,52 @@ public class HoaDonChiTietDAO {
         }
         return totalTongTien;
     }
+    public int TraVeSoLuongSP(int idHoaDon, int idSanPhamCT) {
+        int totalSoLuong = 0;
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            // Sử dụng câu lệnh SQL để lấy số lượng sản phẩm của hóa đơn chi tiết dựa vào idHoaDon và idSanPhamCT
+            String sql = "SELECT soLuong FROM HoaDonChiTietEntity WHERE hoaDonEntity.id = :idHoaDon AND sanPhamChiTietEntity.id = :idSanPhamCT";
+            Query query = session.createQuery(sql);
+            query.setParameter("idHoaDon", idHoaDon);
+            query.setParameter("idSanPhamCT", idSanPhamCT);
+            totalSoLuong = (int) ((org.hibernate.query.Query<?>) query).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Chuyển đổi từ BigDecimal sang int
+       
+        return totalSoLuong;
+    }
 
+    public void updateTongTien(int idHoaDon, int idChiTietSP, BigDecimal newTongTien) {
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            // Bắt đầu giao dịch
+            session.beginTransaction();
+            String sql = "UPDATE HoaDonChiTietEntity " +
+                    "SET"+
+                    " tongTien = :newTongTien " +
+                    "WHERE hoaDonEntity.id = :idHoaDon AND sanPhamChiTietEntity.id = :idChiTietSP";
 
-
-
+            Query query = session.createQuery(sql);
+            query.setParameter("newTongTien", newTongTien); // Thiết lập tham số newTongTien
+            query.setParameter("idHoaDon", idHoaDon);
+            query.setParameter("idChiTietSP", idChiTietSP);
+            int updatedCount = query.executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public int demSoLuongBanGhi(int idHoaDon) {
+        Session session = HibernateUltil.getFACTORY().openSession();
+        try {
+            String hql = "SELECT COUNT(h) FROM HoaDonChiTietEntity h WHERE h.hoaDonEntity.id = :idHoaDon";
+            Query query = session.createQuery(hql, Long.class);
+            query.setParameter("idHoaDon", idHoaDon);
+            Long count = (Long) ((org.hibernate.query.Query<?>) query).uniqueResult();
+            return count != null ? count.intValue() : 0;
+        } finally {
+            session.close();
+        }
+    }
 }

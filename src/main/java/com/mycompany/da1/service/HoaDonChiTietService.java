@@ -11,6 +11,9 @@ public interface HoaDonChiTietService {
     void Save (HoaDonChiTietEntity hoaDonChiTietEntity, int soLuong, BigDecimal newTongTien);
     void  DeleteHDCT(int idHoaDon,int idSP);
     BigDecimal SumtongTien(int idHoaDon);
+    int traVeSoluongSP(int idHoaDon,int idSanPhamCT);
+    void UpdateTongTien(int idHoaDon,int idSanPhamCT,BigDecimal tongTien);
+    int DeSoLuongHoaDonChiTiet(int idHoaDon);
 
 
 }

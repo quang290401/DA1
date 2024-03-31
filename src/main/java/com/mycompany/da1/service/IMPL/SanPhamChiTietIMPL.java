@@ -65,6 +65,11 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
         return sanPhamChiTietDAO.getSoLuongById(id);
     }
 
+    @Override
+    public void UpdateSoLuongSPCT(int idSPCT, int soLuong) {
+          sanPhamChiTietDAO.CongSoLuongChiTietSanPham(idSPCT,soLuong);
+    }
+
 
     public ArrayList<NhaSanXuatEntity> getListNhaSx() {
         return sanPhamChiTietDAO.getListNhaSx();

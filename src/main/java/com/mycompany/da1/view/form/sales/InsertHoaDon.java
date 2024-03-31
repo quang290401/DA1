@@ -16,6 +16,8 @@ import com.mycompany.da1.service.IMPL.KhachHangIMPL;
 import com.mycompany.da1.service.IMPL.TaiKhoanIMPL;
 import com.mycompany.da1.service.IMPL.VoucherServiceIMPL;
 import com.mycompany.da1.view.JFrameMain;
+import com.mycompany.da1.view.events.EventDialogListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -25,13 +27,13 @@ import javax.swing.JOptionPane;
  *
  * @author Quang
  */
-public class InsertHoaDon extends javax.swing.JFrame {
+public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogListener {
 
     VoucherServiceIMPL voucher = new VoucherServiceIMPL();
     KhachHangIMPL khachHangIMPL = new KhachHangIMPL();
     TaiKhoanIMPL taiKhoanIMPL = new TaiKhoanIMPL();
     HoaDonIMPL hoaDonIMPL = new HoaDonIMPL();
-    static FormBanHang formBanHang = new FormBanHang();
+    private EventDialogListener dialogListener;
 
     /**
      * Creates new form InsertHoaDon
@@ -43,8 +45,8 @@ public class InsertHoaDon extends javax.swing.JFrame {
         loadDanhMucVouCher();
         loadKhachHang();
         loadtaiKhoan();
+        this.dialogListener = dialogListener;
     }
-    JFrameMain jFrame = new JFrameMain();
   
 
     @SuppressWarnings("unchecked")
@@ -226,8 +228,8 @@ public class InsertHoaDon extends javax.swing.JFrame {
         hoaDonEntity.setTrangThai(0);
         hoaDonIMPL.Save(hoaDonEntity);
         JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công.");
-         jFrame.setForm(new FormBanHang());
-    }//GEN-LAST:event_btnThemActionPerformed
+        dialogListener.closeDialog();
+    }
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
@@ -277,5 +279,10 @@ public class InsertHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+
+    @Override
+    public void closeDialog() {
+
+    }
     // End of variables declaration//GEN-END:variables
 }

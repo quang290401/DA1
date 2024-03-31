@@ -13,27 +13,43 @@ import java.util.ArrayList;
 
 public class HoaDonChiTietIMPL implements HoaDonChiTietService {
     HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO();
+
     @Override
     public ArrayList<HoaDonChiTietEntity> GetAll(int idHoaDon) {
-       ArrayList<HoaDonChiTietEntity>hoaDonChiTietEntities = hoaDonChiTietDAO.GetList(idHoaDon);
-       return hoaDonChiTietEntities;
+        ArrayList<HoaDonChiTietEntity> hoaDonChiTietEntities = hoaDonChiTietDAO.GetList(idHoaDon);
+        return hoaDonChiTietEntities;
     }
 
     @Override
     public void Save(HoaDonChiTietEntity hoaDonChiTietEntity, int soluong, BigDecimal newTongTien) {
-     hoaDonChiTietDAO.Save(hoaDonChiTietEntity,soluong,newTongTien);
+        hoaDonChiTietDAO.Save(hoaDonChiTietEntity, soluong, newTongTien);
 
     }
 
     @Override
-    public void DeleteHDCT(int idHoaDon,int idSP) {
+    public void DeleteHDCT(int idHoaDon, int idSP) {
 
-        hoaDonChiTietDAO.deleteByHoaDonIdAndProductId(idHoaDon,idSP);
+        hoaDonChiTietDAO.deleteByHoaDonIdAndProductId(idHoaDon, idSP);
     }
 
     @Override
     public BigDecimal SumtongTien(int idHoaDon) {
-      return  hoaDonChiTietDAO.getTotalTongTienByHoaDonId(idHoaDon);
+        return hoaDonChiTietDAO.getTotalTongTienByHoaDonId(idHoaDon);
+    }
+
+    @Override
+    public int traVeSoluongSP(int idHoaDon, int idSanPhamCT) {
+        return hoaDonChiTietDAO.TraVeSoLuongSP(idHoaDon, idSanPhamCT);
+    }
+
+    @Override
+    public void UpdateTongTien(int idHoaDon, int idSanPhamCT, BigDecimal tongTien) {
+        hoaDonChiTietDAO.updateTongTien(idHoaDon, idSanPhamCT, tongTien);
+    }
+
+    @Override
+    public int DeSoLuongHoaDonChiTiet(int idHoaDon) {
+        return hoaDonChiTietDAO.demSoLuongBanGhi(idHoaDon);
     }
 
 }
