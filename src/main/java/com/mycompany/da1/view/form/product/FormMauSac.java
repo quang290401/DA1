@@ -61,6 +61,27 @@ public class FormMauSac extends javax.swing.JPanel implements EventDialogListene
         rdoCon.setSelected(true);
     }
 
+    private Boolean checkEquasName(String name) {
+        for (MauSacEntity item : lstData) {
+            if (item.getTenMauSac().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkEquasName(String name, int id) {
+        for (MauSacEntity item : lstData) {
+            if (item.getTenMauSac().equalsIgnoreCase(name.trim()) && item.getId() == id) {
+                continue;
+            }
+            if (item.getTenMauSac().equalsIgnoreCase(name.trim()) && item.getId() != id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,7 +117,15 @@ public class FormMauSac extends javax.swing.JPanel implements EventDialogListene
             new String [] {
                 "ID", "Tên Danh mục", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
@@ -268,8 +297,13 @@ public class FormMauSac extends javax.swing.JPanel implements EventDialogListene
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim())) {
+            MsgBox.alert(this, "Tên đã tồn tại");
+            return;
+        }
+
         MauSacEntity danhMucEntity = new MauSacEntity();
-        danhMucEntity.setTenMauSac(txtTen.getText());
+        danhMucEntity.setTenMauSac(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         MauSacEntity objTmp = danhMucChungImpl.save(danhMucEntity);
@@ -295,10 +329,15 @@ public class FormMauSac extends javax.swing.JPanel implements EventDialogListene
             return;
         }
 
+        if (checkEquasName(txtTen.getText().trim(), Integer.valueOf(lblId.getText()))) {
+            MsgBox.alert(this, "Tên sản phẩm đã tồn tại");
+            return;
+        }
+
         int id = Integer.valueOf(lblId.getText());
         MauSacEntity danhMucEntity = new MauSacEntity();
         danhMucEntity.setId(id);
-        danhMucEntity.setTenMauSac(txtTen.getText());
+        danhMucEntity.setTenMauSac(txtTen.getText().trim());
         danhMucEntity.setTrangThai(rdoCon.isSelected() ? 1 : 0);
 
         int check = danhMucChungImpl.update(MauSacEntity.class,

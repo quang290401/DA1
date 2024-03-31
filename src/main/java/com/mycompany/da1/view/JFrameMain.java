@@ -1,6 +1,9 @@
 package com.mycompany.da1.view;
 
+import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.view.events.EventMenuSelected;
+import com.mycompany.da1.view.form.bill_manager.QuanLyHoaDon;
 import com.mycompany.da1.view.form.product.FormSanPham;
 import com.mycompany.da1.view.form.sales.FormBanHang;
 import com.mycompany.da1.view.form.temp.ViewDemo;
@@ -8,7 +11,6 @@ import com.mycompany.da1.view.swing.ScrollBar;
 
 import java.awt.Color;
 import javax.swing.JComponent;
-
 
 /**
  *
@@ -25,7 +27,6 @@ public class JFrameMain extends javax.swing.JFrame {
         // Đặt chế độ đóng cửa sổ
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForm(new FormSanPham());
-   
 
         menu.addEventMenuSelected(new EventMenuSelected() {
             // Muốn setForm thì form degsin = JPanel mới add được
@@ -46,14 +47,17 @@ public class JFrameMain extends javax.swing.JFrame {
                 } else if (index == 8) {    //Khách hàng
                     setForm(new ViewDemo());
                 } else if (index == 10) {   // Hóa đơn
-                    setForm(new ViewDemo());
+                    setForm(new QuanLyHoaDon());
                 } else if (index == 12) {   // Thống kê
                     setForm(new ViewDemo());
                 } else if (index == 14) {   // Khuyến mãi
                     setForm(new ViewDemo());
                 } else if (index == 16) { // Đăng xuất
-                    new DangNhap().setVisible(true);
-                    setVisible(false);
+                    if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
+                        UserSession.getInstance().setAccountSession(null);
+                        new DangNhap().setVisible(true);
+                        setVisible(false);
+                    }
                 }
             }
         });
@@ -73,7 +77,8 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel1.setText("                                                                                      WELLCOME TO SHOP");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(" WELLCOME TO SHOP");
 
         sb.setBorder(null);
         sb.setOpaque(false);
@@ -91,10 +96,8 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 590, Short.MAX_VALUE))
-                    .addComponent(sb))
+                    .addComponent(sb, javax.swing.GroupLayout.DEFAULT_SIZE, 1242, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

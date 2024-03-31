@@ -34,4 +34,13 @@ public class XDate {
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         return date;
     }
+    
+    public static Date converDate(Date date, String pattern) {
+        try {
+            formater.applyPattern(pattern);
+            return formater.parse(toString(date));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

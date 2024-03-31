@@ -10,6 +10,7 @@ import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.service.IMPL.SanPhamChiTietIMPL;
 import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.PhanTrang;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XFile;
 import com.mycompany.da1.view.events.EventDialogListener;
@@ -31,6 +32,8 @@ import javax.swing.JFileChooser;
  * @author sonst
  */
 public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogListener {
+
+    private PhanTrang<SanPhamChiTietEntity> phanTranglocal;
 
     private SanPhamChiTietIMPL sanPhamChiTietIMPL = new SanPhamChiTietIMPL();
     private XFile xFile = new XFile();
@@ -68,121 +71,61 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
     }
 
     private void setUp(SanPhamEntity objInput) {
-        sanPhamEntity = objInput;
-        rdoDangBan.setSelected(true);
         lstSanPhamCt = sanPhamChiTietIMPL.GetAll();
-        fillTableSanPhamCt();
+        phanTranglocal = new PhanTrang<>(lstSanPhamCt);
+        // set object cha sản phẩm
+        sanPhamEntity = objInput;
+        //
+        rdoDangBan.setSelected(true);
+        //
         fillCboChiTiet();
         fillCboStaus();
         fillCboTimKiem();
-        //--
         fillCboFileLst();
-        //--
         txtSanPham.setText(objInput.getTenSanPham());
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }
 
-    private void fillTableSanPhamCt() {
-        List<SanPhamChiTietEntity> lstData = sanPhamChiTietIMPL
-                .GetAll()
-                .stream()
-                .filter(item -> item.getSanPhamEntity().getMaSanPham().equals(sanPhamEntity.getMaSanPham()))
-                .collect(Collectors.toList());
-        lstSanPhamCt = lstData;
-        if (lstData == null) {
-            MsgBox.alert(this, "Lỗi");
-        } else {
-            // =======================================================
-            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-            model.setRowCount(0);
-            int index = 1;
-            for (SanPhamChiTietEntity el : lstData) {
-                model.addRow(new Object[]{
-                    index,
-                    el.getMaSanPhamCt(),
-                    el.getSanPhamEntity().getTenSanPham(),
-                    el.getGiaSanPham(),
-                    el.getSoLuong(),
-                    el.getDanhMucEntity() != null ? el.getDanhMucEntity().getTenDanhMuc() : "",
-                    el.getNhaSanXuatEntity() != null ? el.getNhaSanXuatEntity().getTenNhaSanXuat() : "",
-                    el.getMauSacEntity() != null ? el.getMauSacEntity().getTenMauSac() : "",
-                    el.getKichCoEntity() != null ? el.getKichCoEntity().getTenKichCo() : "",
-                    el.getChatLieuEntity() != null ? el.getChatLieuEntity().getTenChatLieu() : "",
-                    Contants.getStatusBusiness(el.getTrangThai()),
-                    el.getAnhSanPham()
-                });
-                index++;
-            }
-        }
+    private void ButtonState() {
+        btNhoMax.setEnabled(phanTranglocal.getIsPrev());
+        btLonMax.setEnabled(phanTranglocal.getIsNext());
+        lbTrang.setText("Page: " + phanTranglocal.getPage());
     }
 
-    private void ButtonState(int size) {
-        int pageCount = (int) Math.ceil((double) size / pageSize);
-
-        btNhoMax.setEnabled(currentPage > 0);
-        btLonMax.setEnabled(currentPage < pageCount - 1);
-        lbTrang.setText("Page: " + (currentPage + 1));
-    }
-
-    private void fillTableWhenSearch() {
+    private void fillTableWhenSearch(int page) {
         String txtSearch = txtLocText.getText();
         DanhMucEntity trangThaiTmp = ((DanhMucEntity) cboLocStatus.getSelectedItem());
         int trangThai = trangThaiTmp.getTrangThai();
         NhaSanXuatEntity nhaSxTmp = ((NhaSanXuatEntity) cboLocNhaSx.getSelectedItem());
         DanhMucEntity danhMucTmp = ((DanhMucEntity) cboLocDanhMuc.getSelectedItem());
-
-        List<SanPhamChiTietEntity> lstData = sanPhamChiTietIMPL.getSearch(txtSearch, danhMucTmp, nhaSxTmp, trangThai, sanPhamEntity);
-        lstSanPhamCt = lstData;
-        listSize = lstData.size();
-        if (lstData == null) {
-            MsgBox.alert(this, "Lỗi");
-        } else {
-//            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-//            model.setRowCount(0);
-//            int index = 1;
-//            for (SanPhamChiTietEntity el : lstData) {
-//                model.addRow(new Object[]{
-//                    index,
-//                    el.getMaSanPhamCt(),
-//                    el.getSanPhamEntity().getTenSanPham(),
-//                    el.getGiaSanPham(),
-//                    el.getSoLuong(),
-//                    el.getDanhMucEntity() != null ? el.getDanhMucEntity().getTenDanhMuc() : "",
-//                    el.getNhaSanXuatEntity() != null ? el.getNhaSanXuatEntity().getTenNhaSanXuat() : "",
-//                    el.getMauSacEntity() != null ? el.getMauSacEntity().getTenMauSac() : "",
-//                    el.getKichCoEntity() != null ? el.getKichCoEntity().getTenKichCo() : "",
-//                    el.getChatLieuEntity() != null ? el.getChatLieuEntity().getTenChatLieu() : "",
-//                    Contants.getStatusBusiness(el.getTrangThai()),
-//                    el.getAnhSanPham()
-//                });
-//                index++;
-//            }
-
-            int start = currentPage * pageSize;
-            int end = Math.min(start + pageSize, lstData.size());
-
-            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-            model.setRowCount(0);
-            int index = 1;
-            for (int i = start; i < end; i++) {
-                SanPhamChiTietEntity el = lstData.get(i);
-                model.addRow(new Object[]{
-                    index,
-                    el.getMaSanPhamCt(),
-                    el.getSanPhamEntity().getTenSanPham(),
-                    el.getGiaSanPham(),
-                    el.getSoLuong(),
-                    el.getDanhMucEntity() != null ? el.getDanhMucEntity().getTenDanhMuc() : "",
-                    el.getNhaSanXuatEntity() != null ? el.getNhaSanXuatEntity().getTenNhaSanXuat() : "",
-                    el.getMauSacEntity() != null ? el.getMauSacEntity().getTenMauSac() : "",
-                    el.getKichCoEntity() != null ? el.getKichCoEntity().getTenKichCo() : "",
-                    el.getChatLieuEntity() != null ? el.getChatLieuEntity().getTenChatLieu() : "",
-                    Contants.getStatusBusiness(el.getTrangThai()),
-                    el.getAnhSanPham()
-                });
-                index++;
-            };
-            ButtonState(lstData.size());
+        //
+        lstSanPhamCt = sanPhamChiTietIMPL.getSearch(txtSearch, danhMucTmp, nhaSxTmp, trangThai, sanPhamEntity);
+        phanTranglocal.refreshList(lstSanPhamCt);
+        //
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setRowCount(0);
+        int index = 1;
+        for (SanPhamChiTietEntity el : phanTranglocal.getListData(page)) {
+            model.addRow(new Object[]{
+                index,
+                el.getMaSanPhamCt(),
+                el.getSanPhamEntity().getTenSanPham(),
+                el.getGiaSanPham(),
+                el.getSoLuong(),
+                el.getDanhMucEntity() != null ? el.getDanhMucEntity().getTenDanhMuc() : "",
+                el.getNhaSanXuatEntity() != null ? el.getNhaSanXuatEntity().getTenNhaSanXuat() : "",
+                el.getMauSacEntity() != null ? el.getMauSacEntity().getTenMauSac() : "",
+                el.getKichCoEntity() != null ? el.getKichCoEntity().getTenKichCo() : "",
+                el.getChatLieuEntity() != null ? el.getChatLieuEntity().getTenChatLieu() : "",
+                Contants.getStatusBusiness(el.getTrangThai()),
+                el.getAnhSanPham()
+            });
+            index++;
         }
+        phanTranglocal.setButtonStatus();
+        ButtonState();
+        System.out.println("====================Table=====================");
+        System.out.println(phanTranglocal.toString());
     }
 
     private void fillCboChiTiet() {
@@ -320,14 +263,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
 
         cboLocStatus.setSelectedIndex(2);
 
-        pageSize = 10;
-        currentPage = 0;
-
-        int pageCount = (int) Math.ceil((double) listSize / pageSize);
-        btNhoMax.setEnabled(currentPage > 0);
-        btLonMax.setEnabled(currentPage < pageCount - 1);
-        lbTrang.setText("Page: " + (currentPage + 1));
-
         fillCboFileLst();
     }
 
@@ -447,6 +382,8 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         jLabel11.setText("Mô Tả");
 
         jLabel8.setText("Mã sản phẩm chi tiết");
+
+        txtMaSpCt.setEditable(false);
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
@@ -759,7 +696,15 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             new String [] {
                 "STT", "Mã sản phẩm", "Tên sản phẩm", "Giá", "Số lượng", "Danh mục", "Nhà sản xuất", "Màu sắc", "Kích cỡ", "Chất liệu", "Trạng Thái", "Ảnh sản phẩm"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachMouseClicked(evt);
@@ -997,11 +942,12 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
                 .orElse(null);
         cboChatLieu.setSelectedItem(chatLieuEntity);
         //--
-        if (tblDanhSach.getValueAt(index, 10).toString() == "Đang kinh doanh") {
+        if (tblDanhSach.getValueAt(index, 10).toString().equals("Đang kinh doanh")) {
             rdoDangBan.setSelected(true);
         } else {
             rdoTamNgung.setSelected(true);
         }
+        //--
         imageName = tblDanhSach.getValueAt(index, 11) == null ? "" : tblDanhSach.getValueAt(index, 11).toString();
         if (imageName != null) {
             showImage(XFile.getPath(imageName));
@@ -1021,7 +967,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
     }//GEN-LAST:event_btLonMaxActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
         if (ValidateEx.checkIsNull(txtSoLuong)) {
             MsgBox.alert(this, "Số lượng bắt buộc nhập");
             return;
@@ -1033,6 +978,13 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             return;
         }
 
+        try {
+            Integer.valueOf(txtSoLuong.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Số lượng không đúng định dạng, xem lại");
+            return;
+        }
+
         if (ValidateEx.checkIsNull(txtGia)) {
             MsgBox.alert(this, "Giá bán bắt buộc nhập");
             return;
@@ -1040,7 +992,15 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             MsgBox.alert(this, "Giá bán phải là kiểu số");
             return;
         }
-        BigDecimal gia = new BigDecimal(txtGia.getText());
+
+        try {
+            new BigDecimal(txtGia.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Giá bán không đúng định dạng, xem lại");
+            return;
+        }
+
+        BigDecimal gia = new BigDecimal(txtGia.getText().trim());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
             MsgBox.alert(this, "Giá bán không thể là số âm");
             return;
@@ -1081,7 +1041,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         sanPhamChiTiet.setMaSanPhamCt("SPCT" + idTmp);
         sanPhamChiTiet.setGiaSanPham(gia);
         sanPhamChiTiet.setAnhSanPham(imageName);
-        sanPhamChiTiet.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
+        sanPhamChiTiet.setSoLuong(Integer.valueOf(txtSoLuong.getText().trim()));
         sanPhamChiTiet.setMoTa(txtMoTa.getText());
         sanPhamChiTiet.setSanPhamEntity(sanPhamEntity);
         sanPhamChiTiet.setDanhMucEntity(danhMucTmp);
@@ -1104,9 +1064,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         }
 
         clearFrom();
-        fillTableSanPhamCt();
-        fillTableWhenSearch();
-
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -1127,6 +1085,13 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             return;
         }
 
+        try {
+            Integer.valueOf(txtSoLuong.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Số lượng không đúng định dạng, xem lại");
+            return;
+        }
+
         if (ValidateEx.checkIsNull(txtGia)) {
             MsgBox.alert(this, "Giá bán bắt buộc nhập");
             return;
@@ -1134,6 +1099,14 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             MsgBox.alert(this, "Giá bán phải là kiểu số");
             return;
         }
+
+        try {
+            new BigDecimal(txtGia.getText().trim());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Giá bán không đúng định dạng, xem lại");
+            return;
+        }
+
         BigDecimal gia = new BigDecimal(txtGia.getText());
         if (gia.compareTo(BigDecimal.ZERO) < 0) {
             MsgBox.alert(this, "Giá bán không thể là số âm");
@@ -1196,8 +1169,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         }
 
         clearFrom();
-        fillTableSanPhamCt();
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -1275,22 +1247,22 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
 
     private void cboLocDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocDanhMucActionPerformed
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocDanhMucActionPerformed
 
     private void txtLocTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLocTextKeyReleased
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_txtLocTextKeyReleased
 
     private void cboLocNhaSxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocNhaSxActionPerformed
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocNhaSxActionPerformed
 
     private void cboLocStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocStatusActionPerformed
         // TODO add your handling code here:
-        fillTableWhenSearch();
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocStatusActionPerformed
 
     private void cboListFileNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboListFileNameActionPerformed
@@ -1304,18 +1276,14 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
     }//GEN-LAST:event_cboListFileNameActionPerformed
 
     private void btNhoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btNhoMaxMouseClicked
-        // TODO add your handling code here:
-        if (currentPage > 0) {
-            currentPage--;
-            fillTableWhenSearch();
+        if (phanTranglocal.getIsPrev()) {
+            fillTableWhenSearch(phanTranglocal.getPage() - 1);
         }
     }//GEN-LAST:event_btNhoMaxMouseClicked
 
     private void btLonMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLonMaxMouseClicked
-        // TODO add your handling code here:
-        if (currentPage < (int) Math.ceil((double) listSize / pageSize) - 1) {
-            currentPage++;
-            fillTableWhenSearch();
+        if (phanTranglocal.getIsNext()) {
+            fillTableWhenSearch(phanTranglocal.getPage() + 1);
         }
     }//GEN-LAST:event_btLonMaxMouseClicked
 
