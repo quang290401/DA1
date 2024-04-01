@@ -776,6 +776,11 @@ public class FormBanHang extends javax.swing.JPanel   {
             JOptionPane.showMessageDialog(null, "Số tiền Thanh toán phải lớn hơn");
             return;
         }
+          int soLuongHdCt = hoaDonChiTietIMPL.DeSoLuongHoaDonChiTiet(Integer.parseInt(txtHoaDon.getText()));
+        if(soLuongHdCt==0){
+            JOptionPane.showMessageDialog(null, "Hãy Mua Hàng");
+            return;
+        }
 
         BigDecimal bigDecimal = hoaDonChiTietIMPL.SumtongTien(Integer.parseInt(txtHoaDon.getText()));
         lableTongTien.setText(String.valueOf(bigDecimal));
@@ -841,8 +846,8 @@ public class FormBanHang extends javax.swing.JPanel   {
     }//GEN-LAST:event_TableSanPhamCTMouseClicked
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
-        InsertHoaDon insertHoaDon = new InsertHoaDon();
-        insertHoaDon.setVisible(true);
+//        InsertHoaDon insertHoaDon = new InsertHoaDon();
+//        insertHoaDon.setVisible(true);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed

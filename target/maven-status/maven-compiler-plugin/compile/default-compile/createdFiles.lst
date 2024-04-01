@@ -3,7 +3,9 @@ com\mycompany\da1\entity\KhachHangEntity.class
 com\mycompany\da1\util\MsgBox.class
 com\mycompany\da1\view\swing\ListMenu.class
 com\mycompany\da1\entity\MauSacEntity.class
+com\mycompany\da1\view\form\client\FormKhachHang$7.class
 com\mycompany\da1\view\form\product\FormMauSac$3.class
+com\mycompany\da1\view\form\client\FormKhachHang$1.class
 com\mycompany\da1\view\form\product\FormSanPham$1.class
 com\mycompany\da1\service\IMPL\SanPhamChiTietIMPL.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$15.class
@@ -23,7 +25,9 @@ com\mycompany\da1\view\form\sales\FormBanHang$13.class
 com\mycompany\da1\view\DangNhap$2.class
 com\mycompany\da1\view\form\sales\InsertHoaDon$3.class
 com\mycompany\da1\view\swing\ListMenu$2.class
+com\mycompany\da1\view\form\client\FormKhachHang.class
 com\mycompany\da1\view\form\product\FormMauSac.class
+com\mycompany\da1\view\form\client\FormKhachHang$2.class
 com\mycompany\da1\view\form\sales\FormBanHang2$15.class
 com\mycompany\da1\view\form\sales\FormBanHang2$19.class
 com\mycompany\da1\util\ValidateEx.class
@@ -35,6 +39,7 @@ com\mycompany\da1\service\HoaDonChiTietService.class
 com\mycompany\da1\view\form\sales\FormBanHang$1.class
 com\mycompany\da1\view\form\sales\FormBanHang2$14.class
 com\mycompany\da1\entity\HoaDonEntity.class
+com\mycompany\da1\view\form\client\FormKhachHang$8.class
 com\mycompany\da1\view\form\temp\ViewDemo.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$4.class
 com\mycompany\da1\view\form\sales\FormBanHang$7.class
@@ -57,6 +62,7 @@ com\mycompany\da1\view\components\JPanelMenu$2.class
 com\mycompany\da1\view\components\JPanelMenu.class
 com\mycompany\da1\view\form\product\FormNhaSanXuat$5.class
 com\mycompany\da1\view\form\product\FormNhaSanXuat.class
+com\mycompany\da1\view\form\client\FormKhachHang$3.class
 com\mycompany\da1\view\swing\ModernScrollBarUI.class
 com\mycompany\da1\view\form\product\FormKichCo$1.class
 com\mycompany\da1\view\form\product\FormSanPham$8.class
@@ -73,6 +79,7 @@ com\mycompany\da1\view\components\JPanelMenu$1.class
 com\mycompany\da1\view\JFrameMain.class
 com\mycompany\da1\view\form\sales\FormBanHang2$5.class
 com\mycompany\da1\service\VoucherService.class
+com\mycompany\da1\view\form\client\FormKhachHang$6.class
 com\mycompany\da1\view\form\product\FormKichCo.class
 com\mycompany\da1\view\form\product\FormSanPham$7.class
 com\mycompany\da1\view\model\ModelMenu$MenuType.class
@@ -81,6 +88,7 @@ com\mycompany\da1\view\form\product\FormNhaSanXuat$3.class
 com\mycompany\da1\util\Contants$MODEL_VIEW.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$8.class
 com\mycompany\da1\view\form\sales\FormBanHang2$11.class
+com\mycompany\da1\view\form\client\FormKhachHang$5.class
 com\mycompany\da1\view\form\product\FormSanPham$6.class
 com\mycompany\da1\view\form\sales\FormBanHang2$4.class
 com\mycompany\da1\view\form\sales\FormBanHang$15.class
@@ -95,6 +103,7 @@ com\mycompany\da1\view\form\product\FormNhaSanXuat$4.class
 com\mycompany\da1\view\form\sales\FormBanHang2$17.class
 com\mycompany\da1\service\KhachhangService.class
 com\mycompany\da1\view\components\JPanelHeader.class
+com\mycompany\da1\view\form\client\FormKhachHang$4.class
 com\mycompany\da1\util\Contants.class
 com\mycompany\da1\view\form\sales\FormBanHang2$7.class
 com\mycompany\da1\view\form\product\FormNhaSanXuat$1.class
@@ -106,6 +115,7 @@ com\mycompany\da1\view\form\product\FormSanPhamCt$6.class
 com\mycompany\da1\view\form\sales\FormBanHang$3.class
 com\mycompany\da1\repository\SanPhamChiTietDAO.class
 com\mycompany\da1\view\form\product\FormSanPham$9.class
+com\mycompany\da1\view\form\client\FormKhachHang$12.class
 com\mycompany\da1\service\HoaDonService.class
 com\mycompany\da1\repository\QuanLyBanHangDao.class
 com\mycompany\da1\util\XFastFuntion.class
@@ -132,12 +142,14 @@ com\mycompany\da1\view\form\product\FormSanPham$3.class
 com\mycompany\da1\view\form\product\FormKichCo$2.class
 com\mycompany\da1\DA1.class
 com\mycompany\da1\view\form\product\FormChatLieu$3.class
+com\mycompany\da1\view\form\client\FormKhachHang$9.class
 com\mycompany\da1\view\form\product\FormMauSac$1.class
 com\mycompany\da1\view\form\sales\FormBanHang$8.class
 com\mycompany\da1\view\form\sales\FormBanHang2$2.class
 com\mycompany\da1\view\JFrameMain$2.class
 com\mycompany\da1\entity\SanPhamChiTietEntity.class
 com\mycompany\da1\view\form\product\FormDanhMuc$5.class
+com\mycompany\da1\view\form\sales\InsertHoaDon$4.class
 com\mycompany\da1\view\form\product\FormSanPham$4.class
 com\mycompany\da1\view\form\sales\FormBanHang2$8.class
 com\mycompany\da1\view\form\product\FormChatLieu$4.class
@@ -146,6 +158,7 @@ com\mycompany\da1\view\form\sales\FormBanHang$11.class
 com\mycompany\da1\service\IMPL\HoaDonIMPL.class
 com\mycompany\da1\view\form\product\FormDanhMuc.class
 com\mycompany\da1\view\form\sales\FormBanHang2$1.class
+com\mycompany\da1\view\form\client\FormKhachHang$11.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$21.class
 com\mycompany\da1\service\SanPhamService.class
 com\mycompany\da1\view\DangNhap.class
@@ -163,9 +176,11 @@ com\mycompany\da1\util\XFile.class
 com\mycompany\da1\view\form\product\FormMauSac$5.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$2.class
 com\mycompany\da1\view\form\sales\FormBanHang2$16.class
+com\mycompany\da1\view\form\client\FormKhachHang$10.class
 com\mycompany\da1\view\form\sales\FormBanHang2$18.class
 com\mycompany\da1\combobox\KhachHangCBB.class
 com\mycompany\da1\view\form\sales\FormBanHang2$9.class
+com\mycompany\da1\view\form\product\FormSanPham$14.class
 com\mycompany\da1\view\form\product\FormSanPham$2.class
 com\mycompany\da1\view\form\sales\FormBanHang$2.class
 com\mycompany\da1\view\form\product\FormSanPhamCt$11.class

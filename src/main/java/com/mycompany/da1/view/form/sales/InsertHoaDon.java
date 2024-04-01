@@ -38,14 +38,21 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
     /**
      * Creates new form InsertHoaDon
      */
-    public InsertHoaDon() {
+    public InsertHoaDon(String idKhach,String tenKhachHang) {
         initComponents();
+        txtIDKhachHang.setEditable(false);
+        txtTenKhachHang.setEditable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         loadDanhMucVouCher();
-        loadKhachHang();
         loadtaiKhoan();
+        this.txtIDKhachHang.setText(idKhach);
+        this.txtTenKhachHang.setText(tenKhachHang);
         this.dialogListener = dialogListener;
+    }
+
+    private InsertHoaDon() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
   
 
@@ -71,26 +78,26 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
 
     }
 
-    private void loadKhachHang() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) CBBKhachHang.getModel();
-        // xoa du lieu cu
-        model.removeAllElements();
-        // đỗ dưc liệu mới vào
-        List<KhachHangEntity> khachHangEntitys = khachHangIMPL.GetAll();
-        try {
-            for (KhachHangEntity p : khachHangEntitys) {
-                int id = p.getId();
-                String hoTen = p.getHoTen();
-                KhachHangCBB khachHangCBB = new KhachHangCBB(id, hoTen);
-                model.addElement(khachHangCBB);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//    private void loadKhachHang() {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) CBBKhachHang.getModel();
+//        // xoa du lieu cu
+//        model.removeAllElements();
+//        // đỗ dưc liệu mới vào
+//        List<KhachHangEntity> khachHangEntitys = khachHangIMPL.GetAll();
+//        try {
+//            for (KhachHangEntity p : khachHangEntitys) {
+//                int id = p.getId();
+//                String hoTen = p.getHoTen();
+//                KhachHangCBB khachHangCBB = new KhachHangCBB(id, hoTen);
+//                model.addElement(khachHangCBB);
+//
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     private void loadtaiKhoan() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) CBBNhanVien.getModel();
@@ -128,8 +135,10 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
         btnThem = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         CBBNhanVien = new javax.swing.JComboBox<>();
-        CBBKhachHang = new javax.swing.JComboBox<>();
         CBBVoucher = new javax.swing.JComboBox<>();
+        txtIDKhachHang = new javax.swing.JTextField();
+        txtTenKhachHang = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +166,14 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
 
         CBBVoucher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        txtIDKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDKhachHangActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Id Của Khách :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,28 +186,35 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClose))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIDKhachHang)
                             .addComponent(CBBNhanVien, 0, 140, Short.MAX_VALUE)
-                            .addComponent(CBBKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CBBVoucher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(CBBVoucher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTenKhachHang))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIDKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(CBBNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(CBBKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CBBVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,7 +229,7 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {                                        
         HoaDonEntity hoaDonEntity = new HoaDonEntity();
         KhachHangEntity khachHangEntity = new KhachHangEntity();
         VoucherEntity voucherEntity = new VoucherEntity();
@@ -215,11 +239,11 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
         int maTaiKhoan;
         VoucherCBB voucherCBB = (VoucherCBB) CBBVoucher.getSelectedItem();
         maVouCher = voucherCBB.IdInt();
-        KhachHangCBB khachHangCBB = (KhachHangCBB) CBBKhachHang.getSelectedItem();
-        maKhachHang = khachHangCBB.IdInt();
+//        KhachHangCBB khachHangCBB = (KhachHangCBB) CBBKhachHang.getSelectedItem();
+//        maKhachHang = khachHangCBB.IdInt();
         TaiKhoanCBB taiKhoanCBB = (TaiKhoanCBB) CBBNhanVien.getSelectedItem();
         maTaiKhoan = taiKhoanCBB.IdInt();
-        khachHangEntity.setId(maKhachHang);
+        khachHangEntity.setId(Integer.parseInt(txtIDKhachHang.getText()));
         voucherEntity.setId(maVouCher);
         taiKhoanEntity.setId(maTaiKhoan);
         hoaDonEntity.setKhachHangEntity(khachHangEntity);
@@ -234,6 +258,10 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtIDKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDKhachHangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDKhachHangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +299,6 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CBBKhachHang;
     private javax.swing.JComboBox<String> CBBNhanVien;
     private javax.swing.JComboBox<String> CBBVoucher;
     private javax.swing.JButton btnClose;
@@ -279,10 +306,13 @@ public class InsertHoaDon extends javax.swing.JFrame  implements EventDialogList
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtIDKhachHang;
+    private javax.swing.JTextField txtTenKhachHang;
+    // End of variables declaration//GEN-END:variables
 
     @Override
     public void closeDialog() {
-
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    // End of variables declaration//GEN-END:variables
 }

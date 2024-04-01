@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface KhachhangService {
     ArrayList<KhachHangEntity> GetAll();
+    KhachHangEntity save(KhachHangEntity objInput);
 }

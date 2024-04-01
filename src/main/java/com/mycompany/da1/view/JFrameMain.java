@@ -4,6 +4,7 @@ import com.mycompany.da1.util.MsgBox;
 import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.view.events.EventMenuSelected;
 import com.mycompany.da1.view.form.bill_manager.QuanLyHoaDon;
+import com.mycompany.da1.view.form.client.FormKhachHang;
 import com.mycompany.da1.view.form.product.FormSanPham;
 import com.mycompany.da1.view.form.sales.FormBanHang;
 import com.mycompany.da1.view.form.temp.ViewDemo;
@@ -45,7 +46,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 } else if (index == 6) {    // Nhân viên
                     setForm(new ViewDemo());
                 } else if (index == 8) {    //Khách hàng
-                    setForm(new ViewDemo());
+                    setForm(new FormKhachHang());
                 } else if (index == 10) {   // Hóa đơn
                     setForm(new QuanLyHoaDon());
                 } else if (index == 12) {   // Thống kê
