@@ -8,8 +8,22 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileFilter;
 
-public class XFile {
+public class XFile extends FileFilter {
+
+    private final String extension;
+    private final String description;
+    
+    public XFile() {
+        this.extension = ".txt";
+        this.description = "";
+    }
+
+    public XFile(String extension, String description) {
+        this.extension = extension;
+        this.description = description;
+    }
 
     public static void save(File src) {
         File dst = new File("Images", src.getName());
@@ -57,5 +71,19 @@ public class XFile {
             System.out.println("Đường dẫn không phải là một thư mục");
         }
         return lstFileName;
+    }
+    
+    
+    @Override
+    public boolean accept(File f) {
+        if (f.isDirectory()) {
+            return true;
+        }
+        return f.getName().endsWith(extension);
+    }
+
+    @Override
+    public String getDescription() {
+        return description + String.format(" (*%s)", extension);
     }
 }
