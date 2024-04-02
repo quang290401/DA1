@@ -9,9 +9,24 @@ import com.mycompany.da1.util.PhanTrang;
 import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
+import com.mycompany.da1.util.XFile;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -120,6 +135,86 @@ public class FormSanPham extends javax.swing.JPanel {
         return false;
     }
 
+    private void exportExcel(File file) {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sản phẩm");
+
+            // Tạo CellStyle border
+            CellStyle borderStyle = workbook.createCellStyle();
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
+            // Tạo CellStyle để thiết lập chữ in đậm và căn giữa
+            CellStyle style = workbook.createCellStyle();
+            Font font = workbook.createFont();
+            font.setBold(true);
+            style.setFont(font);
+            style.setAlignment(HorizontalAlignment.CENTER);
+            style.setVerticalAlignment(VerticalAlignment.CENTER);
+            //
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+
+            spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 4));
+
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SÁCH SẢN PHẨM");
+            cell.setCellStyle(style);
+            
+            //
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã sản phẩm");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Tên sản phẩm");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Ngày nhập");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Trạng thái");
+            cell.setCellStyle(borderStyle);
+            
+            for (int i = 0; i < lstSanPham.size(); i++) {
+                SanPhamEntity item = lstSanPham.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                Cell cell0 = row.createCell(0);
+                cell0.setCellValue(i + 1);
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(1);
+                cell0.setCellValue(item.getMaSanPham());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(2);
+                cell0.setCellValue(item.getTenSanPham());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(3);
+                cell0.setCellValue(XDate.toString(item.getNgayTao()));
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(4);
+                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+                cell0.setCellStyle(borderStyle); //
+            }
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -197,7 +292,7 @@ public class FormSanPham extends javax.swing.JPanel {
 
         btnNhapExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
-        btnNhapExcel.setText("Nhập Excel");
+        btnNhapExcel.setText("Xuất Excel");
         btnNhapExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhapExcelActionPerformed(evt);
@@ -423,16 +518,16 @@ public class FormSanPham extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(btNhoMax)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbTrang)
-                        .addGap(18, 18, 18)
-                        .addComponent(btLonMax)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(326, 326, 326)
+                .addComponent(btNhoMax)
+                .addGap(18, 18, 18)
+                .addComponent(lbTrang)
+                .addGap(18, 18, 18)
+                .addComponent(btLonMax)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,8 +659,20 @@ public class FormSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnNhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapExcelActionPerformed
-        MsgBox.alert(this, "Chức năng sắp ra  mắt");
-        System.out.println(UserSession.getInstance().getAccountSession().toString());
+//        MsgBox.alert(this, "Chức năng sắp ra  mắt");
+//        System.out.println(UserSession.getInstance().getAccountSession().toString());
+        JFileChooser fs = new JFileChooser(new File("C:\\"));
+        fs.setDialogTitle("Save file");
+        fs.setFileFilter(new XFile(".xlsx", "Title file"));
+        int rs = fs.showSaveDialog(null);
+        if (rs == JFileChooser.APPROVE_OPTION) {
+            File fi = fs.getSelectedFile();
+            fi.renameTo(new File(fi.getAbsoluteFile() + ".xlsx"));
+            System.out.println("=========================File Path============================");
+            System.out.println(fi.getAbsoluteFile());
+            System.out.println(fi.getName());
+            exportExcel(new File(fi.getAbsoluteFile() + ".xlsx"));
+        }
     }//GEN-LAST:event_btnNhapExcelActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
