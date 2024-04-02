@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaiKhoanDAO {
     public ArrayList<TaiKhoanEntity> GetList() {
@@ -18,5 +19,25 @@ public class TaiKhoanDAO {
             e.printStackTrace();
         }
         return taiKhoanEntities;
+    }
+    public int getIdNhanVienByUsername(String username) {
+        int idNhanVien = 0;
+        Session session = HibernateUltil.getFACTORY().openSession();
+        try {
+            // Sử dụng HQL để truy vấn
+            String hql = "SELECT e.id FROM TaiKhoanEntity e WHERE e.taiKhoan = :username";
+            Query<Integer> query = session.createQuery(hql);
+            query.setParameter("username", username);
+            List<Integer> results = query.getResultList();
+            if (!results.isEmpty()) {
+                // Nếu có kết quả, lấy idNhanVien đầu tiên
+                idNhanVien = results.get(0);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return idNhanVien;
     }
 }

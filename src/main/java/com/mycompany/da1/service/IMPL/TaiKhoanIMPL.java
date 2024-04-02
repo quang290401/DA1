@@ -14,4 +14,9 @@ public class TaiKhoanIMPL implements TaiKhoanService {
         ArrayList<TaiKhoanEntity>taiKhoanEntities = taiKhoanDAO.GetList();
         return taiKhoanEntities;
     }
+
+    @Override
+    public int traVeIdNhanVien(String userName) {
+        return taiKhoanDAO.getIdNhanVienByUsername(userName);
+    }
 }
