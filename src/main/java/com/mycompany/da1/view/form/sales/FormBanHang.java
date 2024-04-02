@@ -1060,7 +1060,7 @@ public class FormBanHang extends javax.swing.JPanel   {
 
         }
         ExcelExporter.exportHoaDonChiTietToExcel(hoaDonChiTietEntitys, LableTenKhach.getText(),lableSDTKhach.getText()
-                ,"D:\\excle\\ThanhToanEcle.pdf");
+               ,lableTongTien.getText(),lableTongTienSaugiam.getText() ,"D:\\excle\\ThanhToanEcle.xlsx");
         MsgBox.alert(this, "In Thành Công");
 
     }//GEN-LAST:event_BtnexportEcleActionPerformed

@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class ExcelExporter {
     public static void exportHoaDonChiTietToExcel(ArrayList<HoaDonChiTietEntity> hoaDonChiTietEntitys,
-                                                  String tenKhach, String SDT, String filePath) {
+                                                  String tenKhach, String SDT,String tongTien,String tienSauGiam, String filePath) {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("HoaDonChiTiet");
 
-            // Tạo header
+            // Tạo headertién
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("Tên sản phẩm");
             headerRow.createCell(1).setCellValue("Giá");
@@ -35,6 +35,10 @@ public class ExcelExporter {
             customerRow.createCell(1).setCellValue(tenKhach);
             customerRow.createCell(2).setCellValue("Số điện thoại:");
             customerRow.createCell(3).setCellValue(SDT);
+            customerRow.createCell(4).setCellValue("tổng Tiền:");
+            customerRow.createCell(5).setCellValue(tongTien);
+            customerRow.createCell(6).setCellValue("Tiền Sau Giảm:");
+            customerRow.createCell(7).setCellValue(tienSauGiam);
 
             // Ghi dữ liệu ra file
             try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
