@@ -103,11 +103,16 @@ public class PhanTrang<T> {
             this.isPrev = false;
             this.isNext = true;
         }
+
+        // Kiểm tra nút "Next" khi đạt trang cuối cùng
+        if (this.page == this.tongTrang) {
+            this.isNext = false;
+        }
     }
 
     public void refreshList(List<T> lstData) {
-        this.tongTrang = (lstData.size() / 10) + 1;
-        setLstData(lstData);
+        this.lstData = lstData;
+        this.tongTrang = (int) Math.ceil((double) lstData.size() / pageSize);
     }
 
     public List<T> getListData(int page) {

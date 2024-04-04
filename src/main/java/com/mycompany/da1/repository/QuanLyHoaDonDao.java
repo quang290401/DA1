@@ -14,16 +14,26 @@ import org.hibernate.Session;
  */
 public class QuanLyHoaDonDao {
 
-    public ArrayList<HoaDonEntity> getListHd() {
-        ArrayList<HoaDonEntity> hoaDonEntitys = new ArrayList<>();
-        try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            Query query = session.createQuery("from HoaDonEntity");
-            hoaDonEntitys = (ArrayList<HoaDonEntity>) ((org.hibernate.query.Query<?>) query).list();
-        } catch (Exception e) {
-            e.printStackTrace();
+  public ArrayList<HoaDonEntity> getListHd(int trangThai) {
+    ArrayList<HoaDonEntity> hoaDonEntitys = new ArrayList<>();
+    try (Session session = HibernateUltil.getFACTORY().openSession()) {
+        String queryString;
+        if (trangThai == 3) {
+            queryString = "from HoaDonEntity";
+        } else {
+            queryString = "from HoaDonEntity where trangThai = :trangThai";
         }
-        return hoaDonEntitys;
+        Query query = session.createQuery(queryString);
+        if (trangThai != 3) {
+            query.setParameter("trangThai", trangThai);
+        }
+        hoaDonEntitys = (ArrayList<HoaDonEntity>) ((org.hibernate.query.Query<?>) query).list();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return hoaDonEntitys;
+}
+
 
     public ArrayList<HoaDonChiTietEntity> getList() {
         ArrayList<HoaDonChiTietEntity> hoaDonChiTietEntities = new ArrayList<>();

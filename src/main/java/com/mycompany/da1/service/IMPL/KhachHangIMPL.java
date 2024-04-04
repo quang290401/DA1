@@ -28,6 +28,11 @@ public class KhachHangIMPL implements KhachhangService {
 
     }
 
+    @Override
+    public int TraVeKhachMoiThem() {
+        return service.getLastCustomerId();
+    }
+
     public KhachHangEntity updateKhachHang(KhachHangEntity objInput) {
 
         return service.Update(objInput);

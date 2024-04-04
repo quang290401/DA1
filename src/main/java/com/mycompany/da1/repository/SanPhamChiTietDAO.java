@@ -238,6 +238,22 @@ public class SanPhamChiTietDAO {
             e.printStackTrace();
         }
     }
+    public void updateTrangThaiToOne(Integer id) {
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            session.beginTransaction();
+            SanPhamChiTietEntity sanPhamChiTietEntity = session.get(SanPhamChiTietEntity.class, id);
+            if (sanPhamChiTietEntity != null) {
+                sanPhamChiTietEntity.setTrangThai(1); // Cập nhật trạng thái thành 0
+                session.update(sanPhamChiTietEntity);
+                session.getTransaction().commit();
+                System.out.println("Đã cập nhật trạng thái thành 0 cho ID: " + id);
+            } else {
+                System.out.println("Không tìm thấy bản ghi với ID: " + id);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public int getSoLuongById(int id) {
         int soLuong = 0;
         try (Session session = HibernateUltil.getFACTORY().openSession()) {

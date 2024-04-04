@@ -37,7 +37,7 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
     private void setUp() {
         fillCboTrangThai();
 //        lstHdct = quanLyHoaDonDao.GetList();
-        lstHd = quanLyHoaDonDao.getListHd();
+        lstHd = quanLyHoaDonDao.getListHd(cboLocTrangThai.getSelectedIndex());
         phanTranglocal.refreshList(lstHd);
 
         Date currentDate = new Date();
@@ -61,23 +61,24 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         comboBoxModel.removeAllElements();
         // -----------
         DanhMucEntity danhMuc = new DanhMucEntity();
+        
         danhMuc.setTenDanhMuc("--Tất cả--");
-        danhMuc.setTrangThai(4);
+        danhMuc.setTrangThai(3);
         comboBoxModel.addElement(danhMuc);
         // -----------
         DanhMucEntity danhMuc1 = new DanhMucEntity();
         danhMuc1.setTenDanhMuc("Thành công");
-        danhMuc1.setTrangThai(0);
+        danhMuc1.setTrangThai(1);
         comboBoxModel.addElement(danhMuc1);
         // -----------
         DanhMucEntity danhMuc2 = new DanhMucEntity();
         danhMuc2.setTenDanhMuc("Chờ");
-        danhMuc2.setTrangThai(1);
+        danhMuc2.setTrangThai(0);
         comboBoxModel.addElement(danhMuc2);
         // -----------
         DanhMucEntity danhMuc3 = new DanhMucEntity();
         danhMuc3.setTenDanhMuc("Hủy");
-        danhMuc3.setTrangThai(3);
+        danhMuc3.setTrangThai(2);
         comboBoxModel.addElement(danhMuc3);
     }
 
@@ -89,20 +90,20 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         int trangThai = danhMucTmp.getTrangThai();
 
 //        this.lstHdct = quanLyHoaDonDao.getListSeach(textSearch, ngayBd, ngayKt, trangThai);
-        this.lstHd = quanLyHoaDonDao.getListHd();
+        this.lstHd = quanLyHoaDonDao.getListHd(trangThai );
         phanTranglocal.refreshList(this.lstHd);
         DefaultTableModel def = (DefaultTableModel) tblHoaDon.getModel();
         def.setRowCount(0);
 
         int index = 1;
         for (HoaDonEntity item : phanTranglocal.getListData(page)) {
+            String SDT = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getSoDienThoai() : "Vãng lai";
             Object[] rowData = {
-                index,
-                item.getId(),
-                item.getTaiKhoanEntity().getTaiKhoan(),
-                item.getKhachHangEntity().getSoDienThoai(),
-                XDate.toString(item.getNgayTao()),
-                item.getTongTien()
+                    index,
+                    item.getId(),
+                    item.getTaiKhoanEntity().getTaiKhoan(), SDT,
+                    XDate.toString(item.getNgayTao()),
+                    item.getTongTien()
             };
             def.addRow(rowData);
             index++;
@@ -272,10 +273,20 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
 
         btLonMax1.setText(">>");
+        btLonMax1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLonMax1ActionPerformed(evt);
+            }
+        });
 
         lbTrang.setText("jLabel4");
 
         btNhoMax.setText("<<");
+        btNhoMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNhoMaxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -426,6 +437,18 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocTrangThaiActionPerformed
+
+    private void btLonMax1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLonMax1ActionPerformed
+       if (phanTranglocal.getIsNext()) {
+        fillTableWhenSearch(phanTranglocal.getPage() + 1); 
+    }
+    }//GEN-LAST:event_btLonMax1ActionPerformed
+
+    private void btNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhoMaxActionPerformed
+ if (phanTranglocal.getIsPrev()) {
+        fillTableWhenSearch(phanTranglocal.getPage() - 1);
+    }
+    }//GEN-LAST:event_btNhoMaxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

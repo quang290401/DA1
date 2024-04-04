@@ -61,6 +61,11 @@ public class SanPhamChiTietIMPL implements SanPhamChiTietService {
     }
 
     @Override
+    public void UpdateTrangThaiToOne(Integer id) {
+        sanPhamChiTietDAO.updateTrangThaiToOne(id);
+    }
+
+    @Override
     public int getSoLuongById(int id) {
         return sanPhamChiTietDAO.getSoLuongById(id);
     }

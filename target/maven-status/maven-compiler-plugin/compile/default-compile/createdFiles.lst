@@ -28,6 +28,7 @@ com\mycompany\da1\view\swing\ListMenu$2.class
 com\mycompany\da1\view\form\client\FormKhachHang.class
 com\mycompany\da1\view\form\product\FormMauSac.class
 com\mycompany\da1\view\form\client\FormKhachHang$2.class
+com\mycompany\da1\view\form\sales\FormBanHang$19.class
 com\mycompany\da1\view\form\sales\FormBanHang2$15.class
 com\mycompany\da1\view\form\sales\FormBanHang2$19.class
 com\mycompany\da1\util\ValidateEx.class
@@ -100,6 +101,7 @@ com\mycompany\da1\repository\TaiKhoanDAO.class
 com\mycompany\da1\view\events\EventMenuSelected.class
 com\mycompany\da1\view\form\product\FormDanhMuc$1.class
 com\mycompany\da1\view\form\product\FormNhaSanXuat$4.class
+com\mycompany\da1\view\form\bill_manager\QuanLyHoaDon$10.class
 com\mycompany\da1\view\form\sales\FormBanHang2$17.class
 com\mycompany\da1\service\KhachhangService.class
 com\mycompany\da1\view\components\JPanelHeader.class
@@ -199,6 +201,7 @@ com\mycompany\da1\view\form\product\FormSanPhamCt$12.class
 com\mycompany\da1\repository\SanPhamDao.class
 com\mycompany\da1\service\IMPL\MauSacIMPL.class
 com\mycompany\da1\view\template\NewJPanel.class
+com\mycompany\da1\view\form\bill_manager\QuanLyHoaDon$9.class
 com\mycompany\da1\view\form\product\FormChatLieu$1.class
 com\mycompany\da1\view\swing\ModernScrollBarUI$InvisibleScrollBarButton.class
 com\mycompany\da1\entity\KichCoEntity.class

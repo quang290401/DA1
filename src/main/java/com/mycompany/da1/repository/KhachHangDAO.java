@@ -87,5 +87,22 @@ public class KhachHangDAO {
         }
         return null;
     }
-    
+    public int getLastCustomerId() {
+        int lastCustomerId = 0;
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            // Viết câu truy vấn để lấy ID của khách hàng cuối cùng
+            Query query = session.createQuery("select max(id) from KhachHangEntity ");
+
+            // Thực hiện truy vấn và lấy kết quả
+            Object result = query.uniqueResult();
+            if (result != null) {
+                lastCustomerId = (int) result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lastCustomerId;
+    }
+
+
 }
