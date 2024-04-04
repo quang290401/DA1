@@ -99,11 +99,20 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         for (HoaDonEntity item : phanTranglocal.getListData(page)) {
             String SDT = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getSoDienThoai() : "Vãng lai";
             Object[] rowData = {
+<<<<<<< HEAD
                     index,
                     item.getId(),
                     item.getTaiKhoanEntity().getTaiKhoan(), SDT,
                     XDate.toString(item.getNgayTao()),
                     item.getTongTien()
+=======
+                index,
+                item.getId(),
+                item.getTaiKhoanEntity() == null ? "" : item.getTaiKhoanEntity().getTaiKhoan(),
+                item.getKhachHangEntity() == null ? "" : item.getKhachHangEntity().getSoDienThoai(),
+                XDate.toString(item.getNgayTao()),
+                item.getTongTien()
+>>>>>>> 57246443d7f97a4a0556c38eb2b48e0da884a8c9
             };
             def.addRow(rowData);
             index++;
@@ -112,6 +121,8 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         ButtonState();
         System.out.println("====================Table=====================");
         System.out.println(phanTranglocal.toString());
+        System.out.println("====================TongTrang=====================");
+        System.out.println(phanTranglocal.getTongTrang());
     }
 
     private void ButtonState() {
@@ -132,12 +143,12 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
             Object[] rowData = {
                 stt,
                 item.getHoaDonEntity().getId(),
-                item.getHoaDonEntity().getTaiKhoanEntity().getTaiKhoan(),
-                item.getHoaDonEntity().getKhachHangEntity().getHoTen(),
-                item.getHoaDonEntity().getKhachHangEntity().getSoDienThoai(),
+                item.getHoaDonEntity().getTaiKhoanEntity() == null ? "" : item.getHoaDonEntity().getTaiKhoanEntity().getTaiKhoan(),
+                item.getHoaDonEntity().getKhachHangEntity() == null ? "" : item.getHoaDonEntity().getKhachHangEntity().getHoTen(),
+                item.getHoaDonEntity().getKhachHangEntity() == null ? "" : item.getHoaDonEntity().getKhachHangEntity().getSoDienThoai(),
                 item.getNgayTao(),
-                item.getSanPhamChiTietEntity().getMaSanPhamCt(),
-                item.getSanPhamChiTietEntity().getSanPhamEntity().getTenSanPham(),
+                item.getSanPhamChiTietEntity() == null ? "" : item.getSanPhamChiTietEntity().getMaSanPhamCt(),
+                item.getSanPhamChiTietEntity() == null ? "" : item.getSanPhamChiTietEntity().getSanPhamEntity().getTenSanPham(),
                 item.getSoLuong(),
                 item.getTongTien()
             };
@@ -145,7 +156,7 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
             stt++;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -438,6 +449,7 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_cboLocTrangThaiActionPerformed
 
+<<<<<<< HEAD
     private void btLonMax1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLonMax1ActionPerformed
        if (phanTranglocal.getIsNext()) {
         fillTableWhenSearch(phanTranglocal.getPage() + 1); 
@@ -450,6 +462,20 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_btNhoMaxActionPerformed
 
+=======
+    private void btNhoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhoMaxActionPerformed
+        if (phanTranglocal.getIsPrev()) {
+            fillTableWhenSearch(phanTranglocal.getPage() - 1);
+        }
+    }//GEN-LAST:event_btNhoMaxActionPerformed
+
+    private void btLonMax1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLonMax1ActionPerformed
+        if (phanTranglocal.getIsNext()) {
+            fillTableWhenSearch(phanTranglocal.getPage() + 1);
+        }
+    }//GEN-LAST:event_btLonMax1ActionPerformed
+
+>>>>>>> 57246443d7f97a4a0556c38eb2b48e0da884a8c9
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLonMax1;

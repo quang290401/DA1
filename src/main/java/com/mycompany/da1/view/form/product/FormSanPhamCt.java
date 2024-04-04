@@ -12,11 +12,13 @@ import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
 import com.mycompany.da1.util.PhanTrang;
 import com.mycompany.da1.util.ValidateEx;
+import com.mycompany.da1.util.XDate;
 import com.mycompany.da1.util.XFile;
 import com.mycompany.da1.view.events.EventDialogListener;
 import java.awt.Dialog;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -26,6 +28,17 @@ import javax.swing.table.DefaultTableModel;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -302,6 +315,115 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         return XFile.getPath(img.getName());
     }
 
+    private void exportExcel(File file) {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sản phẩm");
+
+            // Tạo CellStyle border
+            CellStyle borderStyle = workbook.createCellStyle();
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
+            // Tạo CellStyle để thiết lập chữ in đậm và căn giữa
+            CellStyle style = workbook.createCellStyle();
+            Font font = workbook.createFont();
+            font.setBold(true);
+            style.setFont(font);
+            style.setAlignment(HorizontalAlignment.CENTER);
+            style.setVerticalAlignment(VerticalAlignment.CENTER);
+            //
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+
+            spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 4));
+
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SÁCH SẢN PHẨM");
+            cell.setCellStyle(style);
+
+            //
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã sản phẩm");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Tên sản phẩm");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Ngày nhập");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Trạng thái");
+            cell.setCellStyle(borderStyle);
+
+            for (int i = 0; i < lstSanPhamCt.size(); i++) {
+                SanPhamChiTietEntity item = lstSanPhamCt.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                Cell cell0 = row.createCell(0);
+                cell0.setCellValue(i + 1);
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(1);
+                cell0.setCellValue(item.getMaSanPhamCt());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(2);
+                cell0.setCellValue(item.getSanPhamEntity().getTenSanPham());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(3);
+                cell0.setCellValue(XDate.toString(item.getSanPhamEntity().getNgayTao()));
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(4);
+                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+                cell0.setCellStyle(borderStyle); //
+            }
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkEquasProduct(SanPhamChiTietEntity objInput) {
+        for (SanPhamChiTietEntity item : lstSanPhamCt) {
+            if (item.getDanhMucEntity().getId() == objInput.getDanhMucEntity().getId()
+                    && item.getKichCoEntity().getId() == objInput.getKichCoEntity().getId()
+                    && item.getMauSacEntity().getId() == objInput.getMauSacEntity().getId()
+                    && item.getChatLieuEntity().getId() == objInput.getChatLieuEntity().getId()
+                    && item.getNhaSanXuatEntity().getId() == objInput.getNhaSanXuatEntity().getId()) {
+                MsgBox.alert(this, "Đã tồn tại sản phẩm tương tự với MASPCT[" + item.getMaSanPhamCt() + "]");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEquasProduct(SanPhamChiTietEntity objInput, int id) {
+        for (SanPhamChiTietEntity item : lstSanPhamCt) {
+            if (item.getDanhMucEntity().getId() == objInput.getDanhMucEntity().getId()
+                    && item.getKichCoEntity().getId() == objInput.getKichCoEntity().getId()
+                    && item.getMauSacEntity().getId() == objInput.getMauSacEntity().getId()
+                    && item.getChatLieuEntity().getId() == objInput.getChatLieuEntity().getId()
+                    && item.getNhaSanXuatEntity().getId() == objInput.getNhaSanXuatEntity().getId()
+                    && item.getId() != id) {
+                MsgBox.alert(this, "Đã tồn tại sản phẩm tương tự với MASPCT[" + item.getMaSanPhamCt() + "]");
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void closeDialog() {
         fillCboTimKiem();
@@ -348,6 +470,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         btnThem = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        btnThem1 = new javax.swing.JButton();
         txtSanPham = new javax.swing.JTextField();
         btnChatLieu = new javax.swing.JLabel();
         cboListFileName = new javax.swing.JComboBox<>();
@@ -485,12 +608,23 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             }
         });
 
+        btnThem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
+        btnThem1.setText("Xuất excel");
+        btnThem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThem1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(579, Short.MAX_VALUE)
+                .addContainerGap(446, Short.MAX_VALUE)
+                .addComponent(btnThem1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCapNhat)
@@ -505,8 +639,9 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnCapNhat)
-                    .addComponent(btnReset))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(btnReset)
+                    .addComponent(btnThem1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtSanPham.setEditable(false);
@@ -1055,6 +1190,10 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             sanPhamChiTiet.setTrangThai(0);
         }
 
+        if (checkEquasProduct(sanPhamChiTiet)) {
+            return;
+        }
+
         SanPhamChiTietEntity objTemp = sanPhamChiTietIMPL.save(sanPhamChiTiet);
         if (objTemp == null) {
             MsgBox.alert(this, "Thêm mới không thành công");
@@ -1158,6 +1297,10 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             sanPhamChiTiet.setTrangThai(1);
         } else {
             sanPhamChiTiet.setTrangThai(0);
+        }
+
+        if (checkEquasProduct(sanPhamChiTiet, sanPhamChiTiet.getId())) {
+            return;
         }
 
         int check = sanPhamChiTietIMPL.update(sanPhamChiTiet);
@@ -1287,6 +1430,21 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         }
     }//GEN-LAST:event_btLonMaxMouseClicked
 
+    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        JFileChooser fs = new JFileChooser(new File("C:\\"));
+        fs.setDialogTitle("Save file");
+        fs.setFileFilter(new XFile(".xlsx", "Title file"));
+        int rs = fs.showSaveDialog(null);
+        if (rs == JFileChooser.APPROVE_OPTION) {
+            File fi = fs.getSelectedFile();
+            fi.renameTo(new File(fi.getAbsoluteFile() + ".xlsx"));
+            System.out.println("=========================File Path============================");
+            System.out.println(fi.getAbsoluteFile());
+            System.out.println(fi.getName());
+            exportExcel(new File(fi.getAbsoluteFile() + ".xlsx"));
+        }
+    }//GEN-LAST:event_btnThem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1343,6 +1501,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
     private javax.swing.JLabel btnNhaSx;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThem1;
     private javax.swing.JButton btnUpLoad1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChatLieu;

@@ -72,6 +72,10 @@ public class PhanTrang<T> {
         this.lstData = lstData;
     }
 
+    public Integer getTongTrang() {
+        return tongTrang;
+    }
+
     @Override
     public String toString() {
         return "PhanTrang{"
@@ -93,6 +97,12 @@ public class PhanTrang<T> {
             return;
         }
 
+        if (this.lstData.size() == this.pageSize) {
+            this.isNext = false;
+            this.isPrev = false;
+            return;
+        }
+
         if (this.page >= this.tongTrang) {
             this.isNext = false;
             this.isPrev = true;
@@ -104,10 +114,13 @@ public class PhanTrang<T> {
             this.isNext = true;
         }
 
+<<<<<<< HEAD
         // Kiểm tra nút "Next" khi đạt trang cuối cùng
         if (this.page == this.tongTrang) {
             this.isNext = false;
         }
+=======
+>>>>>>> 57246443d7f97a4a0556c38eb2b48e0da884a8c9
     }
 
     public void refreshList(List<T> lstData) {
