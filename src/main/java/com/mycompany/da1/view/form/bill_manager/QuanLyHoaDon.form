@@ -409,6 +409,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLonMax1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbTrang">
               <Properties>
@@ -419,6 +422,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNhoMaxActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

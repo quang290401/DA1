@@ -72,6 +72,10 @@ public class PhanTrang<T> {
         this.lstData = lstData;
     }
 
+    public Integer getTongTrang() {
+        return tongTrang;
+    }
+
     @Override
     public String toString() {
         return "PhanTrang{"
@@ -93,6 +97,12 @@ public class PhanTrang<T> {
             return;
         }
 
+        if (this.lstData.size() == this.pageSize) {
+            this.isNext = false;
+            this.isPrev = false;
+            return;
+        }
+
         if (this.page >= this.tongTrang) {
             this.isNext = false;
             this.isPrev = true;
@@ -103,6 +113,7 @@ public class PhanTrang<T> {
             this.isPrev = false;
             this.isNext = true;
         }
+
     }
 
     public void refreshList(List<T> lstData) {

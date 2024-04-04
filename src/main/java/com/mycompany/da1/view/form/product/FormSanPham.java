@@ -521,7 +521,7 @@ public class FormSanPham extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(394, 394, 394)
                         .addComponent(btNhoMax)
                         .addGap(18, 18, 18)
                         .addComponent(lbTrang)
