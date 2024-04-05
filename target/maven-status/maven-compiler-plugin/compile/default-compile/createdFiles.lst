@@ -101,7 +101,6 @@ com\mycompany\da1\repository\TaiKhoanDAO.class
 com\mycompany\da1\view\events\EventMenuSelected.class
 com\mycompany\da1\view\form\product\FormDanhMuc$1.class
 com\mycompany\da1\view\form\product\FormNhaSanXuat$4.class
-com\mycompany\da1\view\form\bill_manager\QuanLyHoaDon$10.class
 com\mycompany\da1\view\form\sales\FormBanHang2$17.class
 com\mycompany\da1\service\KhachhangService.class
 com\mycompany\da1\view\components\JPanelHeader.class

@@ -6,7 +6,9 @@ import com.mycompany.da1.repository.HoaDonDAO;
 import com.mycompany.da1.service.HoaDonService;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HoaDonIMPL implements HoaDonService {
     HoaDonDAO hoaDonDAO = new HoaDonDAO();
@@ -36,6 +38,11 @@ public class HoaDonIMPL implements HoaDonService {
     @Override
     public void UpDateHuyHD(int idHoaDon) {
       hoaDonDAO.UpdateHuyHD(idHoaDon);
+    }
+
+    @Override
+    public BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc) {
+        return hoaDonDAO.tongTienTuNgayDenNgay(ngayBatDau,ngayKetThuc);
     }
 
 }

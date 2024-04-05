@@ -1,8 +1,19 @@
 package com.mycompany.da1.view;
 
+import java.math.BigDecimal;
+
 public class ToanCucStatic {
     public  static  int idNhanVien;
     public  static  int idHoaDon;
+    public  static BigDecimal thongKe;
+
+    public static BigDecimal getThongKe() {
+        return thongKe;
+    }
+
+    public static void setThongKe(BigDecimal thongKe) {
+        ToanCucStatic.thongKe = thongKe;
+    }
 
     public ToanCucStatic() {
     }

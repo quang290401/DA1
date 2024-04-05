@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HoaDonDAO {
     public void Save(HoaDonEntity hoaDonEntity) {
@@ -82,6 +84,21 @@ public class HoaDonDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc) {
+        BigDecimal tongTien = BigDecimal.ZERO;
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            // Tạo câu truy vấn HQL để tính tổng tiền từ ngày bắt đầu đến ngày kết thúc
+            Query<BigDecimal> query = session.createQuery("SELECT SUM(hd.tongTien) FROM HoaDonEntity hd WHERE hd.ngayTao BETWEEN :startDate AND :endDate", BigDecimal.class);
+            query.setParameter("startDate", ngayBatDau);
+            query.setParameter("endDate", ngayKetThuc);
+            // Lấy tổng tiền từ kết quả truy vấn
+            BigDecimal result = query.uniqueResult();
+            tongTien = result != null ? result : BigDecimal.ZERO;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tongTien;
     }
 
 

@@ -1089,7 +1089,7 @@ public class FormBanHang extends javax.swing.JPanel   {
 
             return;
         }
-        if (ValidateEx.checkIsNumber(txtTienKhach)) {
+        if (ValidateEx.checkIsFloat(txtTienKhach)) {
             MsgBox.alert(this, "Số tiền phải là Kiểu Số");
             return;
         }
@@ -1158,10 +1158,17 @@ public class FormBanHang extends javax.swing.JPanel   {
 
     private void btnThemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHoaDonActionPerformed
         // TODO add your handling code here:
-          if (ValidateEx.checkIsNull(txtTenKhach) || ValidateEx.checkIsNull(txtTenKhach)) {
+          if (ValidateEx.checkIsNull(txtTenKhach) || ValidateEx.checkIsNull(txtSDTKhach)) {
             MsgBox.alert(this, "Tên khách hàng và sđt bắt buộc phải nhập");
             return;
         }
+         String regex = "^\\d{10}$";
+         if (!txtSDTKhach.getText().matches(regex)) {
+        MsgBox.alert(this, "SĐt không hợp lệ");
+       return;
+       }
+
+          
 
         KhachHangEntity khachHang = new KhachHangEntity();
         khachHang.setHoTen(txtTenKhach.getText());
