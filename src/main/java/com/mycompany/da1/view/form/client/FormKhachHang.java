@@ -460,11 +460,15 @@ public class FormKhachHang extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         // TODO add your handling code here:
-        if (ValidateEx.checkIsNull(txthoVaTen) || ValidateEx.checkIsNull(txthoVaTen)) {
+        if (ValidateEx.checkIsNull(txthoVaTen) || ValidateEx.checkIsNull(txtsdt)) {
             MsgBox.alert(this, "Tên khách hàng và sđt bắt buộc phải nhập");
             return;
         }
-
+        String regex = "^\\d{10}$";
+        if (!txtsdt.getText().matches(regex)) {
+            MsgBox.alert(this, "SĐt không hợp lệ");
+            return;
+        }
         KhachHangEntity khachHang = new KhachHangEntity();
         khachHang.setHoTen(txthoVaTen.getText());
         khachHang.setSoDienThoai(txtsdt.getText());

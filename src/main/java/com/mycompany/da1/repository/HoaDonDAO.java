@@ -23,6 +23,7 @@ public class HoaDonDAO {
         }
 
     }
+
     public ArrayList<HoaDonEntity> GetList() {
         ArrayList<HoaDonEntity> hoaDonEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
@@ -33,6 +34,7 @@ public class HoaDonDAO {
         }
         return hoaDonEntities;
     }
+
     public ArrayList<HoaDonEntity> ThanhToan(int idHoaDon) {
         ArrayList<HoaDonEntity> hoaDonEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
@@ -66,6 +68,7 @@ public class HoaDonDAO {
             e.printStackTrace();
         }
     }
+
     public void UpdateHuyHD(int idHoaDon) {
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             session.beginTransaction();
@@ -85,16 +88,22 @@ public class HoaDonDAO {
             e.printStackTrace();
         }
     }
+
     public BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc) {
         BigDecimal tongTien = BigDecimal.ZERO;
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
-            // Tạo câu truy vấn HQL để tính tổng tiền từ ngày bắt đầu đến ngày kết thúc
-            Query<BigDecimal> query = session.createQuery("SELECT SUM(hd.tongTien) FROM HoaDonEntity hd WHERE hd.ngayTao BETWEEN :startDate AND :endDate", BigDecimal.class);
-            query.setParameter("startDate", ngayBatDau);
-            query.setParameter("endDate", ngayKetThuc);
-            // Lấy tổng tiền từ kết quả truy vấn
-            BigDecimal result = query.uniqueResult();
-            tongTien = result != null ? result : BigDecimal.ZERO;
+            if (ngayBatDau.equals(ngayKetThuc)) {
+                Query<BigDecimal> query = session.createQuery("SELECT SUM(hd.tongTien) FROM HoaDonEntity hd WHERE hd.ngayTao = :ngayBatDau", BigDecimal.class);
+                query.setParameter("ngayBatDau", ngayBatDau);
+                BigDecimal result = query.uniqueResult();
+                tongTien = result != null ? result : BigDecimal.ZERO;
+            } else {
+                Query<BigDecimal> query = session.createQuery("SELECT SUM(hd.tongTien) FROM HoaDonEntity hd WHERE hd.ngayTao BETWEEN :startDate AND :endDate", BigDecimal.class);
+                query.setParameter("startDate", ngayBatDau);
+                query.setParameter("endDate", ngayKetThuc);
+                BigDecimal result = query.uniqueResult();
+                tongTien = result != null ? result : BigDecimal.ZERO;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
