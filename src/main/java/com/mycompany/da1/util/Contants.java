@@ -1,7 +1,7 @@
 package com.mycompany.da1.util;
 
 public class Contants {
-    
+
     public static enum MODEL_VIEW {
         THEM_MOI, SUA, XOA, CHI_TIET, THEM_MOI_CT
     }
@@ -50,18 +50,18 @@ public class Contants {
             return ten;
         }
     }
-    
-    static public String getStatusBusiness (int status) {
+
+    static public String getStatusBusiness(int status) {
         if (status == 0) {
             return "Ngừng kinh doanh";
         }
         return "Đang kinh doanh";
     }
-    
+
     static public String getStatusAttribute(int tinhTrang) {
         return tinhTrang == 0 ? "Hết" : "Còn";
     }
-    
+
     public static enum PhanTrang {
         DEFAULT_PAGE(1);
         private int value;
@@ -75,7 +75,7 @@ public class Contants {
         }
 
     }
-    
+
     public static enum VaiTro {
         USER(1),
         ADMIN(2);
@@ -89,5 +89,9 @@ public class Contants {
             return value;
         }
 
+    }
+
+    static public String getStatusEmployee(int trangThai) {
+        return trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động";
     }
 }

@@ -26,5 +26,8 @@ public class VaiTroEntity {
     @Column(name = "trangThai")
     private int trangThai;
 
-
+    @Override
+    public String toString() {
+        return tenVaiTro;
+    }
 }
