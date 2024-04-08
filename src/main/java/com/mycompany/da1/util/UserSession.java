@@ -26,5 +26,9 @@ public class UserSession {
 
     public void setAccountSession(TaiKhoanEntity accountSession) {
         this.accountSession = accountSession;
-    }  
+    } 
+    
+    public boolean checkAdmin() {
+        return this.accountSession.getVaiTroEntity().getTenVaiTro().equalsIgnoreCase("admin");
+    }
 }
