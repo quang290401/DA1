@@ -44,7 +44,7 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
     private void setUp() {
         fillCboTrangThai();
 //        lstHdct = quanLyHoaDonDao.GetList();
-        lstHd = quanLyHoaDonDao.getListHd(cboLocTrangThai.getSelectedIndex());
+        lstHd = quanLyHoaDonDao.getListHd(cboLocTrangThai.getSelectedIndex(),txtSearch.getText());
         phanTranglocal.refreshList(lstHd);
 
         Date currentDate = new Date();
@@ -97,7 +97,7 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         int trangThai = danhMucTmp.getTrangThai();
 
 //        this.lstHdct = quanLyHoaDonDao.getListSeach(textSearch, ngayBd, ngayKt, trangThai);
-        this.lstHd = quanLyHoaDonDao.getListHd(trangThai);
+        this.lstHd = quanLyHoaDonDao.getListHd(trangThai,txtSearch.getText());
         phanTranglocal.refreshList(this.lstHd);
         DefaultTableModel def = (DefaultTableModel) tblHoaDon.getModel();
         def.setRowCount(0);
@@ -461,32 +461,32 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btNhoMaxActionPerformed
 
-    private void SerchTableHD(int page) {
-        String tenKhach = txtSearch.getText();
-        this.lstHd = quanLyHoaDonDao.findHoaDonByTenKhachHang(tenKhach);
-        phanTranglocal.refreshList(this.lstHd);
-        DefaultTableModel def = (DefaultTableModel) tblHoaDon.getModel();
-        def.setRowCount(0);
-
-        for (HoaDonEntity item : phanTranglocal.getListData(page)) {
-            String SDT = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getSoDienThoai() : "Vãng lai";
-            String tenKhach2 = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getHoTen() : "Vãng lai";
-            Object[] rowData = {
-                    item.getId(),
-                    item.getTaiKhoanEntity().getTaiKhoan(), SDT,
-                    tenKhach2,
-                    item.getTongTien(),
-                    XDate.toString(item.getNgayTao()),
-
-            };
-            def.addRow(rowData);
-        }
-        phanTranglocal.setButtonStatus();
-        ButtonState();
-    }
+//    private void SerchTableHD(int page) {
+//        String tenKhach = txtSearch.getText();
+//        this.lstHd = quanLyHoaDonDao.findHoaDonByTenKhachHang(tenKhach);
+//        phanTranglocal.refreshList(this.lstHd);
+//        DefaultTableModel def = (DefaultTableModel) tblHoaDon.getModel();
+//        def.setRowCount(0);
+//
+//        for (HoaDonEntity item : phanTranglocal.getListData(page)) {
+//            String SDT = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getSoDienThoai() : "Vãng lai";
+//            String tenKhach2 = item.getKhachHangEntity() != null ? item.getKhachHangEntity().getHoTen() : "Vãng lai";
+//            Object[] rowData = {
+//                    item.getId(),
+//                    item.getTaiKhoanEntity().getTaiKhoan(), SDT,
+//                    tenKhach2,
+//                    item.getTongTien(),
+//                    XDate.toString(item.getNgayTao()),
+//
+//            };
+//            def.addRow(rowData);
+//        }
+//        phanTranglocal.setButtonStatus();
+//        ButtonState();
+//    }
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        SerchTableHD(Contants.PhanTrang.DEFAULT_PAGE.getValue());
+        fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
     }//GEN-LAST:event_txtSearchKeyReleased
 
 

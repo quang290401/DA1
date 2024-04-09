@@ -16,25 +16,39 @@ import org.hibernate.Session;
  */
 public class QuanLyHoaDonDao {
 
-    public ArrayList<HoaDonEntity> getListHd(int trangThai) {
-        ArrayList<HoaDonEntity> hoaDonEntitys = new ArrayList<>();
+    public ArrayList<HoaDonEntity> getListHd(int trangThai, String tenKhach) {
+        ArrayList<HoaDonEntity> hoaDonEntities = new ArrayList<>();
         try (Session session = HibernateUltil.getFACTORY().openSession()) {
             String queryString;
-            if (trangThai == 3) {
+            if (trangThai == 3 && (tenKhach == null || tenKhach.isEmpty())) {
                 queryString = "from HoaDonEntity";
-            } else {
+            } else if (tenKhach == null || tenKhach.isEmpty()) {
                 queryString = "from HoaDonEntity where trangThai = :trangThai";
+            } else if (trangThai == 3) {
+                queryString = "select h from HoaDonEntity h inner join h.khachHangEntity k "
+                        + "where h.trangThai = :trangThai and k.hoTen like :tenKhach";
+            } else {
+                queryString = "select h from HoaDonEntity h inner join h.khachHangEntity k "
+                        + "where h.trangThai = :trangThai and k.hoTen like :tenKhach";
             }
+
             Query query = session.createQuery(queryString);
+
             if (trangThai != 3) {
                 query.setParameter("trangThai", trangThai);
             }
-            hoaDonEntitys = (ArrayList<HoaDonEntity>) ((org.hibernate.query.Query<?>) query).list();
+            if (tenKhach != null && !tenKhach.isEmpty()) {
+                query.setParameter("tenKhach", "%" + tenKhach + "%");
+            }
+
+            hoaDonEntities = (ArrayList<HoaDonEntity>) ((org.hibernate.query.Query<?>) query).list();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return hoaDonEntitys;
+        return hoaDonEntities;
     }
+
+
 
 
     public ArrayList<HoaDonChiTietEntity> getList() {
