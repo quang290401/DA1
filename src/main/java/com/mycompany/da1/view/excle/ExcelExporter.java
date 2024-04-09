@@ -30,15 +30,23 @@ public class ExcelExporter {
             }
 
             // Tạo hàng mới cho thông tin khách hàng
+            // Tạo hàng mới cho thông tin khách hàng
             Row customerRow = sheet.createRow(rowNum++);
             customerRow.createCell(0).setCellValue("Tên khách hàng:");
             customerRow.createCell(1).setCellValue(tenKhach);
-            customerRow.createCell(2).setCellValue("Số điện thoại:");
-            customerRow.createCell(3).setCellValue(SDT);
-            customerRow.createCell(4).setCellValue("tổng Tiền:");
-            customerRow.createCell(5).setCellValue(tongTien);
-            customerRow.createCell(6).setCellValue("Tiền Sau Giảm:");
-            customerRow.createCell(7).setCellValue(tienSauGiam);
+
+            customerRow = sheet.createRow(rowNum++);
+            customerRow.createCell(0).setCellValue("Số điện thoại:");
+            customerRow.createCell(1).setCellValue(SDT);
+
+            customerRow = sheet.createRow(rowNum++);
+            customerRow.createCell(0).setCellValue("Tổng Tiền:");
+            customerRow.createCell(1).setCellValue(tongTien);
+
+            customerRow = sheet.createRow(rowNum++);
+            customerRow.createCell(0).setCellValue("Tiền Sau Giảm:");
+            customerRow.createCell(1).setCellValue(tienSauGiam);
+
 
             // Ghi dữ liệu ra file
             try (FileOutputStream outputStream = new FileOutputStream(filePath)) {

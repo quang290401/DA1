@@ -861,7 +861,7 @@ public class FormBanHang extends javax.swing.JPanel {
         BigDecimal soLuong = new BigDecimal(bb);
         BigDecimal updateTongTien = GiaBan.multiply(soLuong);
         hoaDonChiTietIMPL.UpdateTongTien(Integer.parseInt(txtHoaDon.getText()), Integer.parseInt(TXTidSanPham.getText()),
-                 updateTongTien);
+                updateTongTien);
 
         LoadTableHoaDonCT(Integer.parseInt(txtHoaDon.getText()));
         LoadTableCTSanPham();
@@ -1085,7 +1085,7 @@ public class FormBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienKhachActionPerformed
 
     private void txtTienKhachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachKeyReleased
-     
+
         if (ValidateEx.checkIsFloat(txtTienKhach)) {
             MsgBox.alert(this, "Số tiền phải là Kiểu Số");
             txtTienKhach.setText("");
@@ -1097,7 +1097,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 MsgBox.alert(this, "Số tiền phải lớn hơn 0");
                 txtTienKhach.setText("");
             }
-        } 
+        }
 
         BigDecimal tongTien = new BigDecimal(txtTongTien.getText());
         BigDecimal tienKhach = new BigDecimal(txtTienKhach.getText());
@@ -1150,7 +1150,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         }
         ExcelExporter.exportHoaDonChiTietToExcel(hoaDonChiTietEntitys, LableTenKhach.getText(), lableSDTKhach.getText(),
-                 lableTongTien.getText(), lableTongTienSaugiam.getText(), "D:\\excle\\ThanhToanEcle.xlsx");
+                lableTongTien.getText(), lableTongTienSaugiam.getText(), "D:\\excle\\ThanhToanEcle.xlsx");
         MsgBox.alert(this, "In Thành Công");
 
     }//GEN-LAST:event_BtnexportEcleActionPerformed

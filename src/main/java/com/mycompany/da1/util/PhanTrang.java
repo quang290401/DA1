@@ -91,7 +91,7 @@ public class PhanTrang<T> {
 
     // Function
     public void setButtonStatus() {
-        if (this.tongTrang == 1) {
+        if (this.tongTrang == 1 || tongTrang ==0) {
             this.isNext = false;
             this.isPrev = false;
             return;
