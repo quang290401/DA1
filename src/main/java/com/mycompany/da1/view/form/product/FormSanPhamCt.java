@@ -531,6 +531,11 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         rdoDangBan.setBackground(new java.awt.Color(255, 255, 204));
         buttonGroup1.add(rdoDangBan);
         rdoDangBan.setText("Đang kinh doanh");
+        rdoDangBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoDangBanActionPerformed(evt);
+            }
+        });
 
         btnMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/icons8-add-new-32.png"))); // NOI18N
         btnMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1444,6 +1449,10 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             exportExcel(new File(fi.getAbsoluteFile() + ".xlsx"));
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
+
+    private void rdoDangBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDangBanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoDangBanActionPerformed
 
     /**
      * @param args the command line arguments

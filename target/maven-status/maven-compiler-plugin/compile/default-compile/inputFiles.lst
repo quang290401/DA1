@@ -3,6 +3,7 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\TaiKhoanIMPL.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\bill_manager\ThongKe.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\InsertHoaDon.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\TaiKhoanDAO.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\FormVoucher2.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\KhachhangService.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\MauSacEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\model\ModelMenu.java
@@ -69,6 +70,7 @@ D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\ToanCucStatic.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\HoaDonEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\service\IMPL\DanhMucChungImpl.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\QuanLyBanHangDao.java
+D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\nhan_vien\FormNhanVien.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\entity\VaiTroEntity.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\view\form\sales\FormBanHang.java
 D:\JavaCode\DA1\src\main\java\com\mycompany\da1\repository\SanPhamChiTietDAO.java

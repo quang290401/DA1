@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class HoaDonIMPL implements HoaDonService {
     HoaDonDAO hoaDonDAO = new HoaDonDAO();
+
     @Override
     public void Save(HoaDonEntity hoaDonEntity) {
         hoaDonDAO.Save(hoaDonEntity);
@@ -19,30 +20,35 @@ public class HoaDonIMPL implements HoaDonService {
 
     @Override
     public ArrayList<HoaDonEntity> GetAll() {
-        ArrayList<HoaDonEntity>hoaDonEntities = hoaDonDAO.GetList();
+        ArrayList<HoaDonEntity> hoaDonEntities = hoaDonDAO.GetList();
         return hoaDonEntities;
     }
 
     @Override
     public ArrayList<HoaDonEntity> ThanhToan(int idHoaDon) {
-        ArrayList<HoaDonEntity>hoaDonEntities = hoaDonDAO.ThanhToan(idHoaDon);
+        ArrayList<HoaDonEntity> hoaDonEntities = hoaDonDAO.ThanhToan(idHoaDon);
         return hoaDonEntities;
     }
 
     @Override
     public void UpdateHoaDon(int idHoaDon, BigDecimal tongTien) {
-         hoaDonDAO.UpdateHoaDon(idHoaDon,tongTien);
+        hoaDonDAO.UpdateHoaDon(idHoaDon, tongTien);
 
     }
 
     @Override
     public void UpDateHuyHD(int idHoaDon) {
-      hoaDonDAO.UpdateHuyHD(idHoaDon);
+        hoaDonDAO.UpdateHuyHD(idHoaDon);
+    }
+
+    @Override
+    public void UpDateTrangThaiHD(int idHoaDon, int trangThai) {
+        hoaDonDAO.UpdateTrangThaiHD(idHoaDon, trangThai);
     }
 
     @Override
     public BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc) {
-        return hoaDonDAO.tongTienTuNgayDenNgay(ngayBatDau,ngayKetThuc);
+        return hoaDonDAO.tongTienTuNgayDenNgay(ngayBatDau, ngayKetThuc);
     }
 
 }

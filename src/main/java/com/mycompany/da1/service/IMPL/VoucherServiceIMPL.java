@@ -15,4 +15,25 @@ public class VoucherServiceIMPL implements VoucherService {
         ArrayList<VoucherEntity>voucherEntities = voucherDAO.GetList();
         return voucherEntities;
     }
+
+    @Override
+    public ArrayList<VoucherEntity> GetAllByTrangthai(int trangThai) {
+        ArrayList<VoucherEntity>voucherEntities = voucherDAO.GetList(trangThai);
+        return voucherEntities;
+    }
+
+    @Override
+    public ArrayList<VoucherEntity> SerchVoucher(String tenKhuyenMai) {
+        return voucherDAO.Serch(tenKhuyenMai);
+    }
+
+    @Override
+    public VoucherEntity save(VoucherEntity voucherEntity) {
+        return voucherDAO.Save(voucherEntity);
+    }
+
+    @Override
+    public VoucherEntity Update(VoucherEntity voucherEntity) {
+        return  voucherDAO.UpDate(voucherEntity);
+    }
 }

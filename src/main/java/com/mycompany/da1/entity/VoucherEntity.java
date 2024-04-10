@@ -16,6 +16,8 @@ public class VoucherEntity {
     private int id;
     @Column(name = "phanTramGiam")
     private int phanTramGiam;
+    @Column(name = "tenKhuyenMai",columnDefinition = "NVARCHAR(255)")
+    private String tenKhuyenMai;
     @Column(name = "ngayBatDau")
     private LocalDate ngayBatDau;
     @Column(name = "ngayKetThuc")

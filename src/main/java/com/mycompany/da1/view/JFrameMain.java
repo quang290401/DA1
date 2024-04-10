@@ -8,6 +8,7 @@ import com.mycompany.da1.view.form.client.FormKhachHang;
 import com.mycompany.da1.view.form.nhan_vien.FormNhanVien;
 import com.mycompany.da1.view.form.product.FormSanPham;
 import com.mycompany.da1.view.form.sales.FormBanHang;
+import com.mycompany.da1.view.form.sales.FormVoucher2;
 import com.mycompany.da1.view.form.temp.ViewDemo;
 import com.mycompany.da1.view.swing.ScrollBar;
 
@@ -53,7 +54,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 } else if (index == 12) {   // Thống kê
                     setForm(new ViewDemo());
                 } else if (index == 14) {   // Khuyến mãi
-                    setForm(new ViewDemo());
+                    setForm(new FormVoucher2());
                 } else if (index == 16) { // Đăng xuất
                     if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
                         UserSession.getInstance().setAccountSession(null);

@@ -88,6 +88,26 @@ public class HoaDonDAO {
             e.printStackTrace();
         }
     }
+    public void UpdateTrangThaiHD(int idHoaDon,int trangThai) {
+        try (Session session = HibernateUltil.getFACTORY().openSession()) {
+            session.beginTransaction();
+            String sql = "UPDATE HoaDonEntity SET trangThai = :trangThai WHERE id = :idHoaDon";
+            Query query = session.createQuery(sql);
+            query.setParameter("idHoaDon", idHoaDon);
+            query.setParameter("trangThai", trangThai);
+            int updatedCount = query.executeUpdate();
+            // Kết thúc giao dịch
+            session.getTransaction().commit();
+
+            if (updatedCount > 0) {
+                System.out.println("Hóa đơn đã được thanh toán thành công.");
+            } else {
+                System.out.println("Không tìm thấy hóa đơn với id = " + idHoaDon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc) {
         BigDecimal tongTien = BigDecimal.ZERO;

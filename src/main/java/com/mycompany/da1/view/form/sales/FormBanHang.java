@@ -58,8 +58,8 @@ public class FormBanHang extends javax.swing.JPanel {
         try {
             for (VoucherEntity p : voucherEntitys) {
                 int id = p.getId();
-                int phanTramGiam = p.getPhanTramGiam();
-                VoucherCBB voucherCBB = new VoucherCBB(id, phanTramGiam);
+                String tenPhanTramGiam = p.getTenKhuyenMai();
+                VoucherCBB voucherCBB = new VoucherCBB(id, tenPhanTramGiam);
                 model.addElement(voucherCBB);
 
             }

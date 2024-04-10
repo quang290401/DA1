@@ -14,5 +14,6 @@ public interface HoaDonService {
    ArrayList<HoaDonEntity>ThanhToan(int idHoaDon);
    void UpdateHoaDon(int idHoaDon, BigDecimal tongTien);
    void  UpDateHuyHD(int idHoaDon);
+   void  UpDateTrangThaiHD(int idHoaDon,int TrangThai);
    BigDecimal tongTienTuNgayDenNgay(Timestamp ngayBatDau, Timestamp ngayKetThuc);
 }
