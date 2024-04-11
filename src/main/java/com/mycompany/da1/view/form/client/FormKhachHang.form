@@ -233,6 +233,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p excel"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnnhapExcelActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnxuatExcel">
               <Properties>
