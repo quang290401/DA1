@@ -9,4 +9,5 @@ public interface KhachhangService {
     ArrayList<KhachHangEntity> GetAll();
     KhachHangEntity save(KhachHangEntity objInput);
     int TraVeKhachMoiThem();
+    boolean KiemTraSDTKhach(String sdt);
 }

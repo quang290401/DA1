@@ -41,6 +41,19 @@ public class KhachHangDAO {
         }
         return listData;
     }
+    public boolean isCustomerExist(String phoneNumber) {
+        List<KhachHangEntity> customers = getSearch(phoneNumber); // Lấy danh sách khách hàng dựa trên số điện thoại
+
+        // Kiểm tra xem danh sách có chứa khách hàng có số điện thoại như mong đợi không
+        for (KhachHangEntity customer : customers) {
+            if (customer.getSoDienThoai().equals(phoneNumber)) {
+                return true; // Nếu có khách hàng có số điện thoại như mong đợi, trả về true
+            }
+        }
+        return false; // Nếu không có khách hàng có số điện thoại như mong đợi, trả về false
+    }
+
+
 
 
     public KhachHangEntity Update(KhachHangEntity objInput) {

@@ -1166,6 +1166,11 @@ public class FormBanHang extends javax.swing.JPanel {
             MsgBox.alert(this, "SĐt không hợp lệ");
             return;
         }
+        Boolean kiemTraKhach = khachHangIMPL.KiemTraSDTKhach(txtSDTKhach.getText());
+        if(kiemTraKhach==true){
+            MsgBox.alert(this, "Khách Hàng đã tồn tại");
+            return;
+        }
 
         KhachHangEntity khachHang = new KhachHangEntity();
         khachHang.setHoTen(txtTenKhach.getText());

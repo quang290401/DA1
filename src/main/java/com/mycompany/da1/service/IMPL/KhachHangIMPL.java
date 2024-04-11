@@ -33,6 +33,11 @@ public class KhachHangIMPL implements KhachhangService {
         return service.getLastCustomerId();
     }
 
+    @Override
+    public boolean KiemTraSDTKhach(String sdt) {
+        return service.isCustomerExist(sdt);
+    }
+
     public KhachHangEntity updateKhachHang(KhachHangEntity objInput) {
 
         return service.Update(objInput);
