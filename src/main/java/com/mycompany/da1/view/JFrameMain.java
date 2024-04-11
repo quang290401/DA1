@@ -87,7 +87,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        menu = new com.mycompany.da1.view.components.JPanelMenu();
         sb = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
 
@@ -98,6 +97,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(" WELLCOME TO SHOP");
+        getContentPane().add(jLabel1);
 
         sb.setBorder(null);
         sb.setOpaque(false);
@@ -106,29 +106,7 @@ public class JFrameMain extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.BorderLayout());
         sb.setViewportView(mainPanel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sb, javax.swing.GroupLayout.DEFAULT_SIZE, 1242, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sb)
-                .addContainerGap())
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-        );
+        getContentPane().add(sb);
 
         pack();
         setLocationRelativeTo(null);
@@ -180,7 +158,6 @@ public class JFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainPanel;
-    private com.mycompany.da1.view.components.JPanelMenu menu;
     private javax.swing.JScrollPane sb;
     // End of variables declaration//GEN-END:variables
 }

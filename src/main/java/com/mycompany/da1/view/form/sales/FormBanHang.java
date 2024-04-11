@@ -22,6 +22,7 @@ import com.mycompany.da1.view.excle.ExcelExporter;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -332,7 +333,7 @@ public class FormBanHang extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(anhChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(13, 13, 13))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -746,9 +747,9 @@ public class FormBanHang extends javax.swing.JPanel {
                                         .addGap(112, 112, 112)
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(19, 19, 19)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnexportEcle, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnexportEcle, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,7 +773,7 @@ public class FormBanHang extends javax.swing.JPanel {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(37, 37, 37)
                         .addComponent(BtnexportEcle, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -793,10 +794,10 @@ public class FormBanHang extends javax.swing.JPanel {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1152,9 +1153,23 @@ public class FormBanHang extends javax.swing.JPanel {
             dtm.addRow(row);
 
         }
-        ExcelExporter.exportHoaDonChiTietToExcel(hoaDonChiTietEntitys, LableTenKhach.getText(), lableSDTKhach.getText(),
-                lableTongTien.getText(), lableTongTienSaugiam.getText(), "D:\\excle\\ThanhToanEcle.xlsx");
-        MsgBox.alert(this, "In Thành Công");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn thư mục lưu trữ");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+          
+            File selectedDirectory = fileChooser.getSelectedFile();
+            String directoryPath = selectedDirectory.getAbsolutePath();
+            String filePath = directoryPath + "\\HoaDon.xlsx"; // Đường dẫn của tệp Excel
+            // Tiếp tục xử lý lưu trữ tệp Excel với đường dẫn của thư mục được chọn
+            // Đảm bảo rằng bạn có dữ liệu để xuất ra tệp Excel trước khi thực hiện các bước dưới
+            ExcelExporter.exportHoaDonChiTietToExcel(hoaDonChiTietEntitys, LableTenKhach.getText(), lableSDTKhach.getText(),
+                    lableTongTien.getText(), lableTongTienSaugiam.getText(), filePath); // Xuất dữ liệu ra tệp Excel
+            MsgBox.alert(this, "In Thành Công");
+        }
 
     }//GEN-LAST:event_BtnexportEcleActionPerformed
 
@@ -1170,7 +1185,7 @@ public class FormBanHang extends javax.swing.JPanel {
             return;
         }
         Boolean kiemTraKhach = khachHangIMPL.KiemTraSDTKhach(txtSDTKhach.getText());
-        if(kiemTraKhach==true){
+        if (kiemTraKhach == true) {
             MsgBox.alert(this, "Khách Hàng đã tồn tại");
             return;
         }

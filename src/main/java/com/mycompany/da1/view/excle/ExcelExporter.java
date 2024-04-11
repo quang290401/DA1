@@ -1,6 +1,7 @@
 package com.mycompany.da1.view.excle;
 
 import com.mycompany.da1.entity.HoaDonChiTietEntity;
+import com.mycompany.da1.entity.KhachHangEntity;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -49,6 +50,33 @@ public class ExcelExporter {
 
 
             // Ghi dữ liệu ra file
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            }
+
+            System.out.println("Xuất Excel thành công!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void exportKhacHHnag(ArrayList<KhachHangEntity> khachHangEntities, String filePath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Khách hàng");
+
+            // Tạo headertién
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Họ tên");
+            headerRow.createCell(1).setCellValue("số điện thoại");
+
+
+            // Đổ dữ liệu từ ArrayList vào Excel
+            int rowNum = 1;
+            for (KhachHangEntity khachHangEntity : khachHangEntities) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(khachHangEntity.getHoTen());
+                row.createCell(1).setCellValue(khachHangEntity.getSoDienThoai());
+
+            }
             try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
                 workbook.write(outputStream);
             }

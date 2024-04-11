@@ -1,12 +1,16 @@
 package com.mycompany.da1.view.form.client;
 
+import com.mycompany.da1.entity.HoaDonChiTietEntity;
 import com.mycompany.da1.entity.KhachHangEntity;
 import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.service.IMPL.KhachHangIMPL;
 import com.mycompany.da1.util.MsgBox;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
+import com.mycompany.da1.view.ToanCucStatic;
+import com.mycompany.da1.view.excle.ExcelExporter;
 import com.mycompany.da1.view.form.sales.InsertHoaDon;
+import com.mycompany.da1.view.form.sales.TableSwing;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.*;
@@ -199,6 +204,11 @@ public class FormKhachHang extends javax.swing.JPanel {
 
         btnxuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
         btnxuatExcel.setText("Xuất excel");
+        btnxuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxuatExcelActionPerformed(evt);
+            }
+        });
 
         BtnTaoHoaDon.setText("Chọn Khách");
         BtnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -597,6 +607,39 @@ public class FormKhachHang extends javax.swing.JPanel {
     private void btncleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncleanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btncleanActionPerformed
+
+    private void btnxuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxuatExcelActionPerformed
+
+        TableSwing dtm = new TableSwing(new Object[]{"Tên sản phẩm", "Giá", "Số lượng"}, 0);
+        tblKhachHang.setModel(dtm);
+
+        ArrayList<KhachHangEntity> khachHangEntitys = khachHangService.GetAll();
+
+        for (KhachHangEntity p : khachHangEntitys) {
+
+            Object[] row = {p.getHoTen(),
+                p.getSoDienThoai(), p.getNgaySua(),p.getNgayTao(),p.getNgaySua()
+            };
+            dtm.addRow(row);
+
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn thư mục lưu trữ");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedDirectory = fileChooser.getSelectedFile();
+            String directoryPath = selectedDirectory.getAbsolutePath();
+            String filePath = directoryPath + "\\KhachHang.xlsx"; // Đường dẫn của tệp Excel
+
+            // Tiếp tục xử lý lưu trữ tệp Excel với đường dẫn của thư mục được chọn
+            // Đảm bảo rằng bạn có dữ liệu để xuất ra tệp Excel trước khi thực hiện các bước dưới
+            ExcelExporter.exportKhacHHnag(khachHangEntitys, filePath); // Xuất dữ liệu ra tệp Excel
+            MsgBox.alert(this, "Xuất file Excel thành công!");
+        }
+
+    }
 
     private void btnnhapExcelActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser fileChooser = new JFileChooser();
