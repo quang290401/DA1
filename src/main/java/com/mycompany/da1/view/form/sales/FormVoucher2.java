@@ -8,6 +8,8 @@ import com.mycompany.da1.entity.HoaDonEntity;
 import com.mycompany.da1.entity.SanPhamChiTietEntity;
 import com.mycompany.da1.entity.VoucherEntity;
 import com.mycompany.da1.service.IMPL.VoucherServiceIMPL;
+import com.mycompany.da1.util.MsgBox;
+import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XFile;
 
 import javax.swing.*;
@@ -377,6 +379,10 @@ public class FormVoucher2 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "không được để trống");
             return;
         }
+          if (ValidateEx.checkIsFloat(txtPhanTramGiam)) {
+            MsgBox.alert(this, "Số tiền phải là Kiểu Số");
+            txtPhanTramGiam.setText("");
+        }
         VoucherEntity voucherEntity = new VoucherEntity();
         voucherEntity.setId(Integer.parseInt(txtIDvoucher.getText()));
         voucherEntity.setTenKhuyenMai(txtTenKhuyenMai.getText());
@@ -442,6 +448,10 @@ public class FormVoucher2 extends javax.swing.JPanel {
         } else if (txtNgayKetThuc.getDate() == null) {
             JOptionPane.showMessageDialog(null, "không được để trống");
             return;
+        }
+        if (ValidateEx.checkIsFloat(txtPhanTramGiam)) {
+            MsgBox.alert(this, "Số tiền phải là Kiểu Số");
+            txtPhanTramGiam.setText("");
         }
         VoucherEntity voucherEntity = new VoucherEntity();
         voucherEntity.setTenKhuyenMai(txtTenKhuyenMai.getText());
