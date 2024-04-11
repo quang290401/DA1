@@ -458,6 +458,16 @@ public class FormKhachHang extends javax.swing.JPanel {
             MsgBox.alert(this, "Tên khách hàng và sđt bắt buộc phải nhập");
             return;
         }
+        if(txtIdKhachHang.getText().equals("")){
+            MsgBox.alert(this, "Chưa có khách để sửa");
+            return;
+
+        }
+         String regex = "^\\d{10}$";
+        if (!txtsdt.getText().matches(regex)) {
+            MsgBox.alert(this, "SĐt không hợp lệ");
+            return;
+        }
         KhachHangEntity khachHang = new KhachHangEntity();
         khachHang.setHoTen(txthoVaTen.getText());
         khachHang.setSoDienThoai(txtsdt.getText());
