@@ -1,5 +1,6 @@
 package com.mycompany.da1.view.components;
 
+import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.view.events.EventMenuSelected;
 import com.mycompany.da1.view.model.ModelMenu;
 import java.awt.Color;
@@ -19,12 +20,12 @@ import javax.swing.JFrame;
 public class JPanelMenu extends javax.swing.JPanel {
 
     public EventMenuSelected event;
-    public void addEventMenuSelected(EventMenuSelected event){
+
+    public void addEventMenuSelected(EventMenuSelected event) {
         this.event = event;
         listMenu.addEventMenuSelected(event);
     }
 
-    
     public JPanelMenu() {
         initComponents();
         setOpaque(false);
@@ -32,31 +33,45 @@ public class JPanelMenu extends javax.swing.JPanel {
         init();
     }
 
-    private void init(){
- listMenu.addItems(new ModelMenu("house","Trang Chủ",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("cart","Bán Hàng",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("product","Sản Phẩm",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("employee","Nhân Viên",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("traveler","Khách Hàng",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("bill","Hóa Đơn",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("analytics","Thống Kê",ModelMenu.MenuType.MENU));
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("analytics","Khuyến Mại",ModelMenu.MenuType.MENU));
-        
-        listMenu.addItems(new ModelMenu("","",ModelMenu.MenuType.SPACE));
-        listMenu.addItems(new ModelMenu("check-out","Đăng Xuất",ModelMenu.MenuType.MENU));
+    private void init() {
+        if (UserSession.getInstance().checkAdmin()) {
+            listMenu.addItems(new ModelMenu("house", "Trang Chủ", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("cart", "Bán Hàng", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("product", "Sản Phẩm", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("employee", "Nhân Viên", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("traveler", "Khách Hàng", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("bill", "Hóa Đơn", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("analytics", "Khuyến Mại", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("check-out", "Đăng Xuất", ModelMenu.MenuType.MENU));
+        } else {
+            listMenu.addItems(new ModelMenu("house", "Trang Chủ", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("cart", "Bán Hàng", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+//            listMenu.addItems(new ModelMenu("product", "Sản Phẩm", ModelMenu.MenuType.MENU));
+//            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+//            listMenu.addItems(new ModelMenu("employee", "Nhân Viên", ModelMenu.MenuType.MENU));
+//            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("traveler", "Khách Hàng", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("bill", "Hóa Đơn", ModelMenu.MenuType.MENU));
+            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+//            listMenu.addItems(new ModelMenu("analytics", "Khuyến Mại", ModelMenu.MenuType.MENU));
+//            listMenu.addItems(new ModelMenu("", "", ModelMenu.MenuType.SPACE));
+            listMenu.addItems(new ModelMenu("check-out", "Đăng Xuất", ModelMenu.MenuType.MENU));
+        }
     }
-   
-    
+
     @Override
     protected void paintChildren(Graphics g) {
-         Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint g1 = new GradientPaint(0, 0, Color.decode("#FFFF99"), 0, getHeight(), Color.decode("#FFA500"));
         g2.setPaint(g1);
@@ -64,28 +79,27 @@ public class JPanelMenu extends javax.swing.JPanel {
         g2.fillRect(getWidth() - 20, 0, getWidth(), getHeight());
         super.paintChildren(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
-    private  int x;
-    private  int y;
-    
-    public  void initMoving(JFrame jFrame){
-        jPanel_logo.addMouseListener(new MouseAdapter(){
+
+    private int x;
+    private int y;
+
+    public void initMoving(JFrame jFrame) {
+        jPanel_logo.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                   x = e.getX();
-                   y = e.getY();
+                x = e.getX();
+                y = e.getY();
             }
-            
+
         });
-        jPanel_logo.addMouseMotionListener(new MouseMotionAdapter(){
+        jPanel_logo.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 jFrame.setLocation(e.getXOnScreen() - x, e.getYOnScreen() - y);
             }
-            
+
         });
-        
-        
+
     }
 
     /**

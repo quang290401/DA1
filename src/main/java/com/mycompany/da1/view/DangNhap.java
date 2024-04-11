@@ -159,8 +159,8 @@ public class DangNhap extends javax.swing.JFrame {
                 .collect(Collectors.toList());
         ToanCucStatic tt = new ToanCucStatic();
         int idNhanVien = taiKhoanIMPL.traVeIdNhanVien(txtUsername.getText());
-          tt.setIdNhanVien(idNhanVien);
-        System.out.println( tt.getIdNhanVien());
+        tt.setIdNhanVien(idNhanVien);
+        System.out.println(tt.getIdNhanVien());
 
         if (lst.size() <= 0) {
             MsgBox.alert(this, "Không tồn tại tài khoản [" + txtUsername.getText().trim() + "]");

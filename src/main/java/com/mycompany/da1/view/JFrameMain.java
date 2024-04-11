@@ -39,27 +39,43 @@ public class JFrameMain extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 System.out.println("Select index = " + index);
-                if (index == 0) {  // Trang chủ    
-                    setForm(new ViewDemo());
-                } else if (index == 2) { // Bán hàng
-                    setForm(new FormBanHang());
-                } else if (index == 4) { // Sản phẩm
-                    setForm(new FormSanPham());
-                } else if (index == 6) {    // Nhân viên
-                     setForm(new FormNhanVien());
-                } else if (index == 8) {    //Khách hàng
-                    setForm(new FormKhachHang());
-                } else if (index == 10) {   // Hóa đơn
-                    setForm(new QuanLyHoaDon());
-                } else if (index == 12) {   // Thống kê
-                    setForm(new ViewDemo());
-                } else if (index == 14) {   // Khuyến mãi
-                    setForm(new FormVoucher2());
-                } else if (index == 16) { // Đăng xuất
-                    if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
-                        UserSession.getInstance().setAccountSession(null);
-                        new DangNhap().setVisible(true);
-                        setVisible(false);
+                if (UserSession.getInstance().checkAdmin()) {
+                    if (index == 0) {  // Trang chủ    
+                        setForm(new ViewDemo());
+                    } else if (index == 2) { // Bán hàng
+                        setForm(new FormBanHang());
+                    } else if (index == 4) { // Sản phẩm
+                        setForm(new FormSanPham());
+                    } else if (index == 6) {    // Nhân viên
+                        setForm(new FormNhanVien());
+                    } else if (index == 8) {    //Khách hàng
+                        setForm(new FormKhachHang());
+                    } else if (index == 10) {   // Hóa đơn
+                        setForm(new QuanLyHoaDon());
+                    } else if (index == 12) {   // Khuyến mãi
+                        setForm(new FormVoucher2());
+                    } else if (index == 14) { // Đăng xuất
+                        if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
+                            UserSession.getInstance().setAccountSession(null);
+                            new DangNhap().setVisible(true);
+                            setVisible(false);
+                        }
+                    }
+                } else {
+                    if (index == 0) {  // Trang chủ    
+                        setForm(new ViewDemo());
+                    } else if (index == 2) { // Bán hàng
+                        setForm(new FormBanHang());
+                    } else if (index == 4) {    //Khách hàng
+                        setForm(new FormKhachHang());
+                    } else if (index == 6) {   // Hóa đơn
+                        setForm(new QuanLyHoaDon());
+                    } else if (index == 8) { // Đăng xuất
+                        if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
+                            UserSession.getInstance().setAccountSession(null);
+                            new DangNhap().setVisible(true);
+                            setVisible(false);
+                        }
                     }
                 }
             }
