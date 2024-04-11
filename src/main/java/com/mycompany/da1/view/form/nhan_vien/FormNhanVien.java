@@ -4,6 +4,7 @@ import com.mycompany.da1.entity.DanhMucEntity;
 import com.mycompany.da1.entity.TaiKhoanEntity;
 import com.mycompany.da1.entity.VaiTroEntity;
 import com.mycompany.da1.service.IMPL.TaiKhoanIMPL;
+import com.mycompany.da1.util.AgeCalculator;
 import com.mycompany.da1.util.Contants;
 import com.mycompany.da1.util.MsgBox;
 import com.mycompany.da1.util.PhanTrang;
@@ -11,6 +12,7 @@ import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -37,6 +39,7 @@ public class FormNhanVien extends javax.swing.JPanel {
         listTK = new ArrayList<>();
         phanTranglocal = new PhanTrang<>(listTK);
         txtNgaySinh.setDate(new Date());
+        txtNgaySinh.getDateEditor().setEnabled(false);
         fillCboTimKiem();
         fillCboVaiTro();
         fillTableWhenSearch(Contants.PhanTrang.DEFAULT_PAGE.getValue());
@@ -179,6 +182,14 @@ public class FormNhanVien extends javax.swing.JPanel {
                 MsgBox.alert(this, "Số điện thoại đã tồn tại");
                 return true;
             }
+        }
+        return false;
+    }
+
+    private boolean checkTuoiNv(Calendar calendar) {
+        if (AgeCalculator.checkAge(calendar, 18)) {
+            MsgBox.alert(this, "Tuôi nhân viên phải lớn hơn hoặc bằng 18");
+            return true;
         }
         return false;
     }
@@ -641,13 +652,13 @@ public class FormNhanVien extends javax.swing.JPanel {
         txtNgaySinh.setDate(XDate.toDate(tblNhanVien.getValueAt(index, 4).toString()));
         txtDiaChi.setText(tblNhanVien.getValueAt(index, 5).toString());
         txtSdt.setText(tblNhanVien.getValueAt(index, 6).toString());
-        
+
         if (tblNhanVien.getValueAt(index, 7).toString().equalsIgnoreCase("Đang hoạt động")) {
             rdoHoatDong.setSelected(true);
         } else {
             rdoNgungHoatDong.setSelected(true);
         }
-        
+
         txtCCCD.setText(tblNhanVien.getValueAt(index, 8).toString());
         txtTaiKhoan.setText(tblNhanVien.getValueAt(index, 9).toString());
         txtMatKhau.setText(tblNhanVien.getValueAt(index, 10).toString());
@@ -704,6 +715,9 @@ public class FormNhanVien extends javax.swing.JPanel {
             return;
         } else if (ValidateEx.checkIsNull(txtMatKhau)) {
             MsgBox.alert(this, "Vui lòng nhập mật khẩu");
+            return;
+        }
+        if (checkTuoiNv(txtNgaySinh.getCalendar())) {
             return;
         }
 
@@ -781,6 +795,9 @@ public class FormNhanVien extends javax.swing.JPanel {
         }
         if (getIdByMaSp(txtMa.getText()) == null) {
             MsgBox.alert(this, "Mã nhân viên không tồn tại");
+            return;
+        }
+        if (checkTuoiNv(txtNgaySinh.getCalendar())) {
             return;
         }
         TaiKhoanEntity taiKhoan = new TaiKhoanEntity();

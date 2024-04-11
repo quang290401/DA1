@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Transaction;
 
@@ -112,6 +113,7 @@ public class TaiKhoanDAO {
                     + " gioiTinh = :gioiTinh,"
                     + " sdt = :sdt,"
                     + " cccd = :cccd,"
+                    + " ngaySua = :ngaySua,"
                     + " vaiTro_id = :vaiTroId"
                     + " WHERE id = :id";
             Query query = session.createQuery(sql);
@@ -124,6 +126,7 @@ public class TaiKhoanDAO {
             query.setParameter("gioiTinh", obiInput.getGioiTinh());
             query.setParameter("sdt", obiInput.getSdt());
             query.setParameter("cccd", obiInput.getCccd());
+            query.setParameter("ngaySua", new Date());
             query.setParameter("vaiTroId", obiInput.getVaiTroEntity().getId());
             query.setParameter("id", obiInput.getId());
             int check = query.executeUpdate();
