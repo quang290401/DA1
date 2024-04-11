@@ -39,43 +39,25 @@ public class JFrameMain extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 System.out.println("Select index = " + index);
-                if (UserSession.getInstance().checkAdmin()) {
-                    if (index == 0) {  // Trang chủ    
-                        setForm(new ViewDemo());
-                    } else if (index == 2) { // Bán hàng
-                        setForm(new FormBanHang());
-                    } else if (index == 4) { // Sản phẩm
-                        setForm(new FormSanPham());
-                    } else if (index == 6) {    // Nhân viên
-                        setForm(new FormNhanVien());
-                    } else if (index == 8) {    //Khách hàng
-                        setForm(new FormKhachHang());
-                    } else if (index == 10) {   // Hóa đơn
-                        setForm(new QuanLyHoaDon());
-                    } else if (index == 12) {   // Khuyến mãi
-                        setForm(new FormVoucher2());
-                    } else if (index == 14) { // Đăng xuất
-                        if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
-                            UserSession.getInstance().setAccountSession(null);
-                            new DangNhap().setVisible(true);
-                            setVisible(false);
-                        }
-                    }
-                } else {
-                    if (index == 0) {  // Trang chủ    
-                        setForm(new ViewDemo());
-                    } else if (index == 2) { // Bán hàng
-                        setForm(new FormBanHang());
-                    } else if (index == 4) {    //Khách hàng
-                        setForm(new FormKhachHang());
-                    } else if (index == 6) {   // Hóa đơn
-                        setForm(new QuanLyHoaDon());
-                    } else if (index == 8) { // Đăng xuất
-                        if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
-                            UserSession.getInstance().setAccountSession(null);
-                            new DangNhap().setVisible(true);
-                            setVisible(false);
-                        }
+                if (index == 0) {  // Trang chủ
+                    setForm(new ViewDemo());
+                } else if (index == 2) { // Bán hàng
+                    setForm(new FormBanHang());
+                } else if (index == 4) { // Sản phẩm
+                    setForm(new FormSanPham());
+                } else if (index == 6) {    // Nhân viên
+                    setForm(new FormNhanVien());
+                } else if (index == 8) {    //Khách hàng
+                    setForm(new FormKhachHang());
+                } else if (index == 10) {   // Hóa đơn
+                    setForm(new QuanLyHoaDon());
+                } else if (index == 12) {   // Thống kê
+                    setForm(new FormVoucher2());
+                } else if (index == 14) { // Đăng xuất
+                    if (MsgBox.confirm(sb, "Bạn có chắc chắn muốn đăng xuất!")) {
+                        UserSession.getInstance().setAccountSession(null);
+                        new DangNhap().setVisible(true);
+                        setVisible(false);
                     }
                 }
             }
@@ -87,6 +69,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        menu = new com.mycompany.da1.view.components.JPanelMenu();
         sb = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
 
@@ -97,7 +80,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(" WELLCOME TO SHOP");
-        getContentPane().add(jLabel1);
 
         sb.setBorder(null);
         sb.setOpaque(false);
@@ -106,7 +88,29 @@ public class JFrameMain extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.BorderLayout());
         sb.setViewportView(mainPanel);
 
-        getContentPane().add(sb);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(sb, javax.swing.GroupLayout.DEFAULT_SIZE, 1242, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sb)
+                                .addContainerGap())
+                        .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -119,7 +123,7 @@ public class JFrameMain extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -158,6 +162,7 @@ public class JFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainPanel;
+    private com.mycompany.da1.view.components.JPanelMenu menu;
     private javax.swing.JScrollPane sb;
     // End of variables declaration//GEN-END:variables
 }

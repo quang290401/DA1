@@ -154,6 +154,7 @@ public class FormVoucher2 extends javax.swing.JPanel {
             }
         });
 
+        btnThem.setBackground(new java.awt.Color(51, 255, 51));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +162,8 @@ public class FormVoucher2 extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(51, 255, 102));
+        btnSua.setIcon(new javax.swing.ImageIcon("D:\\JavaCode\\DA1\\src\\main\\java\\com\\mycompany\\da1\\Icon\\icons8-clear-16.png")); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

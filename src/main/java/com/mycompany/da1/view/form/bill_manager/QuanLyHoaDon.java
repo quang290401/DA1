@@ -46,6 +46,8 @@ public class QuanLyHoaDon extends javax.swing.JPanel {
 //        lstHdct = quanLyHoaDonDao.GetList();
         lstHd = quanLyHoaDonDao.getListHd(cboLocTrangThai.getSelectedIndex(), txtSearch.getText());
         phanTranglocal.refreshList(lstHd);
+        txtNgayBatDau.getDateEditor().setEnabled(false);
+        txtNgayKetThuc.getDateEditor().setEnabled(false);
 
         Date currentDate = new Date();
         // Tạo một đối tượng Calendar và thiết lập ngày hiện tại
