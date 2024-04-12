@@ -1,6 +1,7 @@
 package com.mycompany.da1.view.form.nhan_vien;
 
 import com.mycompany.da1.entity.DanhMucEntity;
+import com.mycompany.da1.entity.SanPhamEntity;
 import com.mycompany.da1.entity.TaiKhoanEntity;
 import com.mycompany.da1.entity.VaiTroEntity;
 import com.mycompany.da1.service.IMPL.TaiKhoanIMPL;
@@ -11,12 +12,27 @@ import com.mycompany.da1.util.PhanTrang;
 import com.mycompany.da1.util.UserSession;
 import com.mycompany.da1.util.ValidateEx;
 import com.mycompany.da1.util.XDate;
+import com.mycompany.da1.util.XFile;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -194,6 +210,110 @@ public class FormNhanVien extends javax.swing.JPanel {
         return false;
     }
 
+    private void exportExcel(File file) {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Nhân viên");
+
+            // Tạo CellStyle border
+            CellStyle borderStyle = workbook.createCellStyle();
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
+            // Tạo CellStyle để thiết lập chữ in đậm và căn giữa
+            CellStyle style = workbook.createCellStyle();
+            Font font = workbook.createFont();
+            font.setBold(true);
+            style.setFont(font);
+            style.setAlignment(HorizontalAlignment.CENTER);
+            style.setVerticalAlignment(VerticalAlignment.CENTER);
+            //
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+
+            spreadsheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 4));
+
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SÁCH SẢN PHẨM");
+            cell.setCellStyle(style);
+
+            //
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã nhân viên");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Họ và tên");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Giới tính");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Ngày sinh");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("Địa chỉ");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("Số điện thoại");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("CCCD");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("Trạng thái");
+            cell.setCellStyle(borderStyle);
+
+            for (int i = 0; i < listTK.size(); i++) {
+                TaiKhoanEntity item = listTK.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                Cell cell0 = row.createCell(0);
+                cell0.setCellValue(i + 1);
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(1);
+                cell0.setCellValue(item.getMaTK());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(2);
+                cell0.setCellValue(item.getHoTen());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(3);
+                cell0.setCellValue(item.getGioiTinh());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(4);
+                cell0.setCellValue(XDate.toString(item.getNgaySinh()));
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(5);
+                cell0.setCellValue(item.getDiaChi());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(6);
+                cell0.setCellValue(item.getSdt());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(7);
+                cell0.setCellValue(item.getCccd());
+                cell0.setCellStyle(borderStyle); //
+                cell0 = row.createCell(8);
+                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+                cell0.setCellStyle(borderStyle); //
+            }
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -236,7 +356,6 @@ public class FormNhanVien extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         cboVaiTro = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btNhoMax = new javax.swing.JButton();
         lbTrang = new javax.swing.JLabel();
         btLonMax1 = new javax.swing.JButton();
@@ -426,10 +545,11 @@ public class FormNhanVien extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
         jButton1.setText("Export");
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
-        jButton2.setText("Import");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btNhoMax.setText("<<");
         btNhoMax.addActionListener(new java.awt.event.ActionListener() {
@@ -508,9 +628,7 @@ public class FormNhanVien extends javax.swing.JPanel {
                             .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(145, 145, 145))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -565,29 +683,24 @@ public class FormNhanVien extends javax.swing.JPanel {
                                 .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8)
                                 .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel13)
-                                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(13, 13, 13)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14)
-                                    .addComponent(cboVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(rdoNam)
-                                    .addComponent(rdoNu)))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)
+                                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(cboVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(rdoNam)
+                            .addComponent(rdoNu)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnThem)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -865,6 +978,21 @@ public class FormNhanVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btLonMax1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fs = new JFileChooser(new File("C:\\"));
+        fs.setDialogTitle("Save file");
+        fs.setFileFilter(new XFile(".xlsx", "Title file"));
+        int rs = fs.showSaveDialog(null);
+        if (rs == JFileChooser.APPROVE_OPTION) {
+            File fi = fs.getSelectedFile();
+            fi.renameTo(new File(fi.getAbsoluteFile() + ".xlsx"));
+            System.out.println("=========================File Path============================");
+            System.out.println(fi.getAbsoluteFile());
+            System.out.println(fi.getName());
+            exportExcel(new File(fi.getAbsoluteFile() + ".xlsx"));
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLonMax1;
@@ -877,7 +1005,6 @@ public class FormNhanVien extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JComboBox<String> cboVaiTro;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

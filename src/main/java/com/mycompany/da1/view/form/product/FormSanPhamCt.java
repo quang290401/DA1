@@ -354,38 +354,68 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             cell.setCellValue("STT");
             cell.setCellStyle(borderStyle);
             cell = row.createCell(1, CellType.STRING);
-            cell.setCellValue("Mã sản phẩm");
+            cell.setCellValue("Mã sản phẩm chi tiết");
             cell.setCellStyle(borderStyle);
             cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("Tên sản phẩm");
             cell.setCellStyle(borderStyle);
             cell = row.createCell(3, CellType.STRING);
-            cell.setCellValue("Ngày nhập");
+            cell.setCellValue("Giá");
             cell.setCellStyle(borderStyle);
             cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Số lượng");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("Danh mục");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("Nhà sản xuất");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("Màu sắc");
+            cell.setCellStyle(borderStyle);
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("Kích cỡ");
+            cell.setCellStyle(borderStyle);
+             cell = row.createCell(9, CellType.STRING);
             cell.setCellValue("Trạng thái");
             cell.setCellStyle(borderStyle);
 
-            for (int i = 0; i < lstSanPhamCt.size(); i++) {
-                SanPhamChiTietEntity item = lstSanPhamCt.get(i);
-                row = spreadsheet.createRow((short) 4 + i);
-                row.setHeight((short) 400);
-                Cell cell0 = row.createCell(0);
-                cell0.setCellValue(i + 1);
-                cell0.setCellStyle(borderStyle); //
-                cell0 = row.createCell(1);
-                cell0.setCellValue(item.getMaSanPhamCt());
-                cell0.setCellStyle(borderStyle); //
-                cell0 = row.createCell(2);
-                cell0.setCellValue(item.getSanPhamEntity().getTenSanPham());
-                cell0.setCellStyle(borderStyle); //
-                cell0 = row.createCell(3);
-                cell0.setCellValue(XDate.toString(item.getSanPhamEntity().getNgayTao()));
-                cell0.setCellStyle(borderStyle); //
-                cell0 = row.createCell(4);
-                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
-                cell0.setCellStyle(borderStyle); //
-            }
+//            for (int i = 0; i < lstSanPhamCt.size(); i++) {
+//                SanPhamChiTietEntity item = lstSanPhamCt.get(i);
+//                row = spreadsheet.createRow((short) 4 + i);
+//                row.setHeight((short) 400);
+//                Cell cell0 = row.createCell(0);
+//                cell0.setCellValue(i + 1);
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(1);
+//                cell0.setCellValue(item.getMaSanPhamCt());
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(2);
+//                cell0.setCellValue(item.getSanPhamEntity().getTenSanPham());
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(3);
+////                cell0.setCellValue(item.getGiaSanPham());
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//                cell0 = row.createCell(4);
+//                cell0.setCellValue(Contants.getStatusBusiness(item.getTrangThai()));
+//                cell0.setCellStyle(borderStyle); //
+//            }
 
             FileOutputStream out = new FileOutputStream(file);
             workbook.write(out);
@@ -470,7 +500,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         btnThem = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        btnThem1 = new javax.swing.JButton();
         txtSanPham = new javax.swing.JTextField();
         btnChatLieu = new javax.swing.JLabel();
         cboListFileName = new javax.swing.JComboBox<>();
@@ -613,23 +642,12 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
             }
         });
 
-        btnThem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/da1/Icon/iconExcel.png"))); // NOI18N
-        btnThem1.setText("Xuất excel");
-        btnThem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThem1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(446, Short.MAX_VALUE)
-                .addComponent(btnThem1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(579, Short.MAX_VALUE)
                 .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCapNhat)
@@ -644,8 +662,7 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnCapNhat)
-                    .addComponent(btnReset)
-                    .addComponent(btnThem1))
+                    .addComponent(btnReset))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1435,21 +1452,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
         }
     }//GEN-LAST:event_btLonMaxMouseClicked
 
-    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
-        JFileChooser fs = new JFileChooser(new File("C:\\"));
-        fs.setDialogTitle("Save file");
-        fs.setFileFilter(new XFile(".xlsx", "Title file"));
-        int rs = fs.showSaveDialog(null);
-        if (rs == JFileChooser.APPROVE_OPTION) {
-            File fi = fs.getSelectedFile();
-            fi.renameTo(new File(fi.getAbsoluteFile() + ".xlsx"));
-            System.out.println("=========================File Path============================");
-            System.out.println(fi.getAbsoluteFile());
-            System.out.println(fi.getName());
-            exportExcel(new File(fi.getAbsoluteFile() + ".xlsx"));
-        }
-    }//GEN-LAST:event_btnThem1ActionPerformed
-
     private void rdoDangBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDangBanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoDangBanActionPerformed
@@ -1510,7 +1512,6 @@ public class FormSanPhamCt extends javax.swing.JFrame implements EventDialogList
     private javax.swing.JLabel btnNhaSx;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnThem1;
     private javax.swing.JButton btnUpLoad1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChatLieu;
